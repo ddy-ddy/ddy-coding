@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Icons } from "$lib/icons";
+  import { Icons } from "$lib/components/icons";
   import { ViewVertical } from "radix-icons-svelte";
   import { page } from "$app/stores";
   import { cn } from "$lib/utils";
