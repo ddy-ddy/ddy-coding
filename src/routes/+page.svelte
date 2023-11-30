@@ -1,5 +1,4 @@
 <script lang="ts">
-  import logo from "$lib/icons/logo.svg";
   import { Icons } from "$lib/icons";
   import { ViewVertical } from "radix-icons-svelte";
   import { page } from "$app/stores";
@@ -7,10 +6,9 @@
   import * as Avatar from "$lib/components/ui/avatar";
   import * as Sheet from "$lib/components/ui/sheet";
   import { Button, buttonVariants } from "$lib/components/ui/button";
-  import { Input } from "$lib/components/ui/input";
-  import { Label } from "$lib/components/ui/label";
   import { Sun, Moon } from "lucide-svelte";
   import { toggleMode } from "mode-watcher";
+  import { CommandMenu } from "$lib/components/docs";
   let open = false;
 </script>
 
@@ -20,7 +18,7 @@
     <div class="mr-4 hidden md:flex">
       <a href="/" class="mr-6 flex items-center space-x-2">
         <Avatar.Root class="h-8 w-8">
-          <Avatar.Image class="ml-1" src={logo} alt="@logo" />
+          <Icons.logo class="h-8 w-8" />
         </Avatar.Root>
         <span class="hidden font-bold sm:inline-block text-[15px] lg:text-base"> ddy's website </span>
       </a>
@@ -40,8 +38,8 @@
       </Sheet.Trigger>
       <Sheet.Content side="left" class="pr-0">
         <div class="flex items-center space-x-2">
-          <Avatar.Root class="h-8 w-8 bg-sky-200">
-            <Avatar.Image class="ml-0.5" src={logo} alt="@logo" />
+          <Avatar.Root class="h-8 w-8">
+            <Icons.logo class="h-8 w-8" />
           </Avatar.Root>
           <span class="font-bold">ddy's website </span>
         </div>
@@ -57,17 +55,19 @@
     </Sheet.Root>
     <!-- Search -->
     <div class="flex flex-1 items-center justify-between space-x-2 sm:space-x-4 md:justify-end">
-      <div class="w-full flex-1 md:w-auto md:flex-none"></div>
+      <div class="w-full flex-1 md:w-auto md:flex-none">
+        <CommandMenu />
+      </div>
       <nav class="flex items-center">
         <a href="https://github.com/ddy-ddy" target="_blank" rel="github">
           <div class={cn(buttonVariants({ size: "sm", variant: "ghost" }), "w-9 px-0")}>
-            <Icons.gitHub class="h-4 w-4"></Icons.gitHub>
+            <Icons.gitHub class="h-4 w-4" />
             <span class="sr-only">GitHub</span>
           </div>
         </a>
         <a href="https://twitter.com/ddy_coding" target="_blank" rel="twitter">
           <div class={cn(buttonVariants({ size: "sm", variant: "ghost" }), "w-9 px-0")}>
-            <Icons.twitter class="h-3 w-3 fill-current"></Icons.twitter>
+            <Icons.twitter class="h-3 w-3 fill-current" />
             <span class="sr-only">X</span>
           </div>
         </a>
