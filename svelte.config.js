@@ -1,7 +1,7 @@
 /*
  * @Author: ddy-ddy
  * @Date: 2023-11-29 17:57:20
- * @LastEditTime: 2023-11-30 17:34:51
+ * @LastEditTime: 2023-12-06 21:24:42
  * @Github: https://github.com/ddy-ddy
  * @Website: https://ddy-ddy.com
  */
@@ -20,6 +20,7 @@ const config = {
 		}
 	},
 	preprocess: [vitePreprocess({})],
+	extensions: [".svelte", ".md"],
 };
 
 export default config;
