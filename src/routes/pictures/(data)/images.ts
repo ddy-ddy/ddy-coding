@@ -1,10 +1,3 @@
-/*
- * @Author: ddy-ddy
- * @Date: 2023-11-30 22:06:34
- * @LastEditTime: 2023-12-01 23:02:41
- * @Github: https://github.com/ddy-ddy
- * @Website: https://ddy-ddy.com
- */
 export type Image = {
 	name: string;
 	artist: string;
