@@ -1,4 +1,4 @@
-import type { DocResolver } from "$lib/types/docs";
+import type { DocResolver } from "$lib/types/blogs";
 import type { PageLoad } from "./$types";
 import { error } from "@sveltejs/kit";
 import { slugFromPath } from "$lib/utils";

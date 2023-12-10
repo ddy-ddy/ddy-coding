@@ -1,8 +1,10 @@
 <script lang="ts">
   import { ChevronRight } from "lucide-svelte";
   import { Separator } from "$lib/components/ui/separator";
+  import { BlogPager, TableOfContents } from "$lib/components/page";
   import Balancer from "svelte-wrap-balancer";
   import { cn } from "$lib/utils";
+  import { page } from "$app/stores";
   import type { PageData } from "./$types";
 
   export let data: PageData;
@@ -29,5 +31,17 @@
       {/if}
     </div>
     <Separator class="my-4 md:my-6" />
+    <div class="mdsvex" id="mdsvex">
+      <svelte:component this={component} />
+    </div>
+    <Separator class="my-4 md:my-6" />
+    <BlogPager />
+  </div>
+  <div class="hidden text-sm xl:block">
+    <div class="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] overflow-hidden pt-6">
+      {#key $page.url.pathname}
+        <TableOfContents />
+      {/key}
+    </div>
   </div>
 </main>
