@@ -22,6 +22,7 @@ export const load: PageLoad = async () => {
     if (!doc || !doc.metadata) {
         throw error(404);
     }
+
     return {
         component: doc.default,
         metadata: doc.metadata,

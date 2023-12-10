@@ -1,7 +1,7 @@
 <script lang="ts">
   import { ChevronRight } from "lucide-svelte";
   import { Separator } from "$lib/components/ui/separator";
-  import { BlogPager, TableOfContents } from "$lib/components/page";
+  import { TableOfContents } from "$lib/components/page";
   import Balancer from "svelte-wrap-balancer";
   import { cn } from "$lib/utils";
   import { page } from "$app/stores";
@@ -21,7 +21,7 @@
       <div class="font-medium text-foreground">{doc.title}</div>
     </div>
     <div class="space-y-2">
-      <h1 class={cn("scroll-m-20 text-4xl font-bold tracking-tight")}>Theming</h1>
+      <h1 class={cn("scroll-m-20 text-4xl font-bold tracking-tight")}>{doc.title}</h1>
       {#if doc.description}
         <p class="text-lg text-muted-foreground">
           <Balancer>
@@ -34,8 +34,6 @@
     <div class="mdsvex" id="mdsvex">
       <svelte:component this={component} />
     </div>
-    <Separator class="my-4 md:my-6" />
-    <BlogPager />
   </div>
   <div class="hidden text-sm xl:block">
     <div class="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] overflow-hidden pt-6">
