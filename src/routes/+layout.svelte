@@ -2,7 +2,6 @@
   import "../app.pcss";
   import { ModeWatcher } from "mode-watcher";
   import { SiteHeader, SiteFooter } from "$lib/components/page";
-  import { docsConfig } from "$lib/config/blogs";
   
 </script>
 

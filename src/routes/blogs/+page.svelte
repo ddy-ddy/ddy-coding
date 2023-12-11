@@ -31,9 +31,7 @@
       {/if}
     </div>
     <Separator class="my-4 md:my-6" />
-    <div class="mdsvex" id="mdsvex">
-      <svelte:component this={component} />
-    </div>
+    <article class="prose dark:prose-invert"><svelte:component this={component} /></article>
   </div>
   <div class="hidden text-sm xl:block">
     <div class="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] overflow-hidden pt-6">
