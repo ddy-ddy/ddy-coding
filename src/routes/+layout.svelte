@@ -1,8 +1,7 @@
 <script>
-  import "../app.pcss";
+  import "../app.css";
   import { ModeWatcher } from "mode-watcher";
   import { SiteHeader, SiteFooter } from "$lib/components/page";
-  
 </script>
 
 <ModeWatcher />
