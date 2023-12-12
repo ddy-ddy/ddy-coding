@@ -5,9 +5,9 @@
 </script>
 
 <ModeWatcher />
-<div class="relative flex min-h-screen flex-col">
+<div class="relative flex min-h-screen flex-col" id="page">
   <SiteHeader />
-  <div class="flex-1 py-8">
+  <div class="flex-1">
     <slot />
   </div>
   <SiteFooter />

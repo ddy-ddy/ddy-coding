@@ -8,7 +8,7 @@
   export { className as class };
 </script>
 
-<div class={cn("pb-12 overflow-y-auto", className)}>
+<div class={cn("overflow-y-auto h-[calc(100vh-3.5rem)]", className)}>
   <div class="space-y-4 py-4">
     <div class="py-2">
       <h2 class="mb-2 px-4 text-lg font-semibold tracking-tight te">标签</h2>
@@ -88,21 +88,19 @@
     </div>
     <div class="py-2">
       <h2 class="mb-2 px-4 text-lg font-semibold tracking-tight">地点</h2>
-      <div class="h-[300px] overflow-y-auto px-1">
-        <div class="space-y-1 p-2">
-          {#each provinces as province}
-            <Button variant="ghost" class="w-full justify-start font-normal">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4">
-                <path d="M21 15V6" />
-                <path d="M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-                <path d="M12 12H3" />
-                <path d="M16 6H3" />
-                <path d="M12 18H3" />
-              </svg>
-              {province}
-            </Button>
-          {/each}
-        </div>
+      <div class="space-y-1 p-2">
+        {#each provinces as province}
+          <Button variant="ghost" class="w-full justify-start font-normal">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4">
+              <path d="M21 15V6" />
+              <path d="M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+              <path d="M12 12H3" />
+              <path d="M16 6H3" />
+              <path d="M12 18H3" />
+            </svg>
+            {province}
+          </Button>
+        {/each}
       </div>
     </div>
   </div>
