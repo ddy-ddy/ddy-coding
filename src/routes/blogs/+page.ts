@@ -4,8 +4,6 @@ import { error } from "@sveltejs/kit";
 import { slugFromPath } from "$lib/utils";
 
 export const load: PageLoad = async () => {
-    // there's definitely a better way to do this for the index page
-    // but I'll sort this out later - works for now :)
     const modules = import.meta.glob(`/src/content/**/index.md`);
 
     let match: { path?: string; resolver?: DocResolver } = {};

@@ -2,7 +2,8 @@ import { error } from '@sveltejs/kit'
 
 export const load = async () => {
     try {
-        const ReadMeFile = await import('../../README.md')
+        // @ts-ignore
+        const ReadMeFile = await import('../content/index.md')
         const ReadMe = ReadMeFile.default
 
         return {
@@ -10,6 +11,7 @@ export const load = async () => {
         }
     }
     catch (err) {
+        // @ts-ignore
         throw error(500, err)
     }
 }

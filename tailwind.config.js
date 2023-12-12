@@ -1,4 +1,4 @@
-import { fontFamily } from "tailwindcss/defaultTheme";
+import { fontFamily, typography } from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -58,7 +58,23 @@ const config = {
 			},
 			fontFamily: {
 				sans: ["Inter", ...fontFamily.sans]
-			}
+			},
+			typography: (theme) => ({
+				DEFAULT: {
+					css: {
+						pre: {
+							backgroundColor: theme('colors.gray.800'), // 普通模式下的背景色
+						},
+					},
+				},
+				dark: {
+					css: {
+						pre: {
+							backgroundColor: theme('colors.gray.600'), // 暗模式下的背景色
+						},
+					},
+				},
+			}),
 		}
 	},
 	plugins: [require('@tailwindcss/typography')]
