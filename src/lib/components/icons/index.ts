@@ -30,7 +30,7 @@ import {
 
 
 export const Icons = {
-    gitHub: GitHub,
+    github: GitHub,
     twitter: Twitter,
     logo: Logo,
     chevronLeft: ChevronLeft,

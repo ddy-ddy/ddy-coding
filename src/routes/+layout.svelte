@@ -5,7 +5,15 @@
 </script>
 
 <ModeWatcher />
-<div class="relative flex min-h-screen flex-col" id="page">
+
+<!-- 
+  relative: 设置这个元素的定位为相对定位。
+  flex: 应用Flexbox布局，使其子元素可以使用flex布局属性。
+  flex-col: 子元素将垂直排列（列布局）。
+  min-h-screen: 设置最小高度为视口的高度，确保即使内容不足时，元素也至少有整个屏幕的高度。
+  flex-1: 将其扩展以填充剩余的可用空间
+-->
+<div class="relative flex flex-col min-h-screen">
   <SiteHeader />
   <div class="flex-1">
     <slot />
