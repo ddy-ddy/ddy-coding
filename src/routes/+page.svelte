@@ -2,10 +2,8 @@
   export let data;
 </script>
 
-<article class="prose dark:prose-invert md:prose-md lg:prose-lg mx-auto">
-  <div class="flex justify-center items-center">
-    <div class="container">
-      <svelte:component this={data.ReadMe} />
-    </div>
-  </div>
-</article>
+<div class="container max-w-4xl py-6 md:py-8 lg:py-10">
+  <article class="prose dark:prose-invert mx-auto md:prose-md lg:prose-lg">
+    <svelte:component this={data.ReadMe} />
+  </article>
+</div>
