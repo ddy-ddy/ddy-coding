@@ -1,29 +1,26 @@
-import type { DocResolver } from "$lib/types/blogs";
-import type { PageLoad } from "./$types";
-import { error } from "@sveltejs/kit";
-import { slugFromPath } from "$lib/utils";
-
+import type { PageLoad } from './$types';
+import type { Blog } from "$lib/types/blogs";
+const url_base = "http://121.4.85.24:1337"
 export const load: PageLoad = async () => {
-    const modules = import.meta.glob(`/src/content/**/index.md`);
-
-    let match: { path?: string; resolver?: DocResolver } = {};
-
-    for (const [path, resolver] of Object.entries(modules)) {
-        if (slugFromPath(path) === "index") {
-            match = { path, resolver: resolver as unknown as DocResolver };
-            break;
-        }
+    const response = await fetch(url_base + '/api/blogs?populate=*');
+    if (!response.ok) {
+        throw new Error(`Error fetching blogs: ${response.statusText}`);
     }
+    const blogsData = await response.json();
 
-    const doc = await match?.resolver?.();
+    const blogs: { blog: Blog[] } = blogsData.data.map((blog: any) => {
+        const categories = blog.attributes.blog_categories.data.map((category: any) => category.attributes.category_name);
 
-    if (!doc || !doc.metadata) {
-        throw error(404);
-    }
-
+        return {
+            title: blog.attributes.title,
+            summary: blog.attributes.summary,
+            publishTime: blog.attributes.publishedAt.split('T')[0],
+            author: blog.attributes.author.data.attributes.name,
+            coverUrl: url_base + blog.attributes.cover.data[0].attributes.url,
+            category: categories
+        };
+    });
     return {
-        component: doc.default,
-        metadata: doc.metadata,
-        title: doc.metadata.title
-    };
-};
+        blogs: blogs
+    }
+}

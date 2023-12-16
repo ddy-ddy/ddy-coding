@@ -1,8 +1,9 @@
 <script lang="ts">
   import * as Tabs from "$lib/components/ui/tabs";
   import { Separator } from "$lib/components/ui/separator";
-  import { Frame } from "radix-icons-svelte";
-  let loop = [1, 2, 3, 4];
+  import type { PageData } from "./$types";
+  export let data: PageData;
+  const blogs: any = data.blogs;
 </script>
 
 <div class="container max-w-4xl py-6 md:py-8 lg:py-10">
@@ -16,21 +17,21 @@
     </Tabs.List>
     <Tabs.Content value="所有博客" class="py-2">
       <section class="flex flex-col space-y-6">
-        {#each loop as lo}
+        {#each blogs as blog}
           <div class="flex space-x-4">
-            <img class="hidden md:block w-24 h-24 rounded-md border bg-muted" src="https://ddy-1310349779.cos.ap-shanghai.myqcloud.com/typora/%E7%BA%AF%E8%89%B2.png" />
+            <img alt="img" class="hidden md:block w-24 h-24 rounded-md border bg-muted" src={blog.coverUrl} />
             <div class="flex flex-col space-y-1">
               <div class="flex-1 space-y-1">
-                <h2 class="text-xl font-extrabold line-clamp-1">如何通过ssh来构建服务器</h2>
-                <p class="text-sm text-muted-foreground line-clamp-2">如何通过ssh来构建服务器,如何通过ssh来构建服,通过ssh来构建服务器,如何通过ssh来构建务器,,如何通过ssh来构建服务器,,如何通过ssh来构建服务器,,如何通过ssh来构建服务器,,如何通过ssh来构建服务器,,如何通过ssh来构建服务器,,如何通过ssh来构建服务器</p>
+                <h2 class="text-xl font-extrabold line-clamp-1">{blog.title}</h2>
+                <p class="text-sm text-muted-foreground line-clamp-2">{blog.summary}</p>
               </div>
               <div class="flex space-x-2">
-                <p class="text-sm text-muted-foreground">2023-10-23</p>
+                <p class="text-sm text-muted-foreground">{blog.publishTime}</p>
                 <Separator orientation="vertical" />
-                <a href="/" class="text-sm text-muted-foreground hover:text-sky-400">建站</a>
-                <Separator orientation="vertical" />
-                <a href="/" class="text-sm text-muted-foreground hover:text-sky-400">生活</a>
-                <Separator orientation="vertical" />
+                {#each blog.category as category}
+                  <a href="/" class="text-sm text-muted-foreground hover:text-sky-400">{category}</a>
+                  <Separator orientation="vertical" />
+                {/each}
               </div>
             </div>
           </div>
