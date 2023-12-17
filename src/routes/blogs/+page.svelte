@@ -9,13 +9,12 @@
   const categories: any = data.categories;
 
   let selectedCategory = "所有博客";
-
+  $: filteredBlogs = selectedCategory === "所有博客" ? allBlogs : selectedCategory === "最新博客" ? recentBlogs : categoryBlogs.find((c: any) => c.name === selectedCategory)?.blogs || [];
 
   function selectCategory(event: any) {
     // 接受card.svelte传递过来的博客类名，从而动态更新Tabs.root的默认值，达到点击类别调整到对应页面的效果
     selectedCategory = event.detail;
   }
-
 </script>
 
 <div class="container max-w-4xl py-6 md:py-8 lg:py-10">
@@ -27,27 +26,10 @@
         <Tabs.Trigger value={category.name}>{category.name}</Tabs.Trigger>
       {/each}
     </Tabs.List>
-    <Tabs.Content value="所有博客" class="py-2">
-      <section class="flex flex-col space-y-6">
-        {#each allBlogs as blog}
-          <Card {blog} on:selectCategory={selectCategory} />
-        {/each}
-      </section>
-    </Tabs.Content>
-    <Tabs.Content value="最新博客" class="py-2">
-      <section class="flex flex-col space-y-6">
-        {#each recentBlogs as blog}
-          <Card {blog} on:selectCategory={selectCategory} />
-        {/each}
-      </section>
-    </Tabs.Content>
-
-    {#each categoryBlogs as blogs}
-      <Tabs.Content value={blogs.name} class="py-2">
+    {#each filteredBlogs as blog}
+      <Tabs.Content value={selectedCategory} class="py-2">
         <section class="flex flex-col space-y-6">
-          {#each blogs.blogs as blog}
-            <Card {blog} on:selectCategory={selectCategory} />
-          {/each}
+          <Card {blog} on:selectCategory={selectCategory} />
         </section>
       </Tabs.Content>
     {/each}
