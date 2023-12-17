@@ -1,6 +1,5 @@
 <script lang="ts">
   import * as Tabs from "$lib/components/ui/tabs";
-  import { Separator } from "$lib/components/ui/separator";
   import { Card } from "./(components)";
   import type { PageData } from "./$types";
   export let data: PageData;
@@ -8,10 +7,19 @@
   const recentBlogs: any = data.recentBlogs;
   const categoryBlogs: any = data.categoryBlogs;
   const categories: any = data.categories;
+
+  let selectedCategory = "所有博客";
+
+
+  function selectCategory(event: any) {
+    // 接受card.svelte传递过来的博客类名，从而动态更新Tabs.root的默认值，达到点击类别调整到对应页面的效果
+    selectedCategory = event.detail;
+  }
+
 </script>
 
 <div class="container max-w-4xl py-6 md:py-8 lg:py-10">
-  <Tabs.Root value="所有博客" class="h-full">
+  <Tabs.Root bind:value={selectedCategory} class="h-full">
     <Tabs.List class="flex flex-nowrap overflow-x-auto justify-start bg-muted">
       <Tabs.Trigger value="所有博客">所有博客</Tabs.Trigger>
       <Tabs.Trigger value="最新博客">最新博客</Tabs.Trigger>
@@ -22,22 +30,23 @@
     <Tabs.Content value="所有博客" class="py-2">
       <section class="flex flex-col space-y-6">
         {#each allBlogs as blog}
-          <Card {blog} />
+          <Card {blog} on:selectCategory={selectCategory} />
         {/each}
       </section>
     </Tabs.Content>
     <Tabs.Content value="最新博客" class="py-2">
       <section class="flex flex-col space-y-6">
         {#each recentBlogs as blog}
-          <Card {blog} />
+          <Card {blog} on:selectCategory={selectCategory} />
         {/each}
       </section>
     </Tabs.Content>
+
     {#each categoryBlogs as blogs}
       <Tabs.Content value={blogs.name} class="py-2">
         <section class="flex flex-col space-y-6">
           {#each blogs.blogs as blog}
-            <Card {blog} />
+            <Card {blog} on:selectCategory={selectCategory} />
           {/each}
         </section>
       </Tabs.Content>

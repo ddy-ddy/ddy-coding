@@ -1,5 +1,8 @@
 <script lang="ts">
   import { Separator } from "$lib/components/ui/separator";
+  import { createEventDispatcher } from "svelte";
+  // 事件派发器，在点击博客类别的时候，能够把博客类名传递到+page.svelte
+  const dispatch = createEventDispatcher();
   export let blog: any;
 </script>
 
@@ -16,7 +19,9 @@
       <p class="text-sm text-muted-foreground">{blog.publishTime}</p>
       <Separator orientation="vertical" />
       {#each blog.category as category}
-        <a href="/" class="text-sm text-muted-foreground hover:text-sky-400">{category}</a>
+        <span role="button" tabindex="0" on:click={() => dispatch("selectCategory", category)} class="text-sm text-muted-foreground hover:text-sky-400 cursor-pointer">
+          {category}
+        </span>
         <Separator orientation="vertical" />
       {/each}
     </div>
