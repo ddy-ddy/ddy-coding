@@ -1,26 +1,111 @@
+// import type { PageLoad } from './$types';
+// const url_base = "http://121.4.85.24:1337"
+// export const load: PageLoad = async () => {
+//     // all_blogs
+//     const response = await fetch(url_base + '/api/blogs?populate=*');
+//     if (!response.ok) {
+//         throw new Error(`Error fetching blogs: ${response.statusText}`);
+//     }
+//     const blogsData = await response.json();
+//     const blogs = blogsData.data.map((blog: any) => {
+//         const categories = blog.attributes.blog_categories.data.map((category: any) => category.attributes.category_name);
+
+//         return {
+//             title: blog.attributes.title,
+//             summary: blog.attributes.summary,
+//             publishTime: blog.attributes.publishedAt.split('T')[0],
+//             author: blog.attributes.author.data.attributes.name,
+//             coverUrl: url_base + blog.attributes.cover.data[0].attributes.url,
+//             category: categories
+//         };
+//     });
+
+//     // all_categories
+//     const response_cateogry = await fetch(url_base + '/api/blog-categories')
+//     if (!response_cateogry.ok) {
+//         throw new Error(`Error fetching blogs: ${response_cateogry.statusText}`);
+//     }
+//     const blogCategoriesData = await response_cateogry.json();
+//     const blogCategories = blogCategoriesData.data.map((category: any) => {
+//         return {
+//             id: category.id,
+//             name: category.category_name
+//         }
+//     });
+
+//     return {
+//         blogs: blogs,
+//         categoryies: blogCategories
+//     }
+// }
+
+
+
 import type { PageLoad } from './$types';
-import type { Blog } from "$lib/types/blogs";
-const url_base = "http://121.4.85.24:1337"
-export const load: PageLoad = async () => {
-    const response = await fetch(url_base + '/api/blogs?populate=*');
+
+const url_base = "http://121.4.85.24:1337";
+
+
+async function fetchData(url: any) {
+    const response = await fetch(url);
     if (!response.ok) {
-        throw new Error(`Error fetching blogs: ${response.statusText}`);
+        throw new Error(`Error fetching data: ${response.statusText}`);
     }
-    const blogsData = await response.json();
+    return await response.json();
+}
 
-    const blogs: { blog: Blog[] } = blogsData.data.map((blog: any) => {
+
+function processBlogData(blogData: any) {
+    return blogData.map((blog: any) => {
         const categories = blog.attributes.blog_categories.data.map((category: any) => category.attributes.category_name);
-
         return {
             title: blog.attributes.title,
             summary: blog.attributes.summary,
             publishTime: blog.attributes.publishedAt.split('T')[0],
             author: blog.attributes.author.data.attributes.name,
-            coverUrl: url_base + blog.attributes.cover.data[0].attributes.url,
+            coverUrl: url_base + blog.attributes.cover.data[0].attributes.formats.small.url,
             category: categories
         };
     });
-    return {
-        blogs: blogs
-    }
 }
+
+export const load: PageLoad = async () => {
+    try {
+        // 获取所有博客信息
+        const allBlogsResponse = await fetchData(url_base + '/api/blogs?populate=*');
+        const allBlogs = processBlogData(allBlogsResponse.data);
+
+        // 获取最近更新的5条博客信息
+        const recentBlogsResponse = await fetchData(url_base + '/api/blogs?sort=publishedAt:desc&pagination[limit]=5&populate=*');
+        const recentBlogs = processBlogData(recentBlogsResponse.data);
+
+        // 获取每个类别下的博客信息
+        const categoriesResponse = await fetchData(url_base + '/api/blog-categories');
+        const categories = categoriesResponse.data.map((category: any) => { return { name: category.attributes.category_name } })
+        const categoryBlogs = await Promise.all(categoriesResponse.data.map(async (category: any) => {
+            const categoryBlogsResponse = await fetchData(url_base + `/api/blogs?filters[blog_categories][id][$eq]=${category.id}&populate=*`);
+            const categoryBlogs = processBlogData(categoryBlogsResponse.data);
+            return {
+                name: category.attributes.category_name,
+                blogs: categoryBlogs
+            };
+        }));
+        // 返回组合数据
+        return {
+            allBlogs,
+            recentBlogs,
+            categoryBlogs,
+            categories
+        };
+    } catch (error: any) {
+        console.error('Error loading data:', error);
+        // 可以返回一个错误信息或者空数据
+        return {
+            allBlogs: [],
+            recentBlogs: [],
+            categoryBlogs: [],
+            categories: [],
+            error: error.message
+        };
+    }
+};
