@@ -19,6 +19,7 @@
 
 <div class="container max-w-4xl py-6 md:py-8 lg:py-10">
   <Tabs.Root bind:value={selectedCategory} class="h-full">
+    <!-- tabs list -->
     <Tabs.List class="flex flex-nowrap overflow-x-auto justify-start bg-muted">
       <Tabs.Trigger value="所有博客">所有博客</Tabs.Trigger>
       <Tabs.Trigger value="最新博客">最新博客</Tabs.Trigger>
@@ -26,6 +27,7 @@
         <Tabs.Trigger value={category.name}>{category.name}</Tabs.Trigger>
       {/each}
     </Tabs.List>
+    <!-- tabs content -->
     {#each filteredBlogs as blog}
       <Tabs.Content value={selectedCategory} class="py-2">
         <section class="flex flex-col space-y-6">

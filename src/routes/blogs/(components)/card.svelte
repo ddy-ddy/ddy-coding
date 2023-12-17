@@ -11,7 +11,7 @@
   <div class="flex flex-col space-y-1">
     <div class="flex-1 space-y-1">
       <h2 class="text-xl font-extrabold line-clamp-1">
-        <a href="/">{blog.title}</a>
+        <a href={`/blogs/${blog.id}`}>{blog.title}</a>
       </h2>
       <p class="text-sm text-muted-foreground line-clamp-2">{blog.summary}</p>
     </div>

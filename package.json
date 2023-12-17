@@ -32,6 +32,7 @@
     "fs": "^0.0.1-security",
     "hast-util-to-html": "^9.0.0",
     "lucide-svelte": "^0.294.0",
+    "marked": "^11.1.0",
     "mode-watcher": "^0.1.1",
     "path": "^0.12.7",
     "prettier": "^3.1.1",

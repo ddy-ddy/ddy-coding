@@ -1,46 +1,3 @@
-// import type { PageLoad } from './$types';
-// const url_base = "http://121.4.85.24:1337"
-// export const load: PageLoad = async () => {
-//     // all_blogs
-//     const response = await fetch(url_base + '/api/blogs?populate=*');
-//     if (!response.ok) {
-//         throw new Error(`Error fetching blogs: ${response.statusText}`);
-//     }
-//     const blogsData = await response.json();
-//     const blogs = blogsData.data.map((blog: any) => {
-//         const categories = blog.attributes.blog_categories.data.map((category: any) => category.attributes.category_name);
-
-//         return {
-//             title: blog.attributes.title,
-//             summary: blog.attributes.summary,
-//             publishTime: blog.attributes.publishedAt.split('T')[0],
-//             author: blog.attributes.author.data.attributes.name,
-//             coverUrl: url_base + blog.attributes.cover.data[0].attributes.url,
-//             category: categories
-//         };
-//     });
-
-//     // all_categories
-//     const response_cateogry = await fetch(url_base + '/api/blog-categories')
-//     if (!response_cateogry.ok) {
-//         throw new Error(`Error fetching blogs: ${response_cateogry.statusText}`);
-//     }
-//     const blogCategoriesData = await response_cateogry.json();
-//     const blogCategories = blogCategoriesData.data.map((category: any) => {
-//         return {
-//             id: category.id,
-//             name: category.category_name
-//         }
-//     });
-
-//     return {
-//         blogs: blogs,
-//         categoryies: blogCategories
-//     }
-// }
-
-
-
 import type { PageLoad } from './$types';
 
 const url_base = "http://121.4.85.24:1337";
@@ -59,6 +16,7 @@ function processBlogData(blogData: any) {
     return blogData.map((blog: any) => {
         const categories = blog.attributes.blog_categories.data.map((category: any) => category.attributes.category_name);
         return {
+            id: blog.id,
             title: blog.attributes.title,
             summary: blog.attributes.summary,
             publishTime: blog.attributes.publishedAt.split('T')[0],
