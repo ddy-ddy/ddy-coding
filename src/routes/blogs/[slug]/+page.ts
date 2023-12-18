@@ -9,11 +9,15 @@ export const load: Load = async ({ params }) => {
     const markdownResponse = await fetch(contentFileUrl);
     const markdownContent = await markdownResponse.text();
 
+    const authorData = await fetch(url_base + `/api/authors/${blogData.data.attributes.author.data.id}?populate=*`).then(res => res.json());
+    const authorIconLink = url_base + authorData.data.attributes.icon.data.attributes.url;
+
     const blog = {
         title: blogData.data.attributes.title,
         summary: blogData.data.attributes.summary,
         publishTime: blogData.data.attributes.publishedAt.split('T')[0],
         author: blogData.data.attributes.author.data.attributes.name,
+        authorIconLink: authorIconLink,
         authorLink: blogData.data.attributes.author.data.attributes.github,
         content: markdownContent
     }
