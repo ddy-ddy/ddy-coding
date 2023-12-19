@@ -120,7 +120,7 @@ const config = {
 							height: '0.125em',
 							position: 'absolute',
 							top: 'calc(0.875em - 0.0625em)',
-							left: 0,
+							left: -10,
 							borderRadius: '999px',
 							backgroundColor: theme('colors.slate.300'),
 						},
