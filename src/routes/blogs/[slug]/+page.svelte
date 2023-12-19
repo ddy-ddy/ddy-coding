@@ -8,11 +8,11 @@
 </script>
 
 <div class="container max-w-4xl py-6 md:py-8 lg:py-10">
-  <article class="prose prose-sm md:prose-lg dark:prose-invert mx-auto">
-    <div class="not-prose flex flex-col space-y-2">
+  <article class="prose prose-sm md:prose-base dark:prose-dark mx-auto">
+    <div class="flex flex-col space-y-2">
       <div class="text-xs font-medium text-muted-foreground">发布于 {blog.publishTime}</div>
-      <div class="font-bold text-xl lg:text-3xl">{blog.title}</div>
-      <div class="flex space-x-4">
+      <div class="font-bold text-xl lg:text-3xl text-primary">{blog.title}</div>
+      <div class="not-prose flex space-x-4">
         <div class="flex items-center space-x-2 text-xs">
           <Avatar.Root>
             <Avatar.Image src={blog.authorIconLink} alt={blog.author} class="bg-slate-100" />
