@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PageData } from "./$types";
+  import * as Avatar from "$lib/components/ui/avatar";
   import { marked } from "marked";
   export let data: PageData;
   const blog: any = data.blog;
@@ -8,17 +9,20 @@
 
 <div class="container max-w-4xl py-6 md:py-8 lg:py-10">
   <article class="prose prose-sm md:prose-lg dark:prose-invert mx-auto">
-    <div>
-      <time class="block text-sm text-muted-foreground">发布于 {blog.publishTime}</time>
-      <h1 class="mt-2 inline-block font-heading text-4xl leading-tight lg:text-5xl">{blog.title}</h1>
-      <div class="mt-4 flex space-x-4">
-        <a class="flex items-center space-x-2 text-sm" href={blog.authorLink}>
-          <img src={blog.authorIconLink} alt={blog.author} loading="lazy" class="w-12 h-12 rounded-full bg-white" />
-          <div class="flex-1 text-left leading-tight">
-            <p class="font-medium">{blog.author}</p>
-            <p class="text-[12px] text-muted-foreground">@{blog.author}</p>
+    <div class="not-prose flex flex-col space-y-2">
+      <div class="text-xs font-medium text-muted-foreground">发布于 {blog.publishTime}</div>
+      <div class="font-bold text-xl lg:text-3xl">{blog.title}</div>
+      <div class="flex space-x-4">
+        <div class="flex items-center space-x-2 text-xs">
+          <Avatar.Root>
+            <Avatar.Image src={blog.authorIconLink} alt={blog.author} class="bg-slate-100" />
+            <Avatar.Fallback>{blog.author}</Avatar.Fallback>
+          </Avatar.Root>
+          <div class="flex flex-col space-y-1/2 text-left">
+            <div class="font-medium text-muted-foreground">{blog.author}</div>
+            <a href={blog.authorLink} class="text-sky-500 hover:text-sky-600 dark:text-sky-400">@ddy-ddy</a>
           </div>
-        </a>
+        </div>
       </div>
     </div>
     {@html htmlContent}
