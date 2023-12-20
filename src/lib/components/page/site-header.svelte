@@ -35,7 +35,7 @@
         <Avatar.Root class="h-8 w-8">
           <Icons.logo />
         </Avatar.Root>
-        <span class="text-base font-bold text-[15px]">{siteConfig.siteInfo.title}</span>
+        <span class="text-base text-foreground/80 font-bold text-[15px]">{siteConfig.siteInfo.title}</span>
       </a>
       <!-- MainNav-mid -->
       <nav class="flex items-center justify-between space-x-4 text-sm font-medium">
@@ -53,12 +53,12 @@
         </Button>
       </Sheet.Trigger>
       <Sheet.Content side="left" class="pr-0">
-        <div class="flex items-center space-x-2">
+        <a href="/" class="flex items-center space-x-2">
           <Avatar.Root class="h-8 w-8">
             <Icons.logo class="h-8 w-8" />
           </Avatar.Root>
           <span class="font-bold">{siteConfig.siteInfo.title}</span>
-        </div>
+        </a>
         <div class="my-4 h-[calc(100vh-8rem)] pb-10 pl-6 overflow-auto">
           <div class="flex flex-col space-y-3">
             {#each siteConfig.mainNav as nav}
