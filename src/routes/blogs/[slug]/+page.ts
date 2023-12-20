@@ -5,9 +5,6 @@ const url_base = "http://121.4.85.24:1337";
 export const load: Load = async ({ params }) => {
     const { slug } = params;
     const blogData = await fetch(url_base + `/api/blogs/${slug}?populate=*`).then(res => res.json());
-    const contentFileUrl = url_base + blogData.data.attributes.content_file.data[0].attributes.url;
-    const markdownResponse = await fetch(contentFileUrl);
-    const markdownContent = await markdownResponse.text();
 
     const authorData = await fetch(url_base + `/api/authors/${blogData.data.attributes.author.data.id}?populate=*`).then(res => res.json());
     const authorIconLink = url_base + authorData.data.attributes.icon.data.attributes.url;
@@ -19,7 +16,7 @@ export const load: Load = async ({ params }) => {
         author: blogData.data.attributes.author.data.attributes.name,
         authorIconLink: authorIconLink,
         authorLink: blogData.data.attributes.author.data.attributes.github,
-        content: markdownContent
+        content: blogData.data.attributes.content,
     }
 
     if (blog) {
