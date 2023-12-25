@@ -16,6 +16,7 @@ export const load: Load = async ({ params }) => {
         author: blogData.data.attributes.author.data.attributes.name,
         authorIconLink: authorIconLink,
         authorLink: blogData.data.attributes.author.data.attributes.github,
+        authorMotto: blogData.data.attributes.author.data.attributes.motto,
         content: blogData.data.attributes.content,
     }
 

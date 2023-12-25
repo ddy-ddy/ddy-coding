@@ -7,4 +7,5 @@ const proseStyleP = "prose-p:text-foreground/60 prose-p:my-[10px]";
 const proseStyleA = "prose-a:text-sky-400 hover:prose-a:text-sky-500 dark:prose-a:text-sky-500 dark:hover:prose-a:text-sky-400 prose-a:underline prose-a:underline-offset-4";
 const proseStylePre = "prose-pre:my-[1px] prose-pre:rounded-md";
 const proseStyleImg = "prose-img:my-[1px] prose-img:rounded-md";
-export const proseStyle = combineStyles(proseStyleBase, proseStyleheadings, proseStyleP, proseStyleA, proseStylePre, proseStyleImg);
+const proseStyleLi = "prose-li:text-foreground/60";
+export const proseStyle = combineStyles(proseStyleBase, proseStyleheadings, proseStyleP, proseStyleA, proseStylePre, proseStyleImg, proseStyleLi);

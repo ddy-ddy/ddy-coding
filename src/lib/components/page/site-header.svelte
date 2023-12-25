@@ -5,7 +5,7 @@
   import { cn } from "$lib/utils";
   import * as Avatar from "$lib/components/ui/avatar";
   import * as Sheet from "$lib/components/ui/sheet";
-  import { siteConfig } from "$lib/config/site";
+  import { siteConfig, logoRingStyle } from "$lib/config/site";
   import { Button, buttonVariants } from "$lib/components/ui/button";
   import { Sun, Moon } from "lucide-svelte";
   import { toggleMode } from "mode-watcher";
@@ -32,8 +32,8 @@
     <div class="hidden md:flex space-x-6">
       <!-- MainNav-logo -->
       <a href="/" class="flex items-center space-x-1">
-        <Avatar.Root class="h-8 w-8">
-          <Icons.logo />
+        <Avatar.Root class={logoRingStyle}>
+          <Icons.logo class="ml-[1px]" />
         </Avatar.Root>
         <span class="text-base text-foreground/80 font-bold text-[15px]">{siteConfig.siteInfo.title}</span>
       </a>
@@ -53,9 +53,9 @@
         </Button>
       </Sheet.Trigger>
       <Sheet.Content side="left" class="pr-0">
-        <a href="/" class="flex items-center space-x-2">
-          <Avatar.Root class="h-8 w-8">
-            <Icons.logo class="h-8 w-8" />
+        <a href="/" class="flex items-center space-x-1">
+          <Avatar.Root class={logoRingStyle}>
+            <Icons.logo class="ml-[1px]" />
           </Avatar.Root>
           <span class="font-bold">{siteConfig.siteInfo.title}</span>
         </a>

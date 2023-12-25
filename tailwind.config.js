@@ -70,7 +70,25 @@ const config = {
 			},
 			fontFamily: {
 				sans: ["Inter", ...fontFamily.sans]
-			}
+			},
+			typography: (theme) => ({
+				DEFAULT: {
+					css: {
+						'p code': {
+							color: theme('colors.primary.foreground'),
+							backgroundColor: theme('colors.primary.DEFAULT'),
+							padding: '0.125rem 0.25rem',
+							borderRadius: '0.25rem'
+						},
+						'li code': {
+							color: theme('colors.primary.foreground'),
+							backgroundColor: theme('colors.primary.DEFAULT'),
+							padding: '0.125rem 0.25rem',
+							borderRadius: '0.25rem'
+						},
+					},
+				},
+			}),
 		}
 	},
 	plugins: [require('@tailwindcss/typography')]
