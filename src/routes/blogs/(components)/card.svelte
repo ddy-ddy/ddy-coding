@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Separator } from "$lib/components/ui/separator";
+  import { proseStyle } from "$lib/config/prose";
   import { createEventDispatcher } from "svelte";
   // 事件派发器，在点击博客类别的时候，能够把博客类名传递到+page.svelte
   const dispatch = createEventDispatcher();
@@ -10,9 +11,7 @@
   <img alt="img" class="hidden md:block w-24 h-24 rounded-md border bg-muted" src={blog.coverUrl} />
   <div class="flex flex-col space-y-1">
     <div class="flex-1 space-y-1">
-      <h2 class="text-xl font-extrabold line-clamp-1 text-foreground/80">
-        <a href={`/blogs/${blog.id}`}>{blog.title}</a>
-      </h2>
+      <a href={`/blogs/${blog.id}`} class="font-bold text-base md:text-lg lg:text-xl text-foreground/80">{blog.title}</a>
       <p class="text-sm text-foreground/60 line-clamp-2">{blog.summary}</p>
     </div>
     <div class="flex space-x-2">
