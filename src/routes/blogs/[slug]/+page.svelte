@@ -16,7 +16,7 @@
       <h2>{blog.title}</h2>
       <div class="not-prose flex space-x-4">
         <div class="flex items-center space-x-2 text-xs">
-          <a href={blog.authorLink}>
+          <a href={blog.authorLink} target="_blank" rel="logo">
             <Avatar.Root class={logoRingStyle}>
               <Avatar.Image src={blog.authorIconLink} alt={blog.author} class="ml-[1px]" />
               <Avatar.Fallback>{blog.author}</Avatar.Fallback>

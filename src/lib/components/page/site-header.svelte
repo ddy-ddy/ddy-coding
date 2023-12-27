@@ -31,7 +31,7 @@
   <div class="container flex h-14 items-center">
     <div class="hidden md:flex space-x-6">
       <!-- MainNav-logo -->
-      <a href="/" class="flex items-center space-x-1">
+      <a href="/" class="flex items-center space-x-1" target="_blank" rel="logo">
         <Avatar.Root class={logoRingStyle}>
           <Icons.logo class="ml-[1px]" />
         </Avatar.Root>
@@ -53,7 +53,7 @@
         </Button>
       </Sheet.Trigger>
       <Sheet.Content side="left" class="pr-0">
-        <a href="/" class="flex items-center space-x-1">
+        <a on:click={handleNavClick} href="/" class="flex items-center space-x-1" target="_blank" rel="logo">
           <Avatar.Root class={logoRingStyle}>
             <Icons.logo class="ml-[1px]" />
           </Avatar.Root>
