@@ -87,20 +87,47 @@ const config = {
 			typography: (theme) => ({
 				DEFAULT: {
 					css: {
-						'p code': {
+						'p code, li code': {
 							color: theme('colors.primary.foreground'),
-							backgroundColor: theme('colors.primary.DEFAULT'),
+							backgroundColor: theme('colors.avocado.200'),
 							padding: '0.125rem 0.25rem',
+							margin: '0.125rem 0.125rem',
 							borderRadius: '0.25rem'
 						},
-						'li code': {
-							color: theme('colors.primary.foreground'),
-							backgroundColor: theme('colors.primary.DEFAULT'),
-							padding: '0.125rem 0.25rem',
-							borderRadius: '0.25rem'
+						"code::before": {
+							content: '""',
+						},
+						"code::after": {
+							content: '""',
+						},
+						ul: {
+							listStyleType: 'none',
+						},
+						'ul > li': {
+							position: 'relative',
+						},
+						'ul > li::before': {
+							content: '"•"',
+							position: 'absolute',
+							left: '-0.5rem',
+						},
+						img: {
+							width: '100%',      // 使图片宽度自适应容器
+							maxHeight: '20rem', // 设置图片的最大高度
+							objectFit: 'cover', // 覆盖整个内容区域，可能会裁剪图片
 						},
 					},
 				},
+				dark: {
+					css: {
+						'p code, li code': {
+							color: theme('colors.primary.foreground'),
+							backgroundColor: theme('colors.avocado.800'),
+							padding: '0.125rem 0.25rem',
+							borderRadius: '0.25rem'
+						},
+					}
+				}
 			}),
 		}
 	},

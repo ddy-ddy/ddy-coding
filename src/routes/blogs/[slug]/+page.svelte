@@ -13,7 +13,7 @@
   <article class={proseStyle}>
     <div class="flex flex-col space-y-2">
       <div class="text-xs text-foreground/60">发布于 {blog.publishTime}</div>
-      <h2>{blog.title}</h2>
+      <h1>{blog.title}</h1>
       <div class="not-prose flex space-x-4">
         <div class="flex items-center space-x-2 text-xs">
           <a href={blog.authorLink} target="_blank" rel="logo">
