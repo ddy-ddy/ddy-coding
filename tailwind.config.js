@@ -61,7 +61,20 @@ const config = {
 				card: {
 					DEFAULT: "hsl(var(--card) / <alpha-value>)",
 					foreground: "hsl(var(--card-foreground) / <alpha-value>)"
-				}
+				},
+				// 牛油果
+				avocado: {
+					50: '#f4f9f4', // 最浅的牛油果绿色
+					100: '#e6f2e7',
+					200: '#c1dfc3',
+					300: '#9bcc9e',
+					400: '#4fa74e', // 中等深度的牛油果绿色
+					500: '#038d1e', // 标准的牛油果绿色
+					600: '#027f1b',
+					700: '#025816',
+					800: '#013912',
+					900: '#01250e', // 最深的牛油果绿色
+				},
 			},
 			borderRadius: {
 				lg: "var(--radius)",
@@ -95,3 +108,16 @@ const config = {
 };
 
 export default config;
+
+
+/*
+1、颜色
+- 浅色：text-foreground/60
+- 内容：text-foreground/70
+- 标题：text-foreground/80
+
+2、大小
+- 标题：text-base md:text-lg lg:text-xl
+- 正文：prose-p
+- 小内容：text-sm
+*/
