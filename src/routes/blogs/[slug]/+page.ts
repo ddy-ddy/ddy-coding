@@ -1,6 +1,6 @@
 import type { Load } from '@sveltejs/kit';
+import { url_base } from '$lib/config/site';
 
-const url_base = "http://121.4.85.24:1337";
 
 export const load: Load = async ({ params }) => {
     const { slug } = params;
@@ -18,6 +18,7 @@ export const load: Load = async ({ params }) => {
         authorLink: blogData.data.attributes.author.data.attributes.github,
         authorMotto: blogData.data.attributes.author.data.attributes.motto,
         content: blogData.data.attributes.content,
+        category: blogData.data.attributes.blog_categories.data[0].attributes.category_name,
     }
 
     if (blog) {

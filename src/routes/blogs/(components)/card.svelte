@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Separator } from "$lib/components/ui/separator";
-  import { proseStyle } from "$lib/config/prose";
   import { createEventDispatcher } from "svelte";
   // 事件派发器，在点击博客类别的时候，能够把博客类名传递到+page.svelte
   const dispatch = createEventDispatcher();

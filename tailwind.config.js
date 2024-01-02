@@ -111,11 +111,6 @@ const config = {
 							position: 'absolute',
 							left: '-0.5rem',
 						},
-						img: {
-							width: '100%',      // 使图片宽度自适应容器
-							maxHeight: '20rem', // 设置图片的最大高度
-							objectFit: 'cover', // 覆盖整个内容区域，可能会裁剪图片
-						},
 					},
 				},
 				dark: {

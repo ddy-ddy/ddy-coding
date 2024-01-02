@@ -8,11 +8,11 @@
   const categoryBlogs: any = data.categoryBlogs;
   const categories: any = data.categories;
 
-  let selectedCategory = "所有博客";
+  $: selectedCategory = "所有博客";
   $: filteredBlogs = selectedCategory === "所有博客" ? allBlogs : selectedCategory === "最新博客" ? recentBlogs : categoryBlogs.find((c: any) => c.name === selectedCategory)?.blogs || [];
 
+  // 接受card.svelte传递过来的博客类名，从而动态更新Tabs.root的默认值，达到点击类别调整到对应页面的效果
   function selectCategory(event: any) {
-    // 接受card.svelte传递过来的博客类名，从而动态更新Tabs.root的默认值，达到点击类别调整到对应页面的效果
     selectedCategory = event.detail;
   }
 </script>

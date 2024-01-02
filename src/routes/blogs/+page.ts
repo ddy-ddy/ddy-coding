@@ -1,6 +1,6 @@
 import type { PageLoad } from './$types';
+import { url_base } from '$lib/config/site';
 
-const url_base = "http://121.4.85.24:1337";
 const blog_url = url_base + "/api/blogs?fields=title&fields=summary&fields=publishedAt&populate=author&populate=blog_categories&populate=cover"
 
 

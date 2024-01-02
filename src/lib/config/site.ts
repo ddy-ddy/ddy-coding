@@ -1,3 +1,5 @@
+export const url_base = "https://strapi.ddycoding.cn";
+
 export const siteConfig = {
     siteInfo: {
         "title": "ddy's website",
