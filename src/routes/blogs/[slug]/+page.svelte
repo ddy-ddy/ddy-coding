@@ -1,16 +1,40 @@
 <script lang="ts">
   import type { PageData } from "./$types";
+  import { onMount } from "svelte";
   import * as Avatar from "$lib/components/ui/avatar";
   import { marked } from "marked";
   import { proseStyle } from "$lib/config/prose";
   import { logoRingStyle } from "$lib/config/site";
+
   export let data: PageData;
   const blog: any = data.blog;
-  const htmlContent = marked(blog.content);
+  let htmlContent: any;
+  let minLevel: number;
+  let toc: any = [];
+
+  onMount(() => {
+    if (blog && blog.content) {
+      htmlContent = marked(blog.content);
+      parseContent();
+    }
+  });
+
+  function parseContent() {
+    toc = []; // 清空旧的目录
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, "text/html");
+    doc.querySelectorAll("h1:not(code h1), h2:not(code h2), h3:not(code h3)").forEach((element) => {
+      const level: any = parseInt(element.tagName.substring(1));
+      const text: any = element.textContent;
+      toc.push({ level, text });
+    });
+    minLevel = Math.min(...toc.map((item: any) => item.level));
+  }
 </script>
 
 <div class="flex flex-col lg:flex-row justify-center lg:items-stretch gap-4 max-w-7xl mx-auto py-6 md:py-8 lg:py-10">
-  <div class="max-w-2xl mx-4 md:mx-0">
+  <!-- 返回 -->
+  <div class="flex-none mx-4 md:mx-0 sticky top-20 z-10 max-h-[calc(100vh-20px)]">
     <a role="button" href="/blogs" class="group flex leading-6 text-sm font-medium text-foreground/60 hover:text-foreground/80">
       <svg viewBox="0 -9 3 24" class="overflow-visible mr-2 w-auto h-6 text-foreground/60 group-hover:text-foreground/80">
         <path d="M3 0L0 3L3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> </path>
@@ -18,7 +42,8 @@
       Go back
     </a>
   </div>
-  <div class="max-w-3xl mx-4 md:mx-8 lg:mx-12">
+  <!-- 正文 -->
+  <div class="grow max-w-3xl mx-4 md:mx-8 lg:mx-12">
     <article class={proseStyle}>
       <div class="flex flex-col space-y-2">
         <div class="text-xs text-foreground/60">发布于 {blog.publishTime}</div>
@@ -41,5 +66,25 @@
       {@html htmlContent}
     </article>
   </div>
-  <div class="max-w-2xl hidden lg:block bg-avocado-300">{@html blog.toc}</div>
+  <!-- 目录 -->
+  <div class="hidden md:block flex-none w-52 sticky top-20 z-10 max-h-[calc(100vh-20px)] overflow-auto">
+    <ul>
+      <div class="rounded-md border border-dashed p-2">
+        <h3 class="font-bold text-lg mb-4 underline underline-offset-4 text-foreground/80 decoration-avocado-400">目录</h3>
+        {#each toc as item}
+          <li class="mb-2">
+            {#if item.level - minLevel == 0}
+              <a href="#{item.text}" class="truncate block tracking-tight py-1 sm:text-sm lg:text-md font-medium text-foreground/60 hover:text-foreground/80">
+                {item.text}
+              </a>
+            {:else}
+              <a href="#{item.text}" class="truncate block tracking-tight py-1 sm:text-sm lg:text-md font-medium text-foreground/60 hover:text-foreground/80">
+                • {item.text}
+              </a>
+            {/if}
+          </li>
+        {/each}
+      </div>
+    </ul>
+  </div>
 </div>
