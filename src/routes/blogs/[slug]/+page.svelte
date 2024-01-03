@@ -34,13 +34,15 @@
 
 <div class="flex flex-col lg:flex-row justify-center lg:items-stretch gap-4 max-w-7xl mx-auto py-6 md:py-8 lg:py-10">
   <!-- 返回 -->
-  <div class="flex-none mx-4 md:mx-0 sticky top-20 z-10 max-h-[calc(100vh-20px)]">
-    <a role="button" href="/blogs" class="group flex leading-6 text-sm font-medium text-foreground/60 hover:text-foreground/80">
-      <svg viewBox="0 -9 3 24" class="overflow-visible mr-2 w-auto h-6 text-foreground/60 group-hover:text-foreground/80">
-        <path d="M3 0L0 3L3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> </path>
-      </svg>
-      Go back
-    </a>
+  <div class="flex-none mx-4 md:mx-0 md:w-32 lg:w-36 md:sticky md:top-20 md:z-10 md:max-h-[calc(100vh-20px)]">
+    <div class="flex md:justify-end">
+      <a role="button" href="/blogs" class="group flex leading-6 text-sm font-medium text-foreground/60 hover:text-foreground/80">
+        <svg viewBox="0 -9 3 24" class="overflow-visible mr-2 w-auto h-6 text-foreground/60 group-hover:text-foreground/80">
+          <path d="M3 0L0 3L3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> </path>
+        </svg>
+        Go back
+      </a>
+    </div>
   </div>
   <!-- 正文 -->
   <div class="grow max-w-3xl mx-4 md:mx-8 lg:mx-12">
@@ -67,7 +69,7 @@
     </article>
   </div>
   <!-- 目录 -->
-  <div class="hidden md:block flex-none w-52 sticky top-20 z-10 max-h-[calc(100vh-20px)] overflow-auto">
+  <div class="hidden md:block flex-none md:w-40 lg:w-52 sticky top-20 z-10 max-h-[calc(100vh-20px)] overflow-auto">
     <ul>
       <div class="rounded-md border border-dashed p-2">
         <h3 class="font-bold text-lg mb-4 underline underline-offset-4 text-foreground/80 decoration-avocado-400">目录</h3>
