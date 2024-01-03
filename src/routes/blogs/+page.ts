@@ -3,7 +3,6 @@ import { url_base } from '$lib/config/site';
 
 const blog_url = url_base + "/api/blogs?fields=title&fields=summary&fields=publishedAt&populate=author&populate=blog_categories&populate=cover"
 
-
 async function fetchData(url: any) {
     const response = await fetch(url);
     if (!response.ok) {

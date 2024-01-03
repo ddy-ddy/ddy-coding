@@ -41,5 +41,5 @@
       {@html htmlContent}
     </article>
   </div>
-  <div class="max-w-2xl hidden lg:block bg-avocado-300">123</div>
+  <div class="max-w-2xl hidden lg:block bg-avocado-300">{@html blog.toc}</div>
 </div>
