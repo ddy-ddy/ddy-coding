@@ -75,15 +75,13 @@
         <h3 class="font-bold text-lg mb-4 underline underline-offset-4 text-foreground/80 decoration-avocado-400">目录</h3>
         {#each toc as item}
           <li class="mb-2">
-            {#if item.level - minLevel == 0}
-              <a href="#{item.text}" class="truncate block tracking-tight py-1 sm:text-sm lg:text-md font-medium text-foreground/60 hover:text-foreground/80">
+            <a href="#{item.text}" class="truncate block tracking-tight py-1 sm:text-sm lg:text-md font-medium text-foreground/60 hover:text-foreground/80">
+              {#if item.level - minLevel == 0}
                 {item.text}
-              </a>
-            {:else}
-              <a href="#{item.text}" class="truncate block tracking-tight py-1 sm:text-sm lg:text-md font-medium text-foreground/60 hover:text-foreground/80">
+              {:else}
                 • {item.text}
-              </a>
-            {/if}
+              {/if}
+            </a>
           </li>
         {/each}
       </div>
