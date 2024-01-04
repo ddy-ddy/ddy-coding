@@ -32,10 +32,10 @@
   }
 </script>
 
-<div class="flex flex-col lg:flex-row justify-center lg:items-stretch gap-4 max-w-7xl mx-auto py-6 md:py-8 lg:py-10">
+<div class="flex flex-col lg:flex-row justify-center lg:items-stretch gap-4 max-w-7xl mx-auto py-6 lg:py-10">
   <!-- 返回 -->
-  <div class="flex-none mx-4 md:mx-0 md:w-32 lg:w-36 md:sticky md:top-20 md:z-10 md:max-h-[calc(100vh-20px)]">
-    <div class="flex md:justify-end">
+  <div class="flex-none mx-4 lg:mx-0 lg:w-32 lg:sticky lg:top-20 lg:z-10">
+    <div class="flex lg:justify-end">
       <a role="button" href="/blogs" class="group flex leading-6 text-sm font-medium text-foreground/60 hover:text-foreground/80">
         <svg viewBox="0 -9 3 24" class="overflow-visible mr-2 w-auto h-6 text-foreground/60 group-hover:text-foreground/80">
           <path d="M3 0L0 3L3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> </path>
@@ -45,7 +45,7 @@
     </div>
   </div>
   <!-- 正文 -->
-  <div class="grow max-w-3xl mx-4 md:mx-8 lg:mx-12">
+  <div class="grow max-w-3xl mx-4 lg:mx-12">
     <article class={proseStyle}>
       <div class="flex flex-col space-y-2">
         <div class="text-xs text-foreground/60">发布于 {blog.publishTime}</div>
@@ -69,10 +69,10 @@
     </article>
   </div>
   <!-- 目录 -->
-  <div class="hidden md:block flex-none md:w-40 lg:w-52 sticky top-20 z-10 max-h-[calc(100vh-20px)] overflow-auto">
+  <div class="hidden lg:block flex-none sticky top-20 z-10 max-h-[calc(100vh-20px)] max-w-[calc(15vw)] mr-4">
     <ul>
       <div class="rounded-md border border-dashed p-2">
-        <h3 class="font-bold text-lg mb-4 underline underline-offset-4 text-foreground/80 decoration-avocado-400">目录</h3>
+        <h3 class="font-bold text-lg mb-4 text-foreground/80 underline underline-offset-4 decoration-2 decoration-avocado-400 dark:decoration-avocado-600">目录</h3>
         {#each toc as item}
           <li class="mb-2">
             <a href="#{item.text}" class="truncate block tracking-tight py-1 sm:text-sm lg:text-md font-medium text-foreground/60 hover:text-foreground/80">
