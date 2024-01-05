@@ -2,7 +2,7 @@ import type { PageLoad } from './$types';
 import { url_base } from '$lib/config/site';
 import { fetchData, processBlogData, getRecentBlogs } from '$lib/config/blogs';
 
-const blog_url = url_base + "/api/blogs?fields=title&fields=summary&fields=publishedAt&populate=author&populate=blog_categories&populate=cover"
+const blog_url = url_base + "/api/blogs?fields=title&fields=summary&fields=publishedAt&populate=author&populate=blog_categories&populate=cover&sort=publishedAt:desc"
 
 
 export const load: PageLoad = async () => {
