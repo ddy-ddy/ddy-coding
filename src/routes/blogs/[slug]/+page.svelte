@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
   import * as Avatar from "$lib/components/ui/avatar";
   import { marked } from "marked";
   import { proseStyle } from "$lib/config/prose";
@@ -30,11 +30,11 @@
     toc = []; // 清空旧的目录
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlContent, "text/html");
-    doc.querySelectorAll("h1:not(code h1), h2:not(code h2), h3:not(code h3)").forEach((element, index) => {
+    doc.querySelectorAll("h1:not(code h1), h2:not(code h2)").forEach((element, index) => {
       const level: any = parseInt(element.tagName.substring(1));
       const text: any = element.textContent;
       const anchorId = `content-${index}`;
-      element.setAttribute("id", anchorId); // 为标题设置ID
+      element.setAttribute("id", anchorId);
       toc.push({ level, text, id: anchorId });
     });
     minLevel = Math.min(...toc.map((item: any) => item.level));
@@ -43,6 +43,7 @@
     htmlContent = serializer.serializeToString(doc); // 将修改后的文档转换回HTML字符串
   }
 
+  // 更新当前激活的目录项
   function updateActiveTocItem() {
     let closestId = null;
     let closestDistance = Infinity;

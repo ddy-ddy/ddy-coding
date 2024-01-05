@@ -17,7 +17,7 @@
       <p class="text-sm text-foreground/60">{blog.publishTime}</p>
       <Separator orientation="vertical" />
       {#each blog.category as category}
-        <span role="button" tabindex="0" on:click={() => dispatch("selectCategory", category)} class="text-sm text-foreground/60 hover:text-foreground/80 cursor-pointer">
+        <span role="button" tabindex="0" on:click={() => dispatch("infoFromCard", category)} class="text-sm text-foreground/60 hover:text-foreground/80 cursor-pointer">
           {category}
         </span>
         <Separator orientation="vertical" />
