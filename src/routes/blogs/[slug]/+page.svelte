@@ -103,7 +103,7 @@
           <h3 class="font-bold text-lg mb-4 text-foreground/80 underline underline-offset-4 decoration-2 decoration-avocado-400 dark:decoration-avocado-600">目录</h3>
           {#each toc as item}
             <li class="mb-2">
-              <a href="#{item.id}" class:active={item.id === activeId} class="truncate block tracking-tight py-1 text-sm font-medium text-foreground/60 hover:text-foreground/80">
+              <a href="#{item.id}" class={`truncate block tracking-tight py-1 text-sm font-medium text-foreground/60 hover:text-foreground/80 ${item.id === activeId ? "text-avocado-400 dark:text-avocado-600" : ""}`}>
                 {#if item.level - minLevel == 0}
                   {item.text}
                 {:else}
