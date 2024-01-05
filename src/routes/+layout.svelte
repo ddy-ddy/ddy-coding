@@ -6,14 +6,12 @@
 
 <ModeWatcher />
 
-<!-- 
-  min-h-screen: 设置最小高度为视口的高度，确保即使内容不足时，元素也至少有整个屏幕的高度。
-  flex-1: 将其扩展以填充剩余的可用空间
--->
-<div class="relative flex flex-col min-h-screen">
+<div class="relative flex flex-col min-h-screen overflow-autor">
   <SiteHeader />
   <div class="flex-1">
     <slot />
   </div>
   <SiteFooter />
 </div>
+
+
