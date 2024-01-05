@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
   import * as Avatar from "$lib/components/ui/avatar";
   import { marked } from "marked";
   import { proseStyle } from "$lib/config/prose";
@@ -11,11 +11,37 @@
   let htmlContent: any;
   let minLevel: number;
   let toc: any = [];
+  let activeId: any = null;
 
   onMount(() => {
     if (blog && blog.content) {
       htmlContent = marked(blog.content);
       parseContent();
+      // 确保这些代码在客户端运行
+      const handleScroll = () => {
+        let found = false;
+        for (let i = 0; i < toc.length; i++) {
+          const item = toc[i];
+          const element = document.getElementById(item.id);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
+              activeId = item.id;
+              found = true;
+              break;
+            }
+          }
+        }
+        if (!found) {
+          activeId = null;
+        }
+      };
+      // 添加滚动事件监听器
+      window.addEventListener("scroll", handleScroll);
+      // 清理工作
+      onDestroy(() => {
+        window.removeEventListener("scroll", handleScroll);
+      });
     }
   });
 
@@ -81,7 +107,7 @@
           <h3 class="font-bold text-lg mb-4 text-foreground/80 underline underline-offset-4 decoration-2 decoration-avocado-400 dark:decoration-avocado-600">目录</h3>
           {#each toc as item}
             <li class="mb-2">
-              <a href="#{item.id}" class="truncate block tracking-tight py-1 text-sm font-medium text-foreground/60 hover:text-foreground/80">
+              <a href="#{item.id}" class="truncate block tracking-tight py-1 text-sm font-medium text-foreground/60 hover:text-foreground/80 {item.id === activeId ? ' text-avocado-400 dark:text-avocado-600 ' : ''}">
                 {#if item.level - minLevel == 0}
                   {item.text}
                 {:else}
@@ -95,3 +121,10 @@
     </div>
   </div>
 </section>
+
+<style>
+  .active {
+    color: #4ade80; /* Tailwind色彩，例如绿色 */
+    font-weight: bold;
+  }
+</style>
