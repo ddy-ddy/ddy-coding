@@ -17,32 +17,12 @@
     if (blog && blog.content) {
       htmlContent = marked(blog.content);
       parseContent();
-      // 确保这些代码在客户端运行
-      const handleScroll = () => {
-        let found = false;
-        for (let i = 0; i < toc.length; i++) {
-          const item = toc[i];
-          const element = document.getElementById(item.id);
-          if (element) {
-            const rect = element.getBoundingClientRect();
-            if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
-              activeId = item.id;
-              found = true;
-              break;
-            }
-          }
-        }
-        if (!found) {
-          activeId = null;
-        }
-      };
-      // 添加滚动事件监听器
-      window.addEventListener("scroll", handleScroll);
-      // 清理工作
-      onDestroy(() => {
-        window.removeEventListener("scroll", handleScroll);
-      });
+      window.addEventListener("scroll", updateActiveTocItem);
     }
+    return () => {
+      // 在组件卸载时移除监听器
+      window.removeEventListener("scroll", updateActiveTocItem);
+    };
   });
 
   // 解析目录
@@ -61,6 +41,22 @@
 
     const serializer = new XMLSerializer();
     htmlContent = serializer.serializeToString(doc); // 将修改后的文档转换回HTML字符串
+  }
+
+  function updateActiveTocItem() {
+    let closestId = null;
+    let closestDistance = Infinity;
+
+    toc.forEach((item: any) => {
+      const element: any = document.getElementById(item.id);
+      const distance = Math.abs(element.getBoundingClientRect().top);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestId = item.id;
+      }
+    });
+    activeId = closestId;
   }
 </script>
 
@@ -107,7 +103,7 @@
           <h3 class="font-bold text-lg mb-4 text-foreground/80 underline underline-offset-4 decoration-2 decoration-avocado-400 dark:decoration-avocado-600">目录</h3>
           {#each toc as item}
             <li class="mb-2">
-              <a href="#{item.id}" class="truncate block tracking-tight py-1 text-sm font-medium text-foreground/60 hover:text-foreground/80 {item.id === activeId ? ' text-avocado-400 dark:text-avocado-600 ' : ''}">
+              <a href="#{item.id}" class:active={item.id === activeId} class="truncate block tracking-tight py-1 text-sm font-medium text-foreground/60 hover:text-foreground/80">
                 {#if item.level - minLevel == 0}
                   {item.text}
                 {:else}
@@ -124,7 +120,9 @@
 
 <style>
   .active {
-    color: #4ade80; /* Tailwind色彩，例如绿色 */
-    font-weight: bold;
+    color: #4fa74e;
+  }
+  .active dark {
+    color: #027f1b;
   }
 </style>
