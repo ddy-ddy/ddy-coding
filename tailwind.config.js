@@ -131,15 +131,3 @@ const config = {
 
 export default config;
 
-
-/*
-1、颜色
-- 浅色：text-foreground/60
-- 内容：text-foreground/70
-- 标题：text-foreground/80
-
-2、大小
-- 标题：text-base md:text-lg lg:text-xl
-- 正文：prose-p
-- 小内容：text-sm
-*/

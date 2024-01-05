@@ -6,12 +6,10 @@
 
 <ModeWatcher />
 
-<div class="relative flex flex-col min-h-screen overflow-autor">
+<div class="relative flex flex-col min-h-screen">
   <SiteHeader />
   <div class="flex-1">
     <slot />
   </div>
   <SiteFooter />
 </div>
-
-

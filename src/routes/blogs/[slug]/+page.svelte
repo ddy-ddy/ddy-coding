@@ -19,16 +19,22 @@
     }
   });
 
+  // 解析目录
   function parseContent() {
     toc = []; // 清空旧的目录
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlContent, "text/html");
-    doc.querySelectorAll("h1:not(code h1), h2:not(code h2), h3:not(code h3)").forEach((element) => {
+    doc.querySelectorAll("h1:not(code h1), h2:not(code h2), h3:not(code h3)").forEach((element, index) => {
       const level: any = parseInt(element.tagName.substring(1));
       const text: any = element.textContent;
-      toc.push({ level, text });
+      const anchorId = `content-${index}`;
+      element.setAttribute("id", anchorId); // 为标题设置ID
+      toc.push({ level, text, id: anchorId });
     });
     minLevel = Math.min(...toc.map((item: any) => item.level));
+
+    const serializer = new XMLSerializer();
+    htmlContent = serializer.serializeToString(doc); // 将修改后的文档转换回HTML字符串
   }
 </script>
 
@@ -63,17 +69,19 @@
             </div>
           </div>
         </div>
-        {@html htmlContent}
+        <article>
+          {@html htmlContent}
+        </article>
       </article>
     </div>
     <!-- 目录 -->
-    <div class="hidden lg:block flex-none sticky top-20 z-10 max-h-[50vh] w-[calc(16vw)] 2xl:w-[calc(12vw)] ">
+    <div class="hidden lg:block flex-none sticky top-20 z-10 max-h-[50vh] w-[calc(16vw)] 2xl:w-[calc(12vw)]">
       <ul>
         <div class="rounded-md border border-dashed p-2">
           <h3 class="font-bold text-lg mb-4 text-foreground/80 underline underline-offset-4 decoration-2 decoration-avocado-400 dark:decoration-avocado-600">目录</h3>
           {#each toc as item}
             <li class="mb-2">
-              <a href="#{item.text}" class="truncate block tracking-tight py-1 text-sm font-medium text-foreground/60 hover:text-foreground/80">
+              <a href="#{item.id}" class="truncate block tracking-tight py-1 text-sm font-medium text-foreground/60 hover:text-foreground/80">
                 {#if item.level - minLevel == 0}
                   {item.text}
                 {:else}
