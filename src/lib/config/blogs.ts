@@ -25,8 +25,3 @@ export function processBlogData(blogData: any) {
         };
     });
 }
-
-// 获取最近的博客
-export function getRecentBlogs(allBlogs: any[], limit: number = 5) {
-    return allBlogs.slice(0, limit);
-}

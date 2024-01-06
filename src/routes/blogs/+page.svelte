@@ -6,10 +6,7 @@
 
   export let data: PageData;
   const allBlogs: any = data.allBlogs;
-  const recentBlogs: any = data.recentBlogs;
   const categories: any = data.categories;
-  let count = 100;
-  let perPage = 10;
 
   $: selectedCategory = "所有博客";
   $: ShowBlogs = allBlogs;
@@ -18,8 +15,6 @@
     selectedCategory = categoryName;
     if (selectedCategory === "所有博客") {
       ShowBlogs = allBlogs;
-    } else if (selectedCategory === "最新博客") {
-      ShowBlogs = recentBlogs;
     } else {
       loadCategoryBlogs(selectedCategory);
     }
@@ -31,12 +26,12 @@
   }
 </script>
 
-<div class="container max-w-4xl py-6 md:py-8 lg:py-10">
+<div class="container max-w-4xl py-6 md:py-8 lg:py-10 flex flex-col gap-4"> 
+  <!-- 博客分类展示 -->
   <Tabs.Root bind:value={selectedCategory} class="h-full">
     <!-- tabs list -->
     <Tabs.List class="flex flex-nowrap overflow-x-auto justify-start">
       <Tabs.Trigger value="所有博客" on:click={() => handleCatgoryBlogClick("所有博客")}>所有博客</Tabs.Trigger>
-      <Tabs.Trigger value="最新博客" on:click={() => handleCatgoryBlogClick("最新博客")}>最新博客</Tabs.Trigger>
       {#each categories as category}
         <Tabs.Trigger value={category.name} on:click={() => handleCatgoryBlogClick(category.name)}>{category.name}</Tabs.Trigger>
       {/each}
@@ -69,9 +64,31 @@
       </Tabs.Content>
     {/each}
   </Tabs.Root>
+  <!-- 分页器 -->
+  <Pagination.Root count={7} perPage={5} let:pages let:currentPage>
+    <Pagination.Content>
+      <Pagination.Item>
+        <Pagination.PrevButton />
+      </Pagination.Item>
+      {#each pages as page (page.key)}
+        {#if page.type === "ellipsis"}
+          <Pagination.Item>
+            <Pagination.Ellipsis />
+          </Pagination.Item>
+        {:else}
+          <Pagination.Item>
+            <Pagination.Link {page} isActive={currentPage == page.value}>
+              {page.value}
+            </Pagination.Link>
+          </Pagination.Item>
+        {/if}
+      {/each}
+      <Pagination.Item>
+        <Pagination.NextButton />
+      </Pagination.Item>
+    </Pagination.Content>
+  </Pagination.Root>
 </div>
-
-
 
 <style>
   .line-clamp-1 {
