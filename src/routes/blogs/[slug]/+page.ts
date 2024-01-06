@@ -1,12 +1,12 @@
 import type { Load } from '@sveltejs/kit';
-import { url_base } from '$lib/config/site';
+import { urlBase } from '$lib/config/site';
 
 export const load: Load = async ({ params }) => {
     const { slug } = params;
-    const blogData = await fetch(url_base + `/api/blogs/${slug}?populate=*`).then(res => res.json());
+    const blogData = await fetch(urlBase + `/api/blogs/${slug}?populate=*`).then(res => res.json());
 
-    const authorData = await fetch(url_base + `/api/authors/${blogData.data.attributes.author.data.id}?populate=*`).then(res => res.json());
-    const authorIconLink = url_base + authorData.data.attributes.icon.data.attributes.url;
+    const authorData = await fetch(urlBase + `/api/authors/${blogData.data.attributes.author.data.id}?populate=*`).then(res => res.json());
+    const authorIconLink = urlBase + authorData.data.attributes.icon.data.attributes.url;
 
     const blog = {
         title: blogData.data.attributes.title,

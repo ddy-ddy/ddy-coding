@@ -1,4 +1,6 @@
-export const url_base = "https://strapi.ddycoding.cn";
+export const urlBase = "https://strapi.ddycoding.cn";
+export const allBlogUrl = urlBase + "/api/blogs?fields=title&fields=summary&fields=publishedAt&populate=author&populate=blog_categories&populate=cover&sort=publishedAt:desc"
+
 
 export const siteConfig = {
     siteInfo: {
