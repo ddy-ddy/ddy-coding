@@ -1,20 +1,21 @@
 <script lang="ts">
   import * as Tabs from "$lib/components/ui/tabs";
-  import type { PageData } from "./$types";
-  import { page } from "$app/stores";
   import { Separator } from "$lib/components/ui/separator";
+  import * as Pagination from "$lib/components/ui/pagination";
+  import type { PageData } from "./$types";
 
   export let data: PageData;
   const allBlogs: any = data.allBlogs;
   const recentBlogs: any = data.recentBlogs;
   const categories: any = data.categories;
+  let count = 100;
+  let perPage = 10;
 
   $: selectedCategory = "所有博客";
   $: ShowBlogs = allBlogs;
 
   function handleCatgoryBlogClick(categoryName: string) {
     selectedCategory = categoryName;
-    $page.url.searchParams.set("category", selectedCategory);
     if (selectedCategory === "所有博客") {
       ShowBlogs = allBlogs;
     } else if (selectedCategory === "最新博客") {
@@ -69,6 +70,8 @@
     {/each}
   </Tabs.Root>
 </div>
+
+
 
 <style>
   .line-clamp-1 {
