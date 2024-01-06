@@ -104,7 +104,7 @@
           <h3 class="font-bold text-lg mb-4 text-foreground/80 underline underline-offset-4 decoration-2 decoration-avocado-400 dark:decoration-avocado-600">目录</h3>
           {#each toc as item}
             <li class="mb-2">
-              <a href="#{item.id}" class={`truncate block tracking-tight py-1 text-sm font-medium text-foreground/60 hover:text-foreground/80 ${item.id === activeId ? "text-avocado-400 dark:text-avocado-600" : ""}`}>
+              <a href="#{item.id}" class="truncate block tracking-tight py-1 text-sm font-medium {item.id === activeId ? 'text-avocado-400 dark:text-avocado-600' : 'text-foreground/60 hover:text-foreground/80'}">
                 {#if item.level - minLevel == 0}
                   {item.text}
                 {:else}
@@ -118,12 +118,3 @@
     </div>
   </div>
 </section>
-
-<style>
-  .active {
-    color: #4fa74e;
-  }
-  .active dark {
-    color: #027f1b;
-  }
-</style>
