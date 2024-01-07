@@ -11,37 +11,49 @@
   const paginationData: any = data.paginationData;
   const categories: any = data.categories;
 
+  // 展示博客相关变量
+  $: showBlogs = allBlogs;
+
+  // 博客类别相关变量
   $: selectedCategory = "所有博客";
   $: selectedCategoryId = -1;
-  $: currentPage = 1;
+
+  // 分页器相关变量
   $: pageCategoryChangeFlag = true;
-  $: showBlogs = allBlogs;
+  $: currentPage = paginationData.currentPage;
   $: totalItems = paginationData.totalItems;
   $: totalPages = paginationData.totalPages;
   $: pageSize = paginationData.pageSize;
 
-  console.log(paginationData);
-
+  // 博客类别点击事件
   function handleCatgoryBlogClick(categoryName: string, categoryId: any) {
     selectedCategory = categoryName;
     selectedCategoryId = categoryId;
-    currentPage = 1;
     if (selectedCategoryId === -1) {
+      changePageValue(paginationData);
       showBlogs = allBlogs;
-      totalItems = paginationData.totalItems;
-      totalPages = paginationData.totalPages;
-      pageSize = paginationData.pageSize;
-      pageCategoryChangeFlag = !pageCategoryChangeFlag;
     } else {
       loadCategoryBlogs(categoryId);
     }
   }
 
+  // 分页器点击事件
   function handlePageChange(pageValue: any) {
     currentPage = pageValue;
     loadPageBlogs(pageValue, selectedCategoryId);
   }
 
+  // 分页器数据变化
+  function changePageValue(paginationData: any) {
+    pageCategoryChangeFlag = !pageCategoryChangeFlag;
+    currentPage = paginationData.currentPage;
+    totalItems = paginationData.totalItems;
+    totalPages = paginationData.totalPages;
+    pageSize = paginationData.pageSize;
+    showBlogs = allBlogs;
+  }
+
+  // 加载指定分页指定类别的博客数据
   async function loadPageBlogs(pageId: any, categoryId: any) {
     let pageBlogsResponse: any = null;
     if (categoryId === -1) {
@@ -53,14 +65,12 @@
     showBlogs = pageBlogs;
   }
 
+  // 加载指定类别的博客数据
   async function loadCategoryBlogs(categoryId: any) {
     const categoryBlogsResponse = await fetchData(urlListBlog + `&filters[blog_categories][id][$eq]=${categoryId}`);
     const categoryBlogs = processListBlogData(categoryBlogsResponse.data);
     const categoryPaginationData = processPaginationData(categoryBlogsResponse.meta.pagination);
-    totalItems = categoryPaginationData.totalItems;
-    totalPages = categoryPaginationData.totalPages;
-    pageSize = categoryPaginationData.pageSize;
-    pageCategoryChangeFlag = !pageCategoryChangeFlag;
+    changePageValue(categoryPaginationData);
     showBlogs = categoryBlogs;
   }
 </script>
