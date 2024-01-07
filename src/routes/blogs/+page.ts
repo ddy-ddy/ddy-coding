@@ -3,7 +3,7 @@ import { allBlogUrl, urlBase } from '$lib/config/site';
 import { fetchData, processBlogData } from '$lib/config/blogs';
 
 
-export const load: PageLoad = async () => {
+export const load: PageLoad = async ({ fetch, params }) => {
     try {
         const allBlogsResponse = await fetchData(allBlogUrl);
         const allBlogs: any = processBlogData(allBlogsResponse.data);

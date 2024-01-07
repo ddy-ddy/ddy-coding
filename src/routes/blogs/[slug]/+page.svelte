@@ -2,21 +2,18 @@
   import type { PageData } from "./$types";
   import { onMount } from "svelte";
   import * as Avatar from "$lib/components/ui/avatar";
-  import { marked } from "marked";
   import { proseStyle } from "$lib/config/prose";
   import { logoRingStyle } from "$lib/config/site";
 
   export let data: PageData;
-  const blog: any = data.blog;
-  let htmlContent: any;
-  let minLevel: number;
-  let toc: any = [];
+  let blog: any = data.blog;
+  let htmlContent: any = data.blog.content;
+  let minLevel: any = data.blog.minLevel;
+  let toc: any = data.blog.toc;
   let activeId: any = null;
 
   onMount(() => {
-    if (blog && blog.content) {
-      htmlContent = marked(blog.content);
-      parseContent();
+    if (htmlContent) {
       window.addEventListener("scroll", updateActiveTocItem);
     }
     return () => {
@@ -24,24 +21,6 @@
       window.removeEventListener("scroll", updateActiveTocItem);
     };
   });
-
-  // 解析目录
-  function parseContent() {
-    toc = []; // 清空旧的目录
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(htmlContent, "text/html");
-    doc.querySelectorAll("h1:not(code h1), h2:not(code h2)").forEach((element, index) => {
-      const level: any = parseInt(element.tagName.substring(1));
-      const text: any = element.textContent;
-      const anchorId = `content-${index}`;
-      element.setAttribute("id", anchorId);
-      toc.push({ level, text, id: anchorId });
-    });
-    minLevel = Math.min(...toc.map((item: any) => item.level));
-
-    const serializer = new XMLSerializer();
-    htmlContent = serializer.serializeToString(doc); // 将修改后的文档转换回HTML字符串
-  }
 
   // 更新当前激活的目录项
   function updateActiveTocItem() {
