@@ -7,31 +7,33 @@
   import { blogPageSize, fetchData, processListBlogData, processPaginationData } from "$lib/config/blogs";
 
   export let data: PageData;
-  const allBlogs: any = data.allBlogs;
-  const paginationData: any = data.paginationData;
-  const categories: any = data.categories;
+  const fistBlogs: any = data.fistBlogs;
+  const fistPaginationData: any = data.fistPaginationData;
+  const fistSelectedCategory: any = data.fistSelectedCategory;
+  const fistSelectedCategoryId: any = data.fistSelectedCategoryId;
+  const allCategories: any = data.allCategories;
 
   // 展示博客相关变量
-  $: showBlogs = allBlogs;
+  $: showBlogs = fistBlogs;
 
   // 博客类别相关变量
-  $: selectedCategory = "所有博客";
-  $: selectedCategoryId = -1;
+  $: selectedCategory = fistSelectedCategory;
+  $: selectedCategoryId = fistSelectedCategoryId;
 
   // 分页器相关变量
   $: pageCategoryChangeFlag = true;
-  $: currentPage = paginationData.currentPage;
-  $: totalItems = paginationData.totalItems;
-  $: totalPages = paginationData.totalPages;
-  $: pageSize = paginationData.pageSize;
+  $: currentPage = fistPaginationData.currentPage;
+  $: totalItems = fistPaginationData.totalItems;
+  $: totalPages = fistPaginationData.totalPages;
+  $: pageSize = fistPaginationData.pageSize;
 
   // 博客类别点击事件
   function handleCatgoryBlogClick(categoryName: string, categoryId: any) {
     selectedCategory = categoryName;
     selectedCategoryId = categoryId;
     if (selectedCategoryId === -1) {
-      changePageValue(paginationData);
-      showBlogs = allBlogs;
+      changePageValue(fistPaginationData);
+      showBlogs = fistBlogs;
     } else {
       loadCategoryBlogs(categoryId);
     }
@@ -50,7 +52,7 @@
     totalItems = paginationData.totalItems;
     totalPages = paginationData.totalPages;
     pageSize = paginationData.pageSize;
-    showBlogs = allBlogs;
+    showBlogs = fistBlogs;
   }
 
   // 加载指定分页指定类别的博客数据
@@ -80,7 +82,7 @@
   <Tabs.Root bind:value={selectedCategory} class="h-full">
     <Tabs.List class="flex flex-nowrap overflow-x-auto justify-start">
       <Tabs.Trigger value="所有博客" on:click={() => handleCatgoryBlogClick("所有博客", -1)}>所有博客</Tabs.Trigger>
-      {#each categories as category}
+      {#each allCategories as category}
         <Tabs.Trigger value={category.name} on:click={() => handleCatgoryBlogClick(category.name, category.id)}>{category.name}</Tabs.Trigger>
       {/each}
     </Tabs.List>
@@ -91,7 +93,7 @@
             <img alt="img" class="hidden md:block w-24 h-24 rounded-md border bg-muted" src={blog.coverUrl} />
             <div class="flex flex-col space-y-1">
               <div class="flex-1 space-y-1">
-                <a href={`/blogs/${blog.id}`} class="font-bold text-base md:text-lg lg:text-xl text-foreground/80">{blog.title}</a>
+                <a href={`/blogs/${blog.id}?category=${selectedCategoryId}`} class="font-bold text-base md:text-lg lg:text-xl text-foreground/80">{blog.title}</a>
                 <p class="text-sm text-foreground/60 line-clamp-2">{blog.summary}</p>
               </div>
               <div class="flex space-x-2">
