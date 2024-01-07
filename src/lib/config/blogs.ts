@@ -9,10 +9,15 @@ export async function fetchData(url: any) {
     return await response.json();
 }
 
-// 获取博客列表数据
-export function processBlogData(blogData: any) {
+// 处理博客类别数据
+export function processCategoriesData(categoriesData: any) {
+    return categoriesData.map((category: any) => { return { id: category.id, name: category.attributes.category_name } });
+}
+
+// 处理博客列表数据
+export function processListBlogData(blogData: any) {
     return blogData.map((blog: any) => {
-        const categories = blog.attributes.blog_categories.data.map((category: any) => { return { id: category.id, name: category.attributes.category_name } });
+        const categories = processCategoriesData(blog.attributes.blog_categories.data);
         return {
             id: blog.id,
             title: blog.attributes.title,

@@ -1,8 +1,9 @@
 import type { PageLoad } from './$types';
-import { Parser} from 'htmlparser2';
+import { Parser } from 'htmlparser2';
 import { urlBase } from '$lib/config/site';
 import { marked } from "marked";
 
+// 处理目录
 function parseContent(htmlContent: any) {
     let toc: any = [];
     let minLevel = 1;

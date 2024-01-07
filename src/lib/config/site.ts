@@ -1,5 +1,5 @@
 export const urlBase = "https://strapi.ddycoding.cn";
-export const allBlogUrl = urlBase + "/api/blogs?fields=title&fields=summary&fields=publishedAt&populate=author&populate=blog_categories&populate=cover&sort=publishedAt:desc"
+export const urlListBlog = urlBase + "/api/blogs?fields=title&fields=summary&fields=publishedAt&populate=author&populate=blog_categories&populate=cover&sort=publishedAt:desc"
 
 
 export const siteConfig = {
@@ -21,3 +21,4 @@ export const siteConfig = {
     ]
 }
 export const logoRingStyle = "h-[36px] w-[36px] hover:origin-center hover:rotate-45 hover:bg-avocado-200 dark:hover:bg-avocado-800"
+

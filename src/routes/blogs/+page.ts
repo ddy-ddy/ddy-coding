@@ -1,23 +1,22 @@
 import type { PageLoad } from './$types';
-import { allBlogUrl, urlBase } from '$lib/config/site';
-import { fetchData, processBlogData } from '$lib/config/blogs';
+import { urlListBlog, urlBase } from '$lib/config/site';
+import { fetchData, processCategoriesData, processListBlogData } from '$lib/config/blogs';
 
 
 export const load: PageLoad = async ({ fetch, params }) => {
     try {
-        const allBlogsResponse = await fetchData(allBlogUrl);
-        const allBlogs: any = processBlogData(allBlogsResponse.data);
+        const urlFristListBlog = urlListBlog + '&pagination[page]=1&pagination[pageSize]=5'
+
+        const allBlogsResponse = await fetchData(urlFristListBlog);
+        const allBlogs: any = processListBlogData(allBlogsResponse.data);
 
         const categoriesResponse = await fetchData(urlBase + '/api/blog-categories');
-        const categories = categoriesResponse.data.map((category: any) => { return { id: category.id, name: category.attributes.category_name } })
-
+        const categories = processCategoriesData(categoriesResponse.data);
         return {
             allBlogs,
-            categories,
-            categoryBlogs: []
+            categories
         };
     } catch (error: any) {
-        console.error('Error loading data:', error);
         return {
             allBlogs: [],
             categories: [],
