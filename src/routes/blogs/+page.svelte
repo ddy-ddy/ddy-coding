@@ -4,28 +4,64 @@
   import * as Pagination from "$lib/components/ui/pagination";
   import type { PageData } from "./$types";
   import { urlListBlog } from "$lib/config/site";
-  import { fetchData, processListBlogData } from "$lib/config/blogs";
+  import { blogPageSize, fetchData, processListBlogData, processPaginationData } from "$lib/config/blogs";
 
   export let data: PageData;
   const allBlogs: any = data.allBlogs;
+  const paginationData: any = data.paginationData;
   const categories: any = data.categories;
 
   $: selectedCategory = "所有博客";
-  $: ShowBlogs = allBlogs;
+  $: selectedCategoryId = -1;
+  $: currentPage = 1;
+  $: pageCategoryChangeFlag = true;
+  $: showBlogs = allBlogs;
+  $: totalItems = paginationData.totalItems;
+  $: totalPages = paginationData.totalPages;
+  $: pageSize = paginationData.pageSize;
+
+  console.log(paginationData);
 
   function handleCatgoryBlogClick(categoryName: string, categoryId: any) {
     selectedCategory = categoryName;
-    if (selectedCategory === "所有博客") {
-      ShowBlogs = allBlogs;
+    selectedCategoryId = categoryId;
+    currentPage = 1;
+    if (selectedCategoryId === -1) {
+      showBlogs = allBlogs;
+      totalItems = paginationData.totalItems;
+      totalPages = paginationData.totalPages;
+      pageSize = paginationData.pageSize;
+      pageCategoryChangeFlag = !pageCategoryChangeFlag;
     } else {
       loadCategoryBlogs(categoryId);
     }
   }
 
+  function handlePageChange(pageValue: any) {
+    currentPage = pageValue;
+    loadPageBlogs(pageValue, selectedCategoryId);
+  }
+
+  async function loadPageBlogs(pageId: any, categoryId: any) {
+    let pageBlogsResponse: any = null;
+    if (categoryId === -1) {
+      pageBlogsResponse = await fetchData(urlListBlog + `&pagination[page]=${pageId}&pagination[pageSize]=${blogPageSize}`);
+    } else {
+      pageBlogsResponse = await fetchData(urlListBlog + `&filters[blog_categories][id][$eq]=${categoryId}&pagination[page]=${pageId}&pagination[pageSize]=${blogPageSize}`);
+    }
+    const pageBlogs = processListBlogData(pageBlogsResponse.data);
+    showBlogs = pageBlogs;
+  }
+
   async function loadCategoryBlogs(categoryId: any) {
     const categoryBlogsResponse = await fetchData(urlListBlog + `&filters[blog_categories][id][$eq]=${categoryId}`);
     const categoryBlogs = processListBlogData(categoryBlogsResponse.data);
-    ShowBlogs = categoryBlogs;
+    const categoryPaginationData = processPaginationData(categoryBlogsResponse.meta.pagination);
+    totalItems = categoryPaginationData.totalItems;
+    totalPages = categoryPaginationData.totalPages;
+    pageSize = categoryPaginationData.pageSize;
+    pageCategoryChangeFlag = !pageCategoryChangeFlag;
+    showBlogs = categoryBlogs;
   }
 </script>
 
@@ -38,7 +74,7 @@
         <Tabs.Trigger value={category.name} on:click={() => handleCatgoryBlogClick(category.name, category.id)}>{category.name}</Tabs.Trigger>
       {/each}
     </Tabs.List>
-    {#each ShowBlogs as blog}
+    {#each showBlogs as blog}
       <Tabs.Content bind:value={selectedCategory} class="py-2">
         <section class="flex flex-col space-y-6">
           <div class="flex space-x-4">
@@ -66,29 +102,47 @@
     {/each}
   </Tabs.Root>
   <!-- 分页器 -->
-  <Pagination.Root count={7} perPage={5} let:pages let:currentPage>
-    <Pagination.Content>
-      <Pagination.Item>
-        <Pagination.PrevButton />
-      </Pagination.Item>
-      {#each pages as page (page.key)}
-        {#if page.type === "ellipsis"}
+  {#key pageCategoryChangeFlag}
+    {#if totalPages > 1}
+      <Pagination.Root count={totalItems} perPage={pageSize} let:pages let:currentPage>
+        <Pagination.Content>
           <Pagination.Item>
-            <Pagination.Ellipsis />
+            <Pagination.PrevButton
+              on:click={() => {
+                handlePageChange(handlePageChange((currentPage ?? 2) - 1));
+              }}
+            />
           </Pagination.Item>
-        {:else}
+          {#each pages as page (page.key)}
+            {#if page.type === "ellipsis"}
+              <Pagination.Item>
+                <Pagination.Ellipsis />
+              </Pagination.Item>
+            {:else}
+              <Pagination.Item>
+                <Pagination.Link
+                  {page}
+                  isActive={currentPage == page.value}
+                  on:click={() => {
+                    handlePageChange(page.value);
+                  }}
+                >
+                  {page.value}
+                </Pagination.Link>
+              </Pagination.Item>
+            {/if}
+          {/each}
           <Pagination.Item>
-            <Pagination.Link {page} isActive={currentPage == page.value}>
-              {page.value}
-            </Pagination.Link>
+            <Pagination.NextButton
+              on:click={() => {
+                handlePageChange((currentPage ?? 0) + 1);
+              }}
+            />
           </Pagination.Item>
-        {/if}
-      {/each}
-      <Pagination.Item>
-        <Pagination.NextButton />
-      </Pagination.Item>
-    </Pagination.Content>
-  </Pagination.Root>
+        </Pagination.Content>
+      </Pagination.Root>
+    {/if}
+  {/key}
 </div>
 
 <style>
