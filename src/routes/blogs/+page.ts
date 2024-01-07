@@ -10,6 +10,7 @@ export const load: PageLoad = async ({ url }) => {
         let urlFristListBlog = null;
         let fistSelectedCategory = null;
         let fistSelectedCategoryId = null;
+        
 
         if (clickCategory == -1 || clickCategory == null) {
             urlFristListBlog = urlListBlog + `&pagination[page]=1&pagination[pageSize]=${blogPageSize}`;
@@ -24,7 +25,7 @@ export const load: PageLoad = async ({ url }) => {
         const categoriesResponse = await fetchData(urlBase + '/api/blog-categories');
         const allCategories = processCategoriesData(categoriesResponse.data);
 
-        if (clickCategory === -1 || clickCategory === null) {
+        if (clickCategory == -1 || clickCategory == null) {
             fistSelectedCategory = "所有博客";
             fistSelectedCategoryId = -1;
         } else {
