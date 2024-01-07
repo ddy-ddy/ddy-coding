@@ -13,7 +13,6 @@ export const load: PageLoad = async ({ url }) => {
 
         if (clickCategory == -1 || clickCategory == null) {
             urlFristListBlog = urlListBlog + `&pagination[page]=1&pagination[pageSize]=${blogPageSize}`;
-
         } else {
             urlFristListBlog = urlListBlog + `&filters[blog_categories][id][$eq]=${clickCategory}&pagination[page]=1&pagination[pageSize]=${blogPageSize}`
         }

@@ -31,12 +31,7 @@
   function handleCatgoryBlogClick(categoryName: string, categoryId: any) {
     selectedCategory = categoryName;
     selectedCategoryId = categoryId;
-    if (selectedCategoryId === -1) {
-      changePageValue(fistPaginationData);
-      showBlogs = fistBlogs;
-    } else {
-      loadCategoryBlogs(categoryId);
-    }
+    loadCategoryBlogs(categoryId);
   }
 
   // 分页器点击事件
@@ -58,7 +53,7 @@
   // 加载指定分页指定类别的博客数据
   async function loadPageBlogs(pageId: any, categoryId: any) {
     let pageBlogsResponse: any = null;
-    if (categoryId === -1) {
+    if (categoryId == -1) {
       pageBlogsResponse = await fetchData(urlListBlog + `&pagination[page]=${pageId}&pagination[pageSize]=${blogPageSize}`);
     } else {
       pageBlogsResponse = await fetchData(urlListBlog + `&filters[blog_categories][id][$eq]=${categoryId}&pagination[page]=${pageId}&pagination[pageSize]=${blogPageSize}`);
@@ -69,7 +64,12 @@
 
   // 加载指定类别的博客数据
   async function loadCategoryBlogs(categoryId: any) {
-    const categoryBlogsResponse = await fetchData(urlListBlog + `&filters[blog_categories][id][$eq]=${categoryId}`);
+    let categoryBlogsResponse: any = null;
+    if (categoryId == -1) {
+      categoryBlogsResponse = await fetchData(urlListBlog + `&pagination[page]=1&pagination[pageSize]=${blogPageSize}`);
+    } else {
+      categoryBlogsResponse = await fetchData(urlListBlog + `&filters[blog_categories][id][$eq]=${categoryId}`);
+    }
     const categoryBlogs = processListBlogData(categoryBlogsResponse.data);
     const categoryPaginationData = processPaginationData(categoryBlogsResponse.meta.pagination);
     changePageValue(categoryPaginationData);
