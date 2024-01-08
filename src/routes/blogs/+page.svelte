@@ -117,7 +117,7 @@
 
   {#key pageCategoryChangeFlag}
     {#if totalPages > 1}
-      <Pagination.Root count={totalItems} perPage={pageSize} let:pages>
+      <Pagination.Root count={totalItems} perPage={pageSize} let:pages class="text-foreground/80">
         <Pagination.Content>
           <Pagination.Item>
             <Pagination.PrevButton
