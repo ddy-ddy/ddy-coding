@@ -68,7 +68,7 @@
     if (categoryId == -1) {
       categoryBlogsResponse = await fetchData(urlListBlog + `&pagination[page]=1&pagination[pageSize]=${blogPageSize}`);
     } else {
-      categoryBlogsResponse = await fetchData(urlListBlog + `&filters[blog_categories][id][$eq]=${categoryId}`);
+      categoryBlogsResponse = await fetchData(urlListBlog + `&filters[blog_categories][id][$eq]=${categoryId}&pagination[page]=1&pagination[pageSize]=${blogPageSize}`);
     }
     const categoryBlogs = processListBlogData(categoryBlogsResponse.data);
     const categoryPaginationData = processPaginationData(categoryBlogsResponse.meta.pagination);
@@ -93,7 +93,7 @@
             <img alt="img" class="hidden md:block w-24 h-24 rounded-md border bg-muted" src={blog.coverUrl} />
             <div class="flex flex-col space-y-1">
               <div class="flex-1 space-y-1">
-                <a href={`/blogs/${blog.id}?category=${selectedCategoryId}`} class="font-bold text-base md:text-lg lg:text-xl text-foreground/80">{blog.title}</a>
+                <a href={`/blogs/${blog.id}?category=${selectedCategoryId}&page=${currentPage}`} class="font-bold text-base md:text-lg lg:text-xl text-foreground/80">{blog.title}</a>
                 <p class="text-sm text-foreground/60 line-clamp-2">{blog.summary}</p>
               </div>
               <div class="flex space-x-2">
@@ -116,12 +116,12 @@
   <!-- 分页器 -->
   {#key pageCategoryChangeFlag}
     {#if totalPages > 1}
-      <Pagination.Root count={totalItems} perPage={pageSize} let:pages let:currentPage>
+      <Pagination.Root count={totalItems} perPage={pageSize} let:pages>
         <Pagination.Content>
           <Pagination.Item>
             <Pagination.PrevButton
               on:click={() => {
-                handlePageChange(handlePageChange((currentPage ?? 2) - 1));
+                handlePageChange((currentPage ?? 2) - 1);
               }}
             />
           </Pagination.Item>

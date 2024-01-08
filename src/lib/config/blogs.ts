@@ -1,6 +1,6 @@
 import { urlBase } from '$lib/config/site';
 
-export const blogPageSize = 5;
+export const blogPageSize = 2;
 
 // 获取数据
 export async function fetchData(url: any) {

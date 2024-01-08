@@ -7,15 +7,21 @@ export const load: PageLoad = async ({ url }) => {
     try {
         const queryParams = new URLSearchParams(url.search);
         const clickCategory: any = queryParams.get('category');
+        let clickPage: any = queryParams.get('page');
         let urlFristListBlog = null;
         let fistSelectedCategory = null;
         let fistSelectedCategoryId = null;
-        
+
+        if (clickPage >= 1) {
+            clickPage = clickPage;
+        } else {
+            clickPage = 1;
+        }
 
         if (clickCategory == -1 || clickCategory == null) {
-            urlFristListBlog = urlListBlog + `&pagination[page]=1&pagination[pageSize]=${blogPageSize}`;
+            urlFristListBlog = urlListBlog + `&pagination[page]=${clickPage}&pagination[pageSize]=${blogPageSize}`;
         } else {
-            urlFristListBlog = urlListBlog + `&filters[blog_categories][id][$eq]=${clickCategory}&pagination[page]=1&pagination[pageSize]=${blogPageSize}`
+            urlFristListBlog = urlListBlog + `&filters[blog_categories][id][$eq]=${clickCategory}&pagination[page]=${clickPage}&pagination[pageSize]=${blogPageSize}`
         }
 
         const fistBlogsResponse = await fetchData(urlFristListBlog);
