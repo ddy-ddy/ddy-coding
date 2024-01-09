@@ -5,6 +5,7 @@
   import * as Avatar from "$lib/components/ui/avatar";
   import { proseStyle } from "$lib/config/prose";
   import { logoRingStyle } from "$lib/config/site";
+  import { ArrowLeft } from "lucide-svelte";
 
   export let data: PageData;
   let blog: any = data.blog;
@@ -48,10 +49,8 @@
     <!-- 正文 -->
     <div class="grow max-w-3xl mx-4 lg:mx-12 xl:mx-16">
       <div class="mb-4">
-        <a role="button" href={`/blogs?category=${clickCategory}&page=${clickPage}`} class="group flex leading-6 text-sm font-medium text-foreground/60 hover:text-foreground/80">
-          <svg viewBox="0 -9 3 24" class="overflow-visible mr-2 w-auto h-6 text-foreground/60 group-hover:text-foreground/80">
-            <path d="M3 0L0 3L3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> </path>
-          </svg>
+        <a role="button" href={`/blogs?category=${clickCategory}&page=${clickPage}`} class="group flex items-center leading-6 text-sm font-medium text-foreground/60 hover:text-foreground/80">
+          <ArrowLeft class="mb-[1px] mr-1 w-4 h-4 text-foreground/60 group-hover:text-foreground/80"></ArrowLeft>
           Go back
         </a>
       </div>
