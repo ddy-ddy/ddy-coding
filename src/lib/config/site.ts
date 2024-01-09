@@ -22,3 +22,12 @@ export const siteConfig = {
 }
 export const logoRingStyle = "h-[36px] w-[36px] hover:origin-center hover:rotate-45 hover:bg-avocado-200 dark:hover:bg-avocado-800"
 
+
+// 获取数据
+export async function fetchData(url: any) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Error fetching data: ${response.statusText}`);
+    }
+    return await response.json();
+}

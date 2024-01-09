@@ -3,8 +3,8 @@
   import { Separator } from "$lib/components/ui/separator";
   import * as Pagination from "$lib/components/ui/pagination";
   import type { PageData } from "./$types";
-  import { urlListBlog } from "$lib/config/site";
-  import { blogPageSize, fetchData, processListBlogData, processPaginationData } from "$lib/config/blogs";
+  import { urlListBlog, fetchData } from "$lib/config/site";
+  import { blogPageSize, processListBlogData, processPaginationData } from "$lib/config/blogs";
 
   export let data: PageData;
   const fistBlogs: any = data.fistBlogs;

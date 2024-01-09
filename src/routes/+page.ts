@@ -1,17 +1,24 @@
-import { error } from '@sveltejs/kit'
+import type { PageLoad } from './$types';
+import { urlBase, fetchData } from '$lib/config/site';
+import { marked } from "marked";
 
-export const load = async () => {
+
+export const load: PageLoad = async () => {
     try {
-        // @ts-ignore
-        const ReadMeFile = await import('../content/index.md')
-        const ReadMe = ReadMeFile.default
-
+        const authorInfoResponse = await fetchData(urlBase + '/api/authors?populate=*');
+        const authorInfo = authorInfoResponse.data[0];
         return {
-            ReadMe
+            authrorInfo: {
+                author: authorInfo.attributes.name,
+                authorIconLink: urlBase + authorInfo.attributes.icon.data.attributes.url,
+                authorLink: authorInfo.attributes.github,
+                authorMotto: authorInfo.attributes.motto,
+                authorProfile: marked(authorInfo.attributes.profile)
+            }
         }
-    }
-    catch (err) {
-        // @ts-ignore
-        throw error(500, err)
+    } catch (error: any) {
+        return {
+            error: error.message
+        }
     }
 }

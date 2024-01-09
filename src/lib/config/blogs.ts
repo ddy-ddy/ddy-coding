@@ -1,15 +1,7 @@
 import { urlBase } from '$lib/config/site';
 
-export const blogPageSize = 2;
+export const blogPageSize = 5;
 
-// 获取数据
-export async function fetchData(url: any) {
-    const response = await fetch(url);
-    if (!response.ok) {
-        throw new Error(`Error fetching data: ${response.statusText}`);
-    }
-    return await response.json();
-}
 
 // 处理博客类别数据
 export function processCategoriesData(categoriesData: any) {
