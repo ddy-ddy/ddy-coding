@@ -20,7 +20,7 @@ export const siteConfig = {
         { "name": "照片", "path": "/pictures" },
     ]
 }
-export const logoRingStyle = "h-[36px] w-[36px] hover:origin-center hover:rotate-45 hover:bg-avocado-200 dark:hover:bg-avocado-800"
+export const logoRingStyle = "h-[36px] w-[36px] hover:bg-avocado-200 dark:hover:bg-avocado-800"
 
 
 // 获取数据
