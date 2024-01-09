@@ -18,6 +18,13 @@ export const siteConfig = {
         { "name": "项目", "path": "/projects" },
         { "name": "博客", "path": "/blogs" },
         { "name": "照片", "path": "/pictures" },
+    ],
+    codingInfo: [
+        { "name": "数据产品经理", "color": "avocado" },
+        { "name": "Svelte", "color": "orange" },
+        { "name": "Python", "color": "blue" },
+        { "name": "SQL", "color": "amber" },
+        { "name": "JavaScript", "color": "teal" },
     ]
 }
 export const logoRingStyle = "h-[36px] w-[36px] hover:bg-avocado-200 dark:hover:bg-avocado-800"
