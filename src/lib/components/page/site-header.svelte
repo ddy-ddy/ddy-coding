@@ -33,7 +33,7 @@
       <!-- MainNav-logo -->
       <a href="/" class="flex items-center space-x-1" rel="logo">
         <Avatar.Root class={logoRingStyle}>
-          <Icons.logo class="ml-[1px]" />
+          <Icons.logo class="ml-[1px] hover:animate-move-right-left" />
         </Avatar.Root>
         <span class="text-base text-foreground/80 font-bold text-[15px]">{siteConfig.siteInfo.title}</span>
       </a>

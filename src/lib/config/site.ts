@@ -25,6 +25,7 @@ export const siteConfig = {
         { "name": "Python", "color": "fill-sky-200 dark:fill-sky-600" },
         { "name": "SQL", "color": "fill-amber-200 dark:fill-amber-600" },
         { "name": "JavaScript", "color": "fill-avocado-200 dark:fill-avocado-600" },
+        { "name": "Excel", "color": "fill-yellow-200 dark:fill-yellow-600" },
     ],
 }
 export const logoRingStyle = "h-[36px] w-[36px] hover:bg-avocado-200 dark:hover:bg-avocado-800"

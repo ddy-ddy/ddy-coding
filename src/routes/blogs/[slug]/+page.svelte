@@ -6,6 +6,7 @@
   import { proseStyle } from "$lib/config/prose";
   import { logoRingStyle } from "$lib/config/site";
   import { ArrowLeft } from "lucide-svelte";
+  import { Icons } from "$lib/components/icons";
 
   export let data: PageData;
   let blog: any = data.blog;
@@ -62,9 +63,12 @@
             <div class="flex items-center space-x-2 text-xs">
               <a href={blog.authorLink} target="_blank" rel="logo">
                 <Avatar.Root class={logoRingStyle}>
+                  <Icons.logo class="ml-[1px] hover:animate-move-right-left" />
+                </Avatar.Root>
+                <!-- <Avatar.Root class={logoRingStyle}>
                   <Avatar.Image src={blog.authorIconLink} alt={blog.author} class="ml-[1px]" />
                   <Avatar.Fallback>{blog.author}</Avatar.Fallback>
-                </Avatar.Root>
+                </Avatar.Root> -->
               </a>
               <div class="flex flex-col space-y-[2px] text-left">
                 <div class="font-medium text-foreground/80">{blog.author}</div>
