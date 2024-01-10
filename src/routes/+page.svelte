@@ -4,7 +4,7 @@
   import * as Avatar from "$lib/components/ui/avatar";
   import { Separator } from "$lib/components/ui/separator";
   import { Icons } from "$lib/components/icons";
-  import { Users, MapPinned, CheckSquare } from "lucide-svelte";
+  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank } from "lucide-svelte";
   import { siteConfig } from "$lib/config/site";
 
   export let data: PageData;
@@ -18,7 +18,7 @@
     <div class="rounded-xl border bg-card text-card-foreground shadow lg:col-span-2 p-8">
       <div class="flex flex-col justify-center space-y-4">
         <!-- 内容1 -->
-        <Avatar.Root class="h-48 w-48 bg-avocado-200 dark:bg-avocado-800 self-center">
+        <Avatar.Root class="h-32 w-32 lg:h-48 lg:w-48 bg-avocado-200 dark:bg-avocado-600 self-center">
           <Icons.logo class="ml-[1px]" />
         </Avatar.Root>
         <Separator />
@@ -45,7 +45,7 @@
           <div class="flex flex-wrap gap-x-3 gap-y-3">
             {#each siteConfig.codingInfo as codingInfo}
               <div class="flex items-center space-x-1">
-                <CheckSquare class="h-4 w-4" />
+                <BadgeCheck class="h-4 w-4 {codingInfo.color}" />
                 <p class="text-xs font-medium text-foreground/80">{codingInfo.name}</p>
               </div>
             {/each}
@@ -54,6 +54,22 @@
         <Separator />
         <!-- 内容4 -->
         <div class="font-bold text-base text-foreground/80">Life</div>
+        <div class="flex-grow">
+          <div class="flex flex-wrap gap-x-3 gap-y-3">
+            <a href="/pictures" class="flex space-x-1 border bg-card rounded-lg shadow-sm shadow-avocado-400 dark:shadow-avocado-800 p-1">
+              <Camera class="h-4 w-4 fill-avocado-200 dark:fill-avocado-600"></Camera>
+              <p class="text-xs font-medium text-foreground/80">摄影</p>
+            </a>
+            <a href="https://www.strava.com/athletes/duanyu" class="flex space-x-1 border bg-card rounded-lg shadow-sm shadow-orange-400 dark:shadow-orange-800 p-1">
+              <Bike class="h-4 w-4 fill-orange-200 dark:fill-orange-600"></Bike>
+              <p class="text-xs font-medium text-foreground/80">骑行</p>
+            </a>
+            <a href="https://space.bilibili.com/434180761" class="flex space-x-1 border bg-card rounded-lg shadow-sm shadow-pink-400 dark:shadow-pink-800 p-1">
+              <PiggyBank class="h-4 w-4 fill-pink-200 dark:fill-pink-600"></PiggyBank>
+              <p class="text-xs font-medium text-foreground/80">UP主</p>
+            </a>
+          </div>
+        </div>
         <Separator />
         <!-- 内容5 -->
         <div class="font-bold text-base text-foreground/80">Social</div>

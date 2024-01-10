@@ -20,12 +20,12 @@ export const siteConfig = {
         { "name": "照片", "path": "/pictures" },
     ],
     codingInfo: [
-        { "name": "数据产品经理", "color": "avocado" },
-        { "name": "Svelte", "color": "orange" },
-        { "name": "Python", "color": "blue" },
-        { "name": "SQL", "color": "amber" },
-        { "name": "JavaScript", "color": "teal" },
-    ]
+        { "name": "数据产品经理", "color": "fill-red-200 dark:fill-red-600" },
+        { "name": "Svelte", "color": "fill-orange-200 dark:fill-orange-600" },
+        { "name": "Python", "color": "fill-sky-200 dark:fill-sky-600" },
+        { "name": "SQL", "color": "fill-amber-200 dark:fill-amber-600" },
+        { "name": "JavaScript", "color": "fill-avocado-200 dark:fill-avocado-600" },
+    ],
 }
 export const logoRingStyle = "h-[36px] w-[36px] hover:bg-avocado-200 dark:hover:bg-avocado-800"
 
