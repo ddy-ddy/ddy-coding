@@ -14,6 +14,9 @@ const config = {
 			}
 		},
 		extend: {
+			animation: {
+				'move-right-left': 'move-right-left 1s ease-in-out infinite',
+			},
 			colors: {
 				// 边框
 				border: "hsl(var(--border) / <alpha-value>)",

@@ -4,7 +4,7 @@
   import * as Avatar from "$lib/components/ui/avatar";
   import { Separator } from "$lib/components/ui/separator";
   import { Icons } from "$lib/components/icons";
-  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank } from "lucide-svelte";
+  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank,Hash } from "lucide-svelte";
   import { siteConfig } from "$lib/config/site";
 
   export let data: PageData;
@@ -40,7 +40,7 @@
         </div>
         <Separator />
         <!-- 内容3 -->
-        <div class="font-bold text-base text-foreground/80">Coding</div>
+        <div class="font-bold text-base text-foreground/80">Coding </div>
         <div class="flex-grow">
           <div class="flex flex-wrap gap-x-3 gap-y-3">
             {#each siteConfig.codingInfo as codingInfo}
@@ -56,16 +56,16 @@
         <div class="font-bold text-base text-foreground/80">Life</div>
         <div class="flex-grow">
           <div class="flex flex-wrap gap-x-3 gap-y-3">
-            <a href="/pictures" class="flex space-x-1 border bg-card rounded-lg shadow-sm shadow-avocado-400 dark:shadow-avocado-800 p-1">
-              <Camera class="h-4 w-4 fill-avocado-200 dark:fill-avocado-600"></Camera>
+            <a href="/pictures" class="group flex space-x-1 border bg-card rounded-lg shadow-sm shadow-avocado-400 dark:shadow-avocado-800 p-1">
+              <Camera class="group-hover:animate-move-right-left h-4 w-4 fill-avocado-200 dark:fill-avocado-600"></Camera>
               <p class="text-xs font-medium text-foreground/80">摄影</p>
             </a>
-            <a href="https://www.strava.com/athletes/duanyu" class="flex space-x-1 border bg-card rounded-lg shadow-sm shadow-orange-400 dark:shadow-orange-800 p-1">
-              <Bike class="h-4 w-4 fill-orange-200 dark:fill-orange-600"></Bike>
+            <a href="https://www.strava.com/athletes/duanyu" class="group flex space-x-1 border bg-card rounded-lg shadow-sm shadow-orange-400 dark:shadow-orange-800 p-1">
+              <Bike class="group-hover:animate-move-right-left h-4 w-4 fill-orange-200 dark:fill-orange-600"></Bike>
               <p class="text-xs font-medium text-foreground/80">骑行</p>
             </a>
-            <a href="https://space.bilibili.com/434180761" class="flex space-x-1 border bg-card rounded-lg shadow-sm shadow-pink-400 dark:shadow-pink-800 p-1">
-              <PiggyBank class="h-4 w-4 fill-pink-200 dark:fill-pink-600"></PiggyBank>
+            <a href="https://space.bilibili.com/434180761" class="group flex space-x-1 border bg-card rounded-lg shadow-sm shadow-pink-400 dark:shadow-pink-800 p-1">
+              <PiggyBank class="group-hover:animate-move-right-left h-4 w-4 fill-pink-200 dark:fill-pink-600"></PiggyBank>
               <p class="text-xs font-medium text-foreground/80">UP主</p>
             </a>
           </div>
