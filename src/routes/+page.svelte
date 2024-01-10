@@ -6,6 +6,7 @@
   import { Icons } from "$lib/components/icons";
   import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank } from "lucide-svelte";
   import { siteConfig } from "$lib/config/site";
+  import * as Drawer from "$lib/components/ui/drawer";
 
   export let data: PageData;
   let authorInfo: any = data.authrorInfo;
@@ -70,20 +71,32 @@
         <!-- 内容5:Social -->
         <div class="font-bold text-base text-foreground/80">社交</div>
         <div class="flex flex-wrap gap-x-3 gap-y-3">
+          <Drawer.Root>
+            <Drawer.Trigger>
+              <div class="group flex space-x-1 border bg-card rounded-lg shadow-sm py-1 px-2">
+                <Icons.wechat class="group-hover:animate-move-right-left h-4 w-4"></Icons.wechat>
+                <p class="text-xs font-medium text-foreground/80">WeChat</p>
+              </div>
+            </Drawer.Trigger>
+            <Drawer.Content>
+              <div class="mx-auto w-full max-w-sm p-12">
+                <Drawer.Header>
+                  <Drawer.Title class="text-center text-foreground/80">加个微信吧✌🏻</Drawer.Title>
+                </Drawer.Header>
+                <img class="rounded-xl" src="https://ddy-1310349779.cos.ap-shanghai.myqcloud.com/typora/wechat.jpg" />
+              </div>
+            </Drawer.Content>
+          </Drawer.Root>
           <a href="https://space.bilibili.com/434180761" target="_blank" class="group flex space-x-1 border bg-card rounded-lg shadow-sm py-1 px-2">
-            <Icons.wechat class="h-4 w-4"></Icons.wechat>
-            <p class="text-xs font-medium text-foreground/80">WeChat</p>
-          </a>
-          <a href="https://space.bilibili.com/434180761" target="_blank" class="group flex space-x-1 border bg-card rounded-lg shadow-sm py-1 px-2">
-            <Icons.bilibili class="h-4 w-4"></Icons.bilibili>
+            <Icons.bilibili class="group-hover:animate-move-right-left h-4 w-4"></Icons.bilibili>
             <p class="text-xs font-medium text-foreground/80">Bilibili</p>
           </a>
           <a href="https://twitter.com/ddy_coding" target="_blank" class="group flex space-x-1 border bg-card rounded-lg shadow-sm py-1 px-2">
-            <Icons.twitter class="h-4 w-4 p-[2px]"></Icons.twitter>
+            <Icons.twitter class="group-hover:animate-move-right-left h-4 w-4 p-[2px]"></Icons.twitter>
             <p class="text-xs font-medium text-foreground/80">Twitter</p>
           </a>
           <a href="https://github.com/ddy-ddy" target="_blank" class="group flex space-x-1 border bg-card rounded-lg shadow-sm py-1 px-2">
-            <Icons.github class="h-4 w-4 p-[1px]"></Icons.github>
+            <Icons.github class="group-hover:animate-move-right-left h-4 w-4 p-[1px]"></Icons.github>
             <p class="text-xs font-medium text-foreground/80">GitHub</p>
           </a>
         </div>

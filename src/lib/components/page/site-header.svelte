@@ -31,11 +31,11 @@
   <div class="container flex h-14 items-center">
     <div class="hidden md:flex space-x-6">
       <!-- MainNav-logo -->
-      <a href="/" class="flex items-center space-x-1" rel="logo">
+      <a href="/" class="group flex items-center space-x-1" rel="logo">
         <Avatar.Root class={logoRingStyle}>
-          <Icons.logo class="ml-[1px] hover:animate-move-right-left" />
+          <Icons.logo class="ml-[1px] group-hover:animate-move-right-left" />
         </Avatar.Root>
-        <span class="text-base text-foreground/80 font-bold text-[15px]">{siteConfig.siteInfo.title}</span>
+        <p class="text-base text-foreground/80 font-bold text-[15px]">{siteConfig.siteInfo.title}</p>
       </a>
       <!-- MainNav-mid -->
       <nav class="flex items-center justify-between space-x-4 text-sm font-medium">
