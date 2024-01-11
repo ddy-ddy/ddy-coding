@@ -102,10 +102,14 @@
         </div>
       </div>
     </div>
-    <div class="rounded-xl border bg-card text-card-foreground shadow lg:col-span-5 p-8">
-      <article class={proseStyle}>
-        {@html htmlProfile}
-      </article>
+    <div class="flex flex-col lg:col-span-5">
+      <!-- 自我介绍内容 -->
+      <div class="rounded-xl border bg-card text-card-foreground shadow p-8">
+        <article class={proseStyle}>
+          {@html htmlProfile}
+        </article>
+      </div>
+      <!-- github项目展示 -->
     </div>
   </div>
 </section>

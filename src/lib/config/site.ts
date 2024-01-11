@@ -16,9 +16,9 @@ export const siteConfig = {
     ],
     mainNav: [
         { "name": "首页", "path": "/" },
-        { "name": "项目", "path": "/projects" },
         { "name": "博客", "path": "/blogs" },
-        { "name": "照片", "path": "/pictures" },
+        { "name": "摄影", "path": "/pictures" },
+        { "name": "骑行", "path": "/bicycles" },
     ],
     codingInfo: [
         { "name": "数据产品经理", "color": "fill-red-200 dark:fill-red-600" },
