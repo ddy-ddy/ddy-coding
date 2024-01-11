@@ -31,12 +31,12 @@
         <div class="flex space-x-2">
           <a class="group flex space-x-1 items-end" href="https://github.com/ddy-ddy?tab=followers">
             <Users class="h-4 w-4 group-hover:text-avocado-400 dark:group-hover:text-avocado-600"></Users>
-            <div class="-mb-[1px] text-xs font-medium text-foreground/80 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">156 followers</div>
+            <div class="-mb-[1px] text-xs font-medium text-foreground/80 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{authorInfo.authorGithubFollowers} followers</div>
           </a>
           <Separator orientation="vertical" />
           <div class="flex space-x-1 items-end">
             <MapPinned class="h-4 w-4"></MapPinned>
-            <div class="-mb-[1px] text-xs font-medium text-foreground/80">Guan Zhou</div>
+            <div class="-mb-[1px] text-xs font-medium text-foreground/80">{authorInfo.authorGithubLocation}</div>
           </div>
         </div>
         <Separator />
