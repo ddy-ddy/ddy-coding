@@ -32,7 +32,7 @@ export const logoRingStyle = "h-[36px] w-[36px] hover:bg-avocado-200 dark:hover:
 
 
 // 获取数据
-export async function fetchData(url: any) {
+export async function fetchData(url: any, timeout = 5000) {
     const response = await fetch(url);
     if (!response.ok) {
         throw new Error(`Error fetching data: ${response.statusText}`);

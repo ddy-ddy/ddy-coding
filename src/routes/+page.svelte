@@ -9,7 +9,7 @@
   import * as Drawer from "$lib/components/ui/drawer";
 
   export let data: PageData;
-  let authorInfo: any = data.authrorInfo;
+  let authorInfo: any = data.authorInfo;
   let htmlProfile: any = authorInfo.authorProfile;
 </script>
 
