@@ -11,6 +11,28 @@ async function loadGithubData() {
     }
 }
 
+async function loadGithubRepoData() {
+    try {
+        const response = await fetchData("https://api.github.com/users/ddy-ddy/repos");
+        // 查找指定名称的仓库
+        const repoNames = ['cs-408', 'ddy-coding', 'build-kg'];
+        const repos = response.filter((repo: any) => { return repoNames.includes(repo.name) });
+        const reposInfo = repos.map((repo: any) => {
+            return {
+                name: repo.name,
+                description: repo.description,
+                language: repo.language,
+                star: repo.stargazers_count,
+                fork: repo.forks_count,
+                link: repo.html_url
+            }
+        })
+        return reposInfo;
+    } catch (error) {
+        return [];
+    }
+}
+
 export const load: PageLoad = async () => {
     try {
         const authorInfoResponse = await fetchData(urlBase + '/api/authors?populate=*');
@@ -23,18 +45,28 @@ export const load: PageLoad = async () => {
             authorIconLink: urlBase + authorInfo.attributes.icon.data.attributes.url,
             authorLink: authorInfo.attributes.github,
             authorMotto: authorInfo.attributes.motto,
-            authorProfile: marked(authorInfo.attributes.profile),
-            authorGithubLocation: 'Guan Zhou',
-            authorGithubFollowers: '',
+            authorProfile: marked(authorInfo.attributes.profile)
         };
 
-        // 当 GitHub 数据加载完成后，更新内容
+        const githubData = {
+            authorGithubLocation: 'Guan Zhou',
+            authorGithubFollowers: '',
+            authorGithubRepo: []
+        }
+
+
+        // 加载github主页内容
         const authorGithubResponse = await authorGithubPromise;
-        initialData.authorGithubLocation = authorGithubResponse.location;
-        initialData.authorGithubFollowers = authorGithubResponse.followers;
+        githubData.authorGithubLocation = authorGithubResponse.location;
+        githubData.authorGithubFollowers = authorGithubResponse.followers;
+
+        // 加载github仓库内容
+        const authorGithubRepoData = await loadGithubRepoData();
+        githubData.authorGithubRepo = authorGithubRepoData;
 
         return {
-            authorInfo: initialData
+            authorInfo: initialData,
+            githubInfo: githubData
         }
 
     } catch (error: any) {
@@ -43,5 +75,7 @@ export const load: PageLoad = async () => {
         }
     }
 }
+
+
 
 

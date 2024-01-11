@@ -4,16 +4,17 @@
   import * as Avatar from "$lib/components/ui/avatar";
   import { Separator } from "$lib/components/ui/separator";
   import { Icons } from "$lib/components/icons";
-  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank } from "lucide-svelte";
+  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank, Album } from "lucide-svelte";
   import { siteConfig } from "$lib/config/site";
   import * as Drawer from "$lib/components/ui/drawer";
 
   export let data: PageData;
   let authorInfo: any = data.authorInfo;
+  let githubInfo: any = data.githubInfo;
   let htmlProfile: any = authorInfo.authorProfile;
 </script>
 
-<section class="container py-6 md:py-8 lg:py-10">
+<section class="container py-6 md:py-8 lg:py-10 max-w-6xl">
   <div class="grid gap-4 lg:grid-cols-7">
     <!-- 展示 -->
     <div class="rounded-xl shadow border bg-card text-card-foreground lg:col-span-2 p-8">
@@ -31,12 +32,12 @@
         <div class="flex space-x-2">
           <a class="group flex space-x-1 items-end" href="https://github.com/ddy-ddy?tab=followers">
             <Users class="h-4 w-4 group-hover:text-avocado-400 dark:group-hover:text-avocado-600"></Users>
-            <div class="-mb-[1px] text-xs font-medium text-foreground/80 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{authorInfo.authorGithubFollowers} followers</div>
+            <div class="-mb-[1px] text-xs font-medium text-foreground/80 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{githubInfo.authorGithubFollowers} followers</div>
           </a>
           <Separator orientation="vertical" />
           <div class="flex space-x-1 items-end">
             <MapPinned class="h-4 w-4"></MapPinned>
-            <div class="-mb-[1px] text-xs font-medium text-foreground/80">{authorInfo.authorGithubLocation}</div>
+            <div class="-mb-[1px] text-xs font-medium text-foreground/80">{githubInfo.authorGithubLocation}</div>
           </div>
         </div>
         <Separator />
@@ -102,7 +103,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col lg:col-span-5">
+    <div class="flex flex-col lg:col-span-5 space-y-6">
       <!-- 自我介绍内容 -->
       <div class="rounded-xl border bg-card text-card-foreground shadow p-8">
         <article class={proseStyle}>
@@ -110,6 +111,36 @@
         </article>
       </div>
       <!-- github项目展示 -->
+      {#if githubInfo.authorGithubRepo.length > 0}
+        {#each githubInfo.authorGithubRepo as repo}
+          <div class="flex items-center justify-center [&amp;>div]:w-full">
+            <div class="rounded-xl border bg-card text-card-foreground shadow">
+              <div class="flex-col p-6 grid grid-cols-[1fr_110px] items-start gap-4 space-y-0">
+                <div class="space-y-1">
+                  <h3 class="font-semibold leading-none tracking-tight text-foreground/80">{repo.name}</h3>
+                  <p class="text-sm text-muted-foreground">{repo.description}</p>
+                </div>
+              </div>
+              <div class="p-6 pt-0">
+                <div class="flex space-x-4 text-sm font-medium text-foreground/60">
+                  <div class="flex items-center">
+                    <Album class="mr-1 h-3 w-3"></Album>
+                    {repo.language}
+                  </div>
+                  <div class="flex items-center">
+                    <Album class="mr-1 h-3 w-3 "></Album>
+                    {repo.star}
+                  </div>
+                  <div class="flex items-center">
+                    <Album class="mr-1 h-3 w-3 "></Album>
+                    {repo.fork}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {/each}
+      {/if}
     </div>
   </div>
 </section>
