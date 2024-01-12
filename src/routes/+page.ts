@@ -15,7 +15,7 @@ async function loadGithubRepoData() {
     try {
         const response = await fetchData("https://api.github.com/users/ddy-ddy/repos");
         // 查找指定名称的仓库
-        const repoNames = ['cs-408', 'ddy-coding', 'build-kg'];
+        const repoNames = ['cs-408', 'build-kg', 'ddy-coding',];
         const repos = response.filter((repo: any) => { return repoNames.includes(repo.name) });
         const reposInfo = repos.map((repo: any) => {
             return {
@@ -26,6 +26,10 @@ async function loadGithubRepoData() {
                 fork: repo.forks_count,
                 link: repo.html_url
             }
+        })
+        // 按照star数量排序
+        reposInfo.sort((a: any, b: any) => {
+            return b.star - a.star;
         })
         return reposInfo;
     } catch (error) {

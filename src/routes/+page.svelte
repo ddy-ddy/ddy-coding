@@ -4,7 +4,7 @@
   import * as Avatar from "$lib/components/ui/avatar";
   import { Separator } from "$lib/components/ui/separator";
   import { Icons } from "$lib/components/icons";
-  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank, Album } from "lucide-svelte";
+  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank, Album, Star, GitFork, Languages } from "lucide-svelte";
   import { siteConfig } from "$lib/config/site";
   import * as Drawer from "$lib/components/ui/drawer";
 
@@ -111,36 +111,38 @@
         </article>
       </div>
       <!-- github项目展示 -->
-      {#if githubInfo.authorGithubRepo.length > 0}
-        {#each githubInfo.authorGithubRepo as repo}
-          <div class="flex items-center justify-center [&amp;>div]:w-full">
-            <div class="rounded-xl border bg-card text-card-foreground shadow">
-              <div class="flex-col p-6 grid grid-cols-[1fr_110px] items-start gap-4 space-y-0">
-                <div class="space-y-1">
-                  <h3 class="font-semibold leading-none tracking-tight text-foreground/80">{repo.name}</h3>
-                  <p class="text-sm text-muted-foreground">{repo.description}</p>
+      <div class="flex flex-col space-y-2">
+        <div class="ml-2 font-bold text-base text-foreground/80">项目</div>
+        <div class="grid lg:grid-cols-2 gap-4">
+          {#if githubInfo.authorGithubRepo.length > 0}
+            {#each githubInfo.authorGithubRepo as repo}
+              <div class="flex flex-col space-y-3 w-full rounded-xl border bg-card text-card-foreground shadow p-4">
+                <a href={repo.link} target="_blank" class="flex items-center space-x-2 group">
+                  <Album class="h-4 w-4 stroke-avocado-400 dark:stroke-avocado-600"></Album>
+                  <div class="text-sm font-bold text-avocado-400 dark:text-avocado-600">{repo.name}</div>
+                </a>
+                <p class="text-xs font-medium text-foreground/80">{repo.description}</p>
+                <div class="flex space-x-6">
+                  <a href={repo.link} target="_blank" class="group flex space-x-1">
+                    <Star class="h-4 w-4 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></Star>
+                    <p class="text-xs font-medium text-foreground/80 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.star}</p>
+                  </a>
+                  <a href={repo.link} target="_blank" class="group flex space-x-1">
+                    <GitFork class="h-4 w-4 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></GitFork>
+                    <p class="text-xs font-medium text-foreground/80 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.fork}</p>
+                  </a>
+                  {#if repo.language != null}
+                    <a href={repo.link} target="_blank" class="group flex space-x-1">
+                      <Languages class="h-4 w-4 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></Languages>
+                      <p class="text-xs font-medium text-foreground/80 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.language}</p>
+                    </a>
+                  {/if}
                 </div>
               </div>
-              <div class="p-6 pt-0">
-                <div class="flex space-x-4 text-sm font-medium text-foreground/60">
-                  <div class="flex items-center">
-                    <Album class="mr-1 h-3 w-3"></Album>
-                    {repo.language}
-                  </div>
-                  <div class="flex items-center">
-                    <Album class="mr-1 h-3 w-3 "></Album>
-                    {repo.star}
-                  </div>
-                  <div class="flex items-center">
-                    <Album class="mr-1 h-3 w-3 "></Album>
-                    {repo.fork}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        {/each}
-      {/if}
+            {/each}
+          {/if}
+        </div>
+      </div>
     </div>
   </div>
 </section>
