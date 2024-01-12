@@ -93,7 +93,7 @@
             <img alt="img" class="hidden md:block w-24 h-24 rounded-md border bg-muted" src={blog.coverUrl} />
             <div class="flex flex-col space-y-1">
               <div class="flex-1 space-y-1">
-                <a href={`/blogs/${blog.id}?category=${selectedCategoryId}&page=${currentPage}`} class="font-bold text-base md:text-lg lg:text-xl text-foreground/80">{blog.title}</a>
+                <a href={`/blogs/${blog.id}?category=${selectedCategoryId}&page=${currentPage}`} class="font-bold text-lg text-foreground/80">{blog.title}</a>
                 <p class="text-sm text-foreground/60 line-clamp-2">{blog.summary}</p>
               </div>
               <div class="flex space-x-2">
