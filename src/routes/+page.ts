@@ -37,6 +37,25 @@ async function loadGithubRepoData() {
     }
 }
 
+async function loadBilibiliData() {
+    try {
+        const response = await fetchData(urlBase + "/api/videos?sort=create_time:desc");
+        const videos = response.data;
+        const videoInfo = videos.map((video: any) => {
+            return {
+                name: video.attributes.name,
+                url: video.attributes.url,
+                time: video.attributes.time,
+                create_time: video.attributes.create_time,
+                img_url: video.attributes.img_url
+            }
+        })
+        return videoInfo
+    } catch (error) {
+        return [];
+    }
+}
+
 export const load: PageLoad = async () => {
     try {
         const authorInfoResponse = await fetchData(urlBase + '/api/authors?populate=*');
@@ -68,9 +87,14 @@ export const load: PageLoad = async () => {
         const authorGithubRepoData = await loadGithubRepoData();
         githubData.authorGithubRepo = authorGithubRepoData;
 
+        // 加载bilibili视频内容
+        const videoInfo = await loadBilibiliData();
+
+
         return {
             authorInfo: initialData,
-            githubInfo: githubData
+            githubInfo: githubData,
+            videoInfo: videoInfo
         }
 
     } catch (error: any) {

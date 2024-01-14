@@ -1,23 +1,25 @@
 <script lang="ts">
   import type { PageData } from "./$types";
+  import { cn } from "$lib/utils";
   import { proseStyle } from "$lib/config/prose";
   import * as Avatar from "$lib/components/ui/avatar";
   import { Separator } from "$lib/components/ui/separator";
   import { Icons } from "$lib/components/icons";
-  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank, Album, Star, GitFork, Languages } from "lucide-svelte";
+  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank, Album, Star, GitFork, Languages, Clock, Calendar } from "lucide-svelte";
   import { siteConfig } from "$lib/config/site";
   import * as Drawer from "$lib/components/ui/drawer";
 
   export let data: PageData;
   let authorInfo: any = data.authorInfo;
   let githubInfo: any = data.githubInfo;
+  let videoInfo: any = data.videoInfo;
   let htmlProfile: any = authorInfo.authorProfile;
 </script>
 
 <section class="container py-6 md:py-8 lg:py-10 max-w-6xl">
   <div class="grid gap-4 lg:grid-cols-7">
     <!-- 展示 -->
-    <div class="rounded-xl shadow border bg-card text-card-foreground lg:col-span-2 p-8">
+    <div class="lg:col-span-2 p-8">
       <div class="flex flex-col justify-center space-y-4">
         <!-- 内容1:logo -->
         <Avatar.Root class="h-32 w-32 lg:h-48 lg:w-48 bg-avocado-200 dark:bg-avocado-600 self-center">
@@ -105,7 +107,7 @@
     </div>
     <div class="flex flex-col lg:col-span-5 space-y-6">
       <!-- 自我介绍内容 -->
-      <div class="rounded-xl border bg-card text-card-foreground shadow p-8">
+      <div class="rounded-lg border bg-card text-card-foreground shadow p-8">
         <article class={proseStyle}>
           {@html htmlProfile}
         </article>
@@ -113,32 +115,58 @@
       <!-- github项目展示 -->
       <div class="flex flex-col space-y-2">
         <div class="ml-2 font-bold text-base text-foreground/80">项目</div>
-        <div class="grid lg:grid-cols-2 gap-4">
+        <div class="grid lg:grid-cols-3 gap-4">
           {#if githubInfo.authorGithubRepo.length > 0}
             {#each githubInfo.authorGithubRepo as repo}
-              <div class="flex flex-col space-y-3 w-full rounded-xl border bg-card text-card-foreground shadow p-4">
+              <div class="flex flex-col space-y-3 w-full rounded-lg border bg-card text-card-foreground shadow p-4">
                 <a href={repo.link} target="_blank" class="flex items-center space-x-2 group">
                   <Album class="h-4 w-4 stroke-foreground/70 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></Album>
-                  <div class="text-sm font-bold text-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.name}</div>
+                  <div class="line-clamp-1 text-sm font-bold text-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.name}</div>
                 </a>
-                <p class="text-xs font-medium text-foreground/70">{repo.description}</p>
+                <div class="line-clamp-2 h-8 text-xs font-medium text-foreground/70">{repo.description}</div>
                 <div class="flex space-x-6">
                   <a href={repo.link} target="_blank" class="group flex space-x-1">
                     <Star class="h-4 w-4 stroke-foreground/60 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></Star>
-                    <p class="text-xs font-medium text-foreground/60 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.star}</p>
+                    <p class="line-clamp-1 text-xs font-medium text-foreground/60 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.star}</p>
                   </a>
                   <a href={repo.link} target="_blank" class="group flex space-x-1">
                     <GitFork class="h-4 w-4 stroke-foreground/60 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></GitFork>
-                    <p class="text-xs font-medium text-foreground/60 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.fork}</p>
+                    <p class="line-clamp-1 text-xs font-medium text-foreground/60 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.fork}</p>
                   </a>
                   {#if repo.language != null}
                     <a href={repo.link} target="_blank" class="group flex space-x-1">
                       <Languages class="h-4 w-4 stroke-foreground/60 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></Languages>
-                      <p class="text-xs font-medium text-foreground/60 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.language}</p>
+                      <p class="line-clamp-1 text-xs font-medium text-foreground/60 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.language}</p>
                     </a>
                   {/if}
                 </div>
               </div>
+            {/each}
+          {/if}
+        </div>
+      </div>
+      <!-- bilibili视频展示 -->
+      <div class="flex flex-col space-y-2">
+        <div class="ml-2 font-bold text-base text-foreground/80">视频</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {#if videoInfo.length > 0}
+            {#each videoInfo as video}
+              <a href={video.url} target="_blank" class="group flex flex-col space-y-2">
+                <div class="overflow-hidden rounded-md">
+                  <img class="h-24 w-full object-cover transition-all hover:scale-105 aspect-square" src={video.img_url} alt={video.name} />
+                </div>
+                <div class="line-clamp-2 h-8 text-xs font-medium text-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{video.name}</div>
+                <div class="flex justify-between items-center">
+                  <div class="flex space-x-1">
+                    <Clock class="h-4 w-4 stroke-foreground/60"></Clock>
+                    <p class="line-clamp-1 text-xs font-medium text-foreground/60">{video.time}</p>
+                  </div>
+                  <div class="flex space-x-1">
+                    <Calendar class="h-4 w-4 stroke-foreground/60"></Calendar>
+                    <p class="line-clamp-1 text-xs font-medium text-foreground/60">{video.create_time}</p>
+                  </div>
+                </div>
+              </a>
             {/each}
           {/if}
         </div>
