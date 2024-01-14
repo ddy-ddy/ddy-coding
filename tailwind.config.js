@@ -66,13 +66,13 @@ const config = {
 					foreground: "hsl(var(--card-foreground) / <alpha-value>)"
 				},
 				// 牛油果
-				// avocado: {
+				// ddy: {
 				// 	200: '#c1dfc3', // bg
 				// 	400: '#4fa74e', // text
 				// 	600: '#027f1b', // dark-text
 				// 	800: '#013912', // dark-bg
 				// },
-				avocado: {
+				ddy: {
 					200: '#fed7aa', // bg
 					400: '#fb923c', // text
 					600: '#ea580c', // dark-text
@@ -92,7 +92,7 @@ const config = {
 					css: {
 						'p code, li code': {
 							color: theme('colors.primary.foreground'),
-							backgroundColor: theme('colors.avocado.200'),
+							backgroundColor: theme('colors.ddy.200'),
 							padding: '0.125rem 0.25rem',
 							margin: '0.125rem 0.125rem',
 							borderRadius: '0.25rem'
@@ -120,7 +120,7 @@ const config = {
 					css: {
 						'p code, li code': {
 							color: theme('colors.primary.foreground'),
-							backgroundColor: theme('colors.avocado.800'),
+							backgroundColor: theme('colors.ddy.800'),
 							padding: '0.125rem 0.25rem',
 							borderRadius: '0.25rem'
 						},

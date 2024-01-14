@@ -86,10 +86,10 @@
     <div class="hidden lg:block flex-none sticky top-20 z-10 max-h-[50vh] w-[calc(16vw)] 2xl:w-[calc(12vw)]">
       <ul>
         <div class="rounded-md p-2">
-          <h3 class="font-bold text-lg mb-4 text-foreground/80 underline underline-offset-4 decoration-2 decoration-avocado-400 dark:decoration-avocado-600">目录</h3>
+          <h3 class="font-bold text-lg mb-4 text-foreground/80 underline underline-offset-4 decoration-2 decoration-ddy-400 dark:decoration-ddy-600">目录</h3>
           {#each toc as item}
             <li class="py-[6px]">
-              <a href="#{item.id}" class="truncate block tracking-tight text-sm font-medium border-l-[1.5px] pl-2 {item.id === activeId ? 'pl-4 text-avocado-400 dark:text-avocado-600 border-avocado-400 dark:border-avocado-600' : 'text-foreground/60 hover:text-foreground/80'}">
+              <a href="#{item.id}" class="truncate block tracking-tight text-sm font-medium border-l-[1.5px] pl-2 {item.id === activeId ? 'pl-4 text-ddy-400 dark:text-ddy-600 border-ddy-400 dark:border-ddy-600' : 'text-foreground/60 hover:text-foreground/80'}">
                 {#if item.level - minLevel == 0}
                   {item.text}
                 {:else}

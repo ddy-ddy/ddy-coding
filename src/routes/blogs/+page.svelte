@@ -93,14 +93,14 @@
             <img alt="img" class="hidden md:block w-20 h-20 rounded-md border bg-muted" src={blog.coverUrl} />
             <div class="flex flex-col space-y-1">
               <div class="flex-1 space-y-1">
-                <a href={`/blogs/${blog.id}?category=${selectedCategoryId}&page=${currentPage}`} class="font-bold text-lg text-foreground/80 hover:text-avocado-400 dark:hover:text-avocado-600">{blog.title}</a>
+                <a href={`/blogs/${blog.id}?category=${selectedCategoryId}&page=${currentPage}`} class="font-bold text-lg text-foreground/80 hover:text-ddy-400 dark:hover:text-ddy-600">{blog.title}</a>
                 <p class="text-sm text-foreground/60 line-clamp-1">{blog.summary}</p>
               </div>
               <div class="flex space-x-2">
                 <p class="tracking-tighter text-sm text-foreground/60">{blog.publishTime}</p>
                 <Separator orientation="vertical" />
                 {#each blog.category as category}
-                  <span role="button" tabindex="0" on:click={() => handleCatgoryBlogClick(category.name, category.id)} class="text-sm text-foreground/60 hover:text-avocado-400 dark:hover:text-avocado-600 cursor-pointer">
+                  <span role="button" tabindex="0" on:click={() => handleCatgoryBlogClick(category.name, category.id)} class="text-sm text-foreground/60 hover:text-ddy-400 dark:hover:text-ddy-600 cursor-pointer">
                     {category.name}
                   </span>
                   <Separator orientation="vertical" />

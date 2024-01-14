@@ -24,7 +24,7 @@
     <div class="lg:col-span-2 p-8">
       <div class="flex flex-col justify-center space-y-4">
         <!-- 内容1:logo -->
-        <Avatar.Root class="h-32 w-32 lg:h-48 lg:w-48 bg-avocado-200 dark:bg-avocado-600 self-center">
+        <Avatar.Root class="h-32 w-32 lg:h-48 lg:w-48 bg-ddy-200 dark:bg-ddy-600 self-center">
           <Icons.logo class="ml-[1px] hover:animate-move-right-left" />
         </Avatar.Root>
         <Separator />
@@ -36,8 +36,8 @@
         {#if Object.keys(githubInfo).length != 0}
           <div class="flex space-x-2">
             <a class="group flex space-x-1 items-end" href="https://github.com/ddy-ddy?tab=followers">
-              <Users class="h-4 w-4 stroke-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600"></Users>
-              <div class="-mb-[1px] text-xs font-medium text-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{githubInfo.followers} followers</div>
+              <Users class="h-4 w-4 stroke-foreground/70 group-hover:text-ddy-400 dark:group-hover:text-ddy-600"></Users>
+              <div class="-mb-[1px] text-xs font-medium text-foreground/70 group-hover:text-ddy-400 dark:group-hover:text-ddy-600">{githubInfo.followers} followers</div>
             </a>
             <Separator orientation="vertical" />
             <div class="flex space-x-1 items-end">
@@ -124,23 +124,23 @@
             {#each githubRepoInfo as repo}
               <div class="flex flex-col space-y-3 w-full rounded-lg border bg-card shadow p-4">
                 <a href={repo.link} target="_blank" class="flex items-center space-x-2 group">
-                  <GithubIcon class="h-4 w-4 stroke-foreground/70 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></GithubIcon>
-                  <div class="line-clamp-1 text-sm font-bold text-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.name}</div>
+                  <GithubIcon class="h-4 w-4 stroke-foreground/70 group-hover:stroke-ddy-400 dark:group-hover:stroke-ddy-600"></GithubIcon>
+                  <div class="line-clamp-1 text-sm font-bold text-foreground/70 group-hover:text-ddy-400 dark:group-hover:text-ddy-600">{repo.name}</div>
                 </a>
                 <div class="line-clamp-2 h-8 text-xs font-medium text-foreground/70">{repo.description}</div>
                 <div class="flex space-x-6">
                   <a href={repo.link} target="_blank" class="group flex space-x-1">
-                    <Star class="h-4 w-4 stroke-foreground/60 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></Star>
-                    <p class="line-clamp-1 text-xs font-medium text-foreground/60 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.star}</p>
+                    <Star class="h-4 w-4 stroke-foreground/60 group-hover:stroke-ddy-400 dark:group-hover:stroke-ddy-600"></Star>
+                    <p class="line-clamp-1 text-xs font-medium text-foreground/60 group-hover:text-ddy-400 dark:group-hover:text-ddy-600">{repo.star}</p>
                   </a>
                   <a href={repo.link} target="_blank" class="group flex space-x-1">
-                    <GitFork class="h-4 w-4 stroke-foreground/60 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></GitFork>
-                    <p class="line-clamp-1 text-xs font-medium text-foreground/60 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.fork}</p>
+                    <GitFork class="h-4 w-4 stroke-foreground/60 group-hover:stroke-ddy-400 dark:group-hover:stroke-ddy-600"></GitFork>
+                    <p class="line-clamp-1 text-xs font-medium text-foreground/60 group-hover:text-ddy-400 dark:group-hover:text-ddy-600">{repo.fork}</p>
                   </a>
                   {#if repo.language != null}
                     <a href={repo.link} target="_blank" class="group flex space-x-1">
-                      <Languages class="h-4 w-4 stroke-foreground/60 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></Languages>
-                      <p class="line-clamp-1 text-xs font-medium text-foreground/60 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.language}</p>
+                      <Languages class="h-4 w-4 stroke-foreground/60 group-hover:stroke-ddy-400 dark:group-hover:stroke-ddy-600"></Languages>
+                      <p class="line-clamp-1 text-xs font-medium text-foreground/60 group-hover:text-ddy-400 dark:group-hover:text-ddy-600">{repo.language}</p>
                     </a>
                   {/if}
                 </div>
@@ -159,7 +159,7 @@
                 <div class="overflow-hidden rounded-md">
                   <img class="h-24 w-full object-cover transition-all hover:scale-105 aspect-square" src={video.img_url} alt={video.name} />
                 </div>
-                <div class="line-clamp-2 h-8 text-xs font-medium text-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{video.name}</div>
+                <div class="line-clamp-2 h-8 text-xs font-medium text-foreground/70 group-hover:text-ddy-400 dark:group-hover:text-ddy-600">{video.name}</div>
                 <div class="flex justify-between items-center">
                   <div class="flex space-x-1">
                     <Clock class="h-4 w-4 stroke-foreground/60"></Clock>
