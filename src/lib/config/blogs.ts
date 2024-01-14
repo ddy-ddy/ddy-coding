@@ -18,7 +18,7 @@ export function processListBlogData(blogData: any) {
             summary: blog.attributes.summary,
             publishTime: blog.attributes.publishedAt.split('T')[0],
             author: blog.attributes.author.data.attributes.name,
-            coverUrl: urlBase + blog.attributes.cover.data[0].attributes.formats.small.url,
+            coverUrl: urlBase + blog.attributes.cover.data[0].attributes.formats.thumbnail.url,
             category: categories
         };
     });
