@@ -8,6 +8,8 @@
   import { siteConfig } from "$lib/config/site";
   import * as Drawer from "$lib/components/ui/drawer";
   import { toast } from "svelte-sonner";
+  import { Skeleton } from "$lib/components/ui/skeleton";
+
   export let data: PageData;
   let authorInfo: any = data.authorInfo;
   let githubInfo: any = data.githubInfo;
@@ -121,9 +123,9 @@
         </article>
       </div>
       <!-- github项目展示 -->
-      {#if githubRepoInfo.length > 0}
-        <div class="flex flex-col space-y-2">
-          <div class="ml-2 font-bold text-base text-foreground/80">项目</div>
+      <div class="flex flex-col space-y-2">
+        <div class="ml-2 font-bold text-base text-foreground/80">项目</div>
+        {#if githubRepoInfo.length > 0}
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {#each githubRepoInfo as repo}
               <div class="flex flex-col space-y-3 w-full rounded-lg border bg-card shadow p-4">
@@ -151,8 +153,11 @@
               </div>
             {/each}
           </div>
-        </div>
-      {/if}
+        {:else}
+          <Skeleton class="w-full h-24 rounded-lg shadow-ddy-400 dark:shadow-ddy-800" />
+        {/if}
+      </div>
+
       <!-- bilibili视频展示 -->
       <div class="flex flex-col space-y-2">
         <div class="ml-2 font-bold text-base text-foreground/80">视频</div>
