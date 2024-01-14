@@ -13,6 +13,7 @@
   export let data: PageData;
   let authorInfo: any = data.authorInfo;
   let githubInfo: any = data.githubInfo;
+  let githubRepoInfo: any = data.githubRepoInfo;
   let videoInfo: any = data.videoInfo;
   let htmlProfile: any = authorInfo.authorProfile;
 </script>
@@ -32,17 +33,19 @@
           <div class="font-bold text-lg text-foreground/80">{authorInfo.author}</div>
           <div class="text-xs text-foreground/60">{authorInfo.authorMotto}</div>
         </div>
-        <div class="flex space-x-2">
-          <a class="group flex space-x-1 items-end" href="https://github.com/ddy-ddy?tab=followers">
-            <Users class="h-4 w-4 stroke-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600"></Users>
-            <div class="-mb-[1px] text-xs font-medium text-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{githubInfo.authorGithubFollowers} followers</div>
-          </a>
-          <Separator orientation="vertical" />
-          <div class="flex space-x-1 items-end">
-            <MapPinned class="h-4 w-4 stroke-foreground/70"></MapPinned>
-            <div class="-mb-[1px] text-xs font-medium text-foreground/70">{githubInfo.authorGithubLocation}</div>
+        {#if Object.keys(githubInfo).length != 0}
+          <div class="flex space-x-2">
+            <a class="group flex space-x-1 items-end" href="https://github.com/ddy-ddy?tab=followers">
+              <Users class="h-4 w-4 stroke-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600"></Users>
+              <div class="-mb-[1px] text-xs font-medium text-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{githubInfo.followers} followers</div>
+            </a>
+            <Separator orientation="vertical" />
+            <div class="flex space-x-1 items-end">
+              <MapPinned class="h-4 w-4 stroke-foreground/70"></MapPinned>
+              <div class="-mb-[1px] text-xs font-medium text-foreground/70">{githubInfo.location}</div>
+            </div>
           </div>
-        </div>
+        {/if}
         <Separator />
         <!-- 内容3:Coding -->
         <div class="font-bold text-base text-foreground/80">工作</div>
@@ -58,8 +61,8 @@
         <!-- 内容4:Life -->
         <div class="font-bold text-base text-foreground/80">生活</div>
         <div class="flex flex-wrap gap-x-3 gap-y-3">
-          <a href="/pictures" class="group flex space-x-1 border bg-card rounded-lg shadow-sm shadow-avocado-400 dark:shadow-avocado-800 p-1">
-            <Camera class="group-hover:animate-move-right-left h-4 w-4 fill-avocado-200 dark:fill-avocado-600"></Camera>
+          <a href="/pictures" class="group flex space-x-1 border bg-card rounded-lg shadow-sm shadow-yellow-400 dark:shadow-yellow-800 p-1">
+            <Camera class="group-hover:animate-move-right-left h-4 w-4 fill-yellow-200 dark:fill-yellow-600"></Camera>
             <p class="text-xs font-medium text-foreground/70">摄影</p>
           </a>
           <a href="https://www.strava.com/athletes/duanyu" target="_blank" class="group flex space-x-1 border bg-card rounded-lg shadow-sm shadow-orange-400 dark:shadow-orange-800 p-1">
@@ -114,11 +117,11 @@
         </article>
       </div>
       <!-- github项目展示 -->
-      <div class="flex flex-col space-y-2">
-        <div class="ml-2 font-bold text-base text-foreground/80">项目</div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {#if githubInfo.authorGithubRepo.length > 0}
-            {#each githubInfo.authorGithubRepo as repo}
+      {#if githubRepoInfo.length > 0}
+        <div class="flex flex-col space-y-2">
+          <div class="ml-2 font-bold text-base text-foreground/80">项目</div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {#each githubRepoInfo as repo}
               <div class="flex flex-col space-y-3 w-full rounded-lg border bg-card text-card-foreground shadow p-4">
                 <a href={repo.link} target="_blank" class="flex items-center space-x-2 group">
                   <Github class="h-4 w-4 stroke-foreground/70 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></Github>
@@ -143,9 +146,9 @@
                 </div>
               </div>
             {/each}
-          {/if}
+          </div>
         </div>
-      </div>
+      {/if}
       <!-- bilibili视频展示 -->
       <div class="flex flex-col space-y-2">
         <div class="ml-2 font-bold text-base text-foreground/80">视频</div>

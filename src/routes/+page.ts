@@ -5,9 +5,9 @@ import { marked } from "marked";
 async function loadGithubData() {
     try {
         const response = await fetchData("https://api.github.com/users/ddy-ddy");
-        return response;
+        return { location: response.location, followers: response.followers };
     } catch (error) {
-        return { location: 'Guan Zhou', followers: 'unknown' };
+        return {}
     }
 }
 
@@ -61,8 +61,6 @@ export const load: PageLoad = async () => {
         const authorInfoResponse = await fetchData(urlBase + '/api/authors?populate=*');
         const authorInfo = authorInfoResponse.data[0];
 
-        const authorGithubPromise = loadGithubData();
-
         const initialData = {
             author: authorInfo.attributes.name,
             authorIconLink: urlBase + authorInfo.attributes.icon.data.attributes.url,
@@ -71,29 +69,19 @@ export const load: PageLoad = async () => {
             authorProfile: marked(authorInfo.attributes.profile)
         };
 
-        const githubData = {
-            authorGithubLocation: 'Guan Zhou',
-            authorGithubFollowers: '',
-            authorGithubRepo: []
-        }
-
-
         // 加载github主页内容
-        const authorGithubResponse = await authorGithubPromise;
-        githubData.authorGithubLocation = authorGithubResponse.location;
-        githubData.authorGithubFollowers = authorGithubResponse.followers;
+        const githubData = loadGithubData();
 
         // 加载github仓库内容
-        const authorGithubRepoData = await loadGithubRepoData();
-        githubData.authorGithubRepo = authorGithubRepoData;
+        const githubRepoData = loadGithubRepoData();
 
         // 加载bilibili视频内容
-        const videoInfo = await loadBilibiliData();
-
+        const videoInfo = loadBilibiliData();
 
         return {
             authorInfo: initialData,
             githubInfo: githubData,
+            githubRepoInfo: githubRepoData,
             videoInfo: videoInfo
         }
 

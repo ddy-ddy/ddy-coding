@@ -66,17 +66,17 @@ const config = {
 					foreground: "hsl(var(--card-foreground) / <alpha-value>)"
 				},
 				// 牛油果
+				// avocado: {
+				// 	200: '#c1dfc3', // bg
+				// 	400: '#4fa74e', // text
+				// 	600: '#027f1b', // dark-text
+				// 	800: '#013912', // dark-bg
+				// },
 				avocado: {
-					50: '#f4f9f4', // 最浅的牛油果绿色
-					100: '#e6f2e7',
-					200: '#c1dfc3',
-					300: '#9bcc9e',
-					400: '#4fa74e', // 中等深度的牛油果绿色
-					500: '#038d1e', // 标准的牛油果绿色
-					600: '#027f1b',
-					700: '#025816',
-					800: '#013912',
-					900: '#01250e', // 最深的牛油果绿色
+					200: '#fed7aa', // bg
+					400: '#fb923c', // text
+					600: '#ea580c', // dark-text
+					800: '#9a3412', // dark-bg
 				},
 			},
 			borderRadius: {
