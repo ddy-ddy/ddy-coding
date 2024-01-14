@@ -88,19 +88,19 @@
     </Tabs.List>
     {#each showBlogs as blog}
       <Tabs.Content bind:value={selectedCategory} class="py-2">
-        <section class="flex flex-col space-y-6">
+        <section class="flex flex-col space-y-4">
           <div class="flex space-x-4">
-            <img alt="img" class="hidden md:block w-24 h-24 rounded-md border bg-muted" src={blog.coverUrl} />
+            <img alt="img" class="hidden md:block w-20 h-20 rounded-md border bg-muted" src={blog.coverUrl} />
             <div class="flex flex-col space-y-1">
               <div class="flex-1 space-y-1">
-                <a href={`/blogs/${blog.id}?category=${selectedCategoryId}&page=${currentPage}`} class="font-bold text-lg text-foreground/80">{blog.title}</a>
-                <p class="text-sm text-foreground/60 line-clamp-2">{blog.summary}</p>
+                <a href={`/blogs/${blog.id}?category=${selectedCategoryId}&page=${currentPage}`} class="font-bold text-lg text-foreground/80 hover:text-avocado-400 dark:hover:text-avocado-600">{blog.title}</a>
+                <p class="text-sm text-foreground/60 line-clamp-1">{blog.summary}</p>
               </div>
               <div class="flex space-x-2">
-                <p class="text-sm text-foreground/60">{blog.publishTime}</p>
+                <p class="tracking-tighter text-sm text-foreground/60">{blog.publishTime}</p>
                 <Separator orientation="vertical" />
                 {#each blog.category as category}
-                  <span role="button" tabindex="0" on:click={() => handleCatgoryBlogClick(category.name, category.id)} class="text-sm text-foreground/60 hover:text-foreground/80 cursor-pointer">
+                  <span role="button" tabindex="0" on:click={() => handleCatgoryBlogClick(category.name, category.id)} class="text-sm text-foreground/60 hover:text-avocado-400 dark:hover:text-avocado-600 cursor-pointer">
                     {category.name}
                   </span>
                   <Separator orientation="vertical" />

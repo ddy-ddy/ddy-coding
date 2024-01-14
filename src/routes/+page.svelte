@@ -8,6 +8,7 @@
   import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank, Album, Star, GitFork, Languages, Clock, Calendar } from "lucide-svelte";
   import { siteConfig } from "$lib/config/site";
   import * as Drawer from "$lib/components/ui/drawer";
+  import Github from "$lib/components/icons/github.svelte";
 
   export let data: PageData;
   let authorInfo: any = data.authorInfo;
@@ -115,12 +116,12 @@
       <!-- github项目展示 -->
       <div class="flex flex-col space-y-2">
         <div class="ml-2 font-bold text-base text-foreground/80">项目</div>
-        <div class="grid lg:grid-cols-3 gap-4">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {#if githubInfo.authorGithubRepo.length > 0}
             {#each githubInfo.authorGithubRepo as repo}
               <div class="flex flex-col space-y-3 w-full rounded-lg border bg-card text-card-foreground shadow p-4">
                 <a href={repo.link} target="_blank" class="flex items-center space-x-2 group">
-                  <Album class="h-4 w-4 stroke-foreground/70 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></Album>
+                  <Github class="h-4 w-4 stroke-foreground/70 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></Github>
                   <div class="line-clamp-1 text-sm font-bold text-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.name}</div>
                 </a>
                 <div class="line-clamp-2 h-8 text-xs font-medium text-foreground/70">{repo.description}</div>
@@ -159,11 +160,11 @@
                 <div class="flex justify-between items-center">
                   <div class="flex space-x-1">
                     <Clock class="h-4 w-4 stroke-foreground/60"></Clock>
-                    <p class="line-clamp-1 text-xs font-medium text-foreground/60">{video.time}</p>
+                    <p class="tracking-tight line-clamp-1 text-xs font-medium text-foreground/60">{video.time}</p>
                   </div>
                   <div class="flex space-x-1">
                     <Calendar class="h-4 w-4 stroke-foreground/60"></Calendar>
-                    <p class="line-clamp-1 text-xs font-medium text-foreground/60">{video.create_time}</p>
+                    <p class="tracking-tighter line-clamp-1 text-xs font-medium text-foreground/60">{video.create_time}</p>
                   </div>
                 </div>
               </a>
