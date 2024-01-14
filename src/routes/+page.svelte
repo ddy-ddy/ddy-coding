@@ -7,15 +7,19 @@
   import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank, Star, GitFork, Languages, Clock, Calendar, GithubIcon } from "lucide-svelte";
   import { siteConfig } from "$lib/config/site";
   import * as Drawer from "$lib/components/ui/drawer";
-  import { Toaster } from "$lib/components/ui/sonner";
-  import { Button } from "$lib/components/ui/button";
-
+  import { toast } from "svelte-sonner";
   export let data: PageData;
   let authorInfo: any = data.authorInfo;
   let githubInfo: any = data.githubInfo;
   let githubRepoInfo: any = data.githubRepoInfo;
   let videoInfo: any = data.videoInfo;
   let htmlProfile: any = authorInfo.authorProfile;
+
+  toast.info("欢迎来到ddy's website", {
+    description: new Date().toLocaleString(),
+    duration: 3000,
+    icon: Icons.smile,
+  });
 </script>
 
 <section class="container py-6 md:py-8 lg:py-10 max-w-6xl">

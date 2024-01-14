@@ -75,6 +75,7 @@
     changePageValue(categoryPaginationData);
     showBlogs = categoryBlogs;
   }
+
 </script>
 
 <div class="container max-w-4xl py-6 md:py-8 lg:py-10 flex flex-col gap-4">

@@ -3,6 +3,7 @@ import Twitter from "./twitter.svelte";
 import Logo from "./logo.svelte";
 import Bilibili from "./bilibili.svelte";
 import Wechat from "./wechat.svelte";
+import Smile from "./smile.svelte";
 
 
 export const Icons = {
@@ -11,4 +12,5 @@ export const Icons = {
     github: GitHub,
     twitter: Twitter,
     logo: Logo,
+    smile: Smile
 }
