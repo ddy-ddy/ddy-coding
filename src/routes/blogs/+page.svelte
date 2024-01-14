@@ -5,6 +5,7 @@
   import type { PageData } from "./$types";
   import { urlListBlog, fetchData } from "$lib/config/site";
   import { blogPageSize, processListBlogData, processPaginationData } from "$lib/config/blogs";
+  import { Skeleton } from "$lib/components/ui/skeleton";
 
   export let data: PageData;
   const fistBlogs: any = data.fistBlogs;

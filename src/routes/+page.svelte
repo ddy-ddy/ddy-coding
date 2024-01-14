@@ -27,7 +27,7 @@
 <section class="container py-6 md:py-8 lg:py-10 max-w-6xl">
   <div class="grid gap-4 lg:grid-cols-7">
     <!-- 展示 -->
-    <div class="lg:col-span-2 p-8">
+    <div class="lg:col-span-2 p-2 lg:p-4">
       <div class="flex flex-col justify-center space-y-4">
         <!-- 内容1:logo -->
         <Avatar.Root class="h-32 w-32 lg:h-48 lg:w-48 bg-ddy-200 dark:bg-ddy-600 self-center">
