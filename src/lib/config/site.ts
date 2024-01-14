@@ -1,5 +1,4 @@
 export const urlBase = "https://strapi.ddycoding.cn";
-export const urlGithubStats = "https://github-stat.ddycoding.cn"
 export const urlListBlog = urlBase + "/api/blogs?fields=title&fields=summary&fields=publishedAt&populate=author&populate=blog_categories&populate=cover&sort=publishedAt:desc"
 
 
