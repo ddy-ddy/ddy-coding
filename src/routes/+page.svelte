@@ -111,7 +111,7 @@
     </div>
     <div class="flex flex-col lg:col-span-5 space-y-6">
       <!-- 自我介绍内容 -->
-      <div class="rounded-lg border bg-card text-card-foreground shadow p-8">
+      <div class="rounded-lg border bg-card shadow p-8">
         <article class={proseStyle}>
           {@html htmlProfile}
         </article>
@@ -122,7 +122,7 @@
           <div class="ml-2 font-bold text-base text-foreground/80">项目</div>
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {#each githubRepoInfo as repo}
-              <div class="flex flex-col space-y-3 w-full rounded-lg border bg-card text-card-foreground shadow p-4">
+              <div class="flex flex-col space-y-3 w-full rounded-lg border bg-card shadow p-4">
                 <a href={repo.link} target="_blank" class="flex items-center space-x-2 group">
                   <GithubIcon class="h-4 w-4 stroke-foreground/70 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></GithubIcon>
                   <div class="line-clamp-1 text-sm font-bold text-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.name}</div>
