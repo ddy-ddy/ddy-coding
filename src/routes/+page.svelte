@@ -1,14 +1,14 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import { cn } from "$lib/utils";
   import { proseStyle } from "$lib/config/prose";
   import * as Avatar from "$lib/components/ui/avatar";
   import { Separator } from "$lib/components/ui/separator";
   import { Icons } from "$lib/components/icons";
-  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank, Album, Star, GitFork, Languages, Clock, Calendar, GithubIcon } from "lucide-svelte";
+  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank, Star, GitFork, Languages, Clock, Calendar, GithubIcon } from "lucide-svelte";
   import { siteConfig } from "$lib/config/site";
   import * as Drawer from "$lib/components/ui/drawer";
-  import Github from "$lib/components/icons/github.svelte";
+  import { Toaster } from "$lib/components/ui/sonner";
+  import { Button } from "$lib/components/ui/button";
 
   export let data: PageData;
   let authorInfo: any = data.authorInfo;
