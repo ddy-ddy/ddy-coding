@@ -5,7 +5,7 @@
   import * as Avatar from "$lib/components/ui/avatar";
   import { Separator } from "$lib/components/ui/separator";
   import { Icons } from "$lib/components/icons";
-  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank, Album, Star, GitFork, Languages, Clock, Calendar } from "lucide-svelte";
+  import { Users, MapPinned, BadgeCheck, Camera, Bike, PiggyBank, Album, Star, GitFork, Languages, Clock, Calendar, GithubIcon } from "lucide-svelte";
   import { siteConfig } from "$lib/config/site";
   import * as Drawer from "$lib/components/ui/drawer";
   import Github from "$lib/components/icons/github.svelte";
@@ -124,7 +124,7 @@
             {#each githubRepoInfo as repo}
               <div class="flex flex-col space-y-3 w-full rounded-lg border bg-card text-card-foreground shadow p-4">
                 <a href={repo.link} target="_blank" class="flex items-center space-x-2 group">
-                  <Github class="h-4 w-4 stroke-foreground/70 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></Github>
+                  <GithubIcon class="h-4 w-4 stroke-foreground/70 group-hover:stroke-avocado-400 dark:group-hover:stroke-avocado-600"></GithubIcon>
                   <div class="line-clamp-1 text-sm font-bold text-foreground/70 group-hover:text-avocado-400 dark:group-hover:text-avocado-600">{repo.name}</div>
                 </a>
                 <div class="line-clamp-2 h-8 text-xs font-medium text-foreground/70">{repo.description}</div>
