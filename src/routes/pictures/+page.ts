@@ -26,8 +26,6 @@ export const load: PageLoad = async () => {
             }
         });
 
-        console.log(pictures);
-
         return {
             pictures: pictures
         }
