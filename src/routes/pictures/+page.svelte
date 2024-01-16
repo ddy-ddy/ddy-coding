@@ -1,13 +1,15 @@
 <script lang="ts">
-  import { PlusCircled } from "radix-icons-svelte";
-  import { Button } from "$lib/components/ui/button";
+  import type { PageData } from "./$types";
   import { Separator } from "$lib/components/ui/separator";
   import * as Tabs from "$lib/components/ui/tabs";
-  import { Image, Sidebar, Map } from "./(components)";
+  import { Image, Map } from "./(components)";
   import { imageLists } from "./(data)/images";
+
+  export let data: PageData;
+  let pictures: any = data.pictures;
 </script>
 
-<div class="container relative">
+<div class="container max-w-4xl py-6 md:py-8 lg:py-10 flex flex-col gap-4">
   <div class="h-full mx-auto py-6">
     <Tabs.Root value="music" class="h-full space-y-6">
       <Tabs.List>
@@ -23,8 +25,12 @@
         </div>
         <Separator class="my-4" />
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
-          {#each imageLists as image}
-            <Image {image} class="lg:pr-4 py-2" aspectRatio="portrait" />
+          {#each pictures as picture}
+            <div class="space-y-3 lg:pr-4 py-2">
+              <div class="overflow-hidden rounded-md">
+                <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-square" src={picture.large_url} alt={picture.description} />
+              </div>
+            </div>
           {/each}
         </div>
       </Tabs.Content>

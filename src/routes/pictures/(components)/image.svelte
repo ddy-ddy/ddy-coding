@@ -10,7 +10,7 @@
 
 <div class={cn("space-y-3", className)} {...$$restProps}>
   <div class="overflow-hidden rounded-md">
-    <img class={cn("h-auto w-auto object-cover transition-all hover:scale-105", aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square")} src={image.cover} alt={image.name} />
+    <img class={cn("h-auto w-auto object-cover transition-all hover:scale-105", aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square")} src={image.small_url} alt={image.description} />
   </div>
   <div class="space-y-1 text-sm">
     <h3 class="font-medium leading-none">{image.name}</h3>
