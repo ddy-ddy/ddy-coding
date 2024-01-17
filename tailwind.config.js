@@ -73,10 +73,12 @@ const config = {
 				// 	800: '#013912', // dark-bg
 				// },
 				ddy: {
+					100: '#ffedd5',
 					200: '#fed7aa', // bg
 					400: '#fb923c', // text
 					600: '#ea580c', // dark-text
 					800: '#9a3412', // dark-bg
+					900: '#431407'
 				},
 			},
 			borderRadius: {

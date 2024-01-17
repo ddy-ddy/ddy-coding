@@ -2,8 +2,10 @@ import type { PageLoad } from './$types';
 import { urlBase, fetchData } from '$lib/config/site';
 
 
-export const load: PageLoad = async () => {
+export const load: PageLoad = async (data: any) => {
     try {
+        const mapToken = data["data"]["body"]["map_token"]
+
         const response = await fetchData(urlBase + "/api/pictures?filters[flag][$eq]=true&populate=*");
         const picturesInfo = response.data;
 
@@ -27,7 +29,8 @@ export const load: PageLoad = async () => {
         });
 
         return {
-            pictures: pictures
+            pictures: pictures,
+            mapToken: mapToken
         }
 
     } catch (error: any) {
