@@ -26,12 +26,12 @@
         .then((AMap) => {
           // 地图实例
           map = new AMap.Map("mapContainer", {
-            pitch: 50, //地图俯仰角度，有效范围 0 度- 83 度
+            pitch: 0, //地图俯仰角度，有效范围 0 度- 83 度
             viewMode: "3D", //地图模式
             rotateEnable: true, //是否开启地图旋转交互 鼠标右键 + 鼠标画圈移动 或 键盘Ctrl + 鼠标左键画圈移动
             pitchEnable: true, //是否开启地图倾斜交互 鼠标右键 + 鼠标上下移动或键盘Ctrl + 鼠标左键上下移动
-            zoom: 17, //初始化地图层级
-            rotation: -15, //初始地图顺时针旋转的角度
+            zoom: 6, //初始化地图层级
+            rotation: 0, //初始地图顺时针旋转的角度
             zooms: [2, 20], //地图显示的缩放级别范围
             center: [113.280637, 23.125178], //初始地图中心经纬度
             mapStyle: "amap://styles/normal", //设置地图的显示样式
@@ -57,15 +57,23 @@
               bottom: "14px",
             },
           });
-          // // 当前定位
-          // geolocation = new AMap.Geolocation({
-          //   enableHighAccuracy: true, // 是否使用高精度定位，默认：true
-          //   timeout: 10000, // 设置定位超时时间，默认：无穷大
-          //   offset: [10, 20], // 定位按钮的停靠位置的偏移量
-          //   zoomToAccuracy: true, //  定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-          //   position: "LB", //  定位按钮的排放位置, RB表示右下
-          // });
-
+          for (var i = 0; i < pictures.length; i += 1) {
+            var center = [113.280637 + i, 23.125178 + i];
+            var icon = new AMap.Icon({
+              image: pictures[i]["small_url"], // 替换为您想要显示的图片路径
+              size: new AMap.Size(40, 40), // 设置图片的宽度和高度
+              imageSize: new AMap.Size(40, 40), // 设置图片显示时的实际大小
+            });
+            var marker = new AMap.Marker({
+              position: center,
+              icon: icon,
+              zIndex: 10,
+              bubble: true,
+              cursor: "pointer",
+              clickable: true,
+            });
+            marker.setMap(map);
+          }
           map.addControl(toolBar);
           map.addControl(controlBar);
           map.addControl(scale);
@@ -80,14 +88,6 @@
       map = null;
     });
   }
-
-  // function handleNowPosition() {
-  //   geolocation.getCurrentPosition(function (status: any, result: any) {
-  //     if (status == "complete") {
-  //       console.log(result);
-  //     }
-  //   });
-  // }
 
   function hadleMapDarkStyle() {
     if (mapStyle === "normal") {

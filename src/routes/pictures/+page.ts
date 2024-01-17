@@ -9,7 +9,9 @@ export const load: PageLoad = async (data: any) => {
         const response = await fetchData(urlBase + "/api/pictures?filters[flag][$eq]=true&populate=*");
         const picturesInfo = response.data;
 
+
         const pictures = picturesInfo.map((picture: any) => {
+
             return {
                 description: picture.attributes.description,
                 img_url: urlBase + picture["attributes"]["img"]["data"][0]["attributes"]["url"],
