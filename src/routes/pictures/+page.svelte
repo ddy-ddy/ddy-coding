@@ -10,7 +10,6 @@
   export let data: PageData;
   let pictures: any = data.pictures;
   let mapToken: any = data.mapToken;
-  let mapExpand = false;
   let map: any;
 
   let geolocation: any;
@@ -54,7 +53,7 @@
           // 比例尺
           var scale = new AMap.Scale({
             position: {
-              right: "80px",
+              right: "40px",
               bottom: "14px",
             },
           });
@@ -90,10 +89,6 @@
   //   });
   // }
 
-  function handleMapExpand() {
-    mapExpand = !mapExpand;
-  }
-
   function hadleMapDarkStyle() {
     if (mapStyle === "normal") {
       map.setMapStyle("amap://styles/dark");
@@ -105,50 +100,43 @@
   }
 </script>
 
-<div class="container max-w-4xl py-6 md:py-8 lg:py-10 flex flex-col gap-4">
-  <Tabs.Root value="map" class="h-full">
-    <Tabs.List class="mb-2">
-      <Tabs.Trigger value="pictures"><ImageIcon class="w-4 h-4" /></Tabs.Trigger>
-      <Tabs.Trigger value="map"><MapPin class="w-4 h-4" /></Tabs.Trigger>
-    </Tabs.List>
-    <Tabs.Content value="pictures">
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4">
-        {#each pictures as picture}
-          <AlertDialog.Root>
-            <AlertDialog.Trigger>
-              <div class="overflow-hidden rounded-md">
-                <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-square" src={picture.large_url} alt={picture.description} />
-              </div>
-            </AlertDialog.Trigger>
-            <AlertDialog.Content>
-              <div class="flex flex-col space-y-4">
-                <img class="h-auto w-auto" src={picture.large_url} alt={picture.description} />
-                <div>{picture.description}</div>
-              </div>
-              <AlertDialog.Footer>
-                <AlertDialog.Cancel class=""><ChevronDown /></AlertDialog.Cancel>
-              </AlertDialog.Footer>
-            </AlertDialog.Content>
-          </AlertDialog.Root>
-        {/each}
-      </div>
-    </Tabs.Content>
-    <Tabs.Content value="map">
-      <div class="relative z-20 h-[450px] lg:h-[550px] items-center justify-center rounded-lg shadow-lg">
-        <div id="mapContainer" class="w-full h-full rounded-lg"></div>
-        <div class="absolute right-2 bottom-2 z-50 flex space-x-2 bg-card shadow-lg rounded-lg p-2 shadow-ddy-100">
-          <button on:click={hadleMapDarkStyle}>
-            {#if mapStyle == "dark"}
-              <Moon class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
-            {:else}
-              <Sun class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
-            {/if}
-          </button>
-          <button on:click={handleMapExpand}>
-            <Expand class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2"></Expand>
-          </button>
-        </div>
-      </div>
-    </Tabs.Content>
-  </Tabs.Root>
-</div>
+<Tabs.Root value="map" class="relative">
+  <Tabs.List class="absolute items-center left-1/2 top-4 z-50">
+    <Tabs.Trigger value="map"><MapPin class="w-4 h-4" /></Tabs.Trigger>
+    <Tabs.Trigger value="pictures"><ImageIcon class="w-4 h-4" /></Tabs.Trigger>
+  </Tabs.List>
+  <!-- <Tabs.Content value="pictures">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4">
+      {#each pictures as picture}
+        <AlertDialog.Root>
+          <AlertDialog.Trigger>
+            <div class="overflow-hidden rounded-md">
+              <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-square" src={picture.large_url} alt={picture.description} />
+            </div>
+          </AlertDialog.Trigger>
+          <AlertDialog.Content>
+            <div class="flex flex-col space-y-4">
+              <img class="h-auto w-auto" src={picture.large_url} alt={picture.description} />
+              <div>{picture.description}</div>
+            </div>
+            <AlertDialog.Footer>
+              <AlertDialog.Cancel class=""><ChevronDown /></AlertDialog.Cancel>
+            </AlertDialog.Footer>
+          </AlertDialog.Content>
+        </AlertDialog.Root>
+      {/each}
+    </div>
+  </Tabs.Content> -->
+  <Tabs.Content value="map" class="relative z-20 ">
+    <div id="mapContainer" class="w-screen h-[calc(100vh-3.5rem)]"></div>
+    <div class="absolute right-[40px] top-[180px] z-60 flex space-x-2 bg-card shadow-lg rounded-lg p-2 ">
+      <button on:click={hadleMapDarkStyle}>
+        {#if mapStyle == "dark"}
+          <Moon class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
+        {:else}
+          <Sun class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
+        {/if}
+      </button>
+    </div>
+  </Tabs.Content>
+</Tabs.Root>
