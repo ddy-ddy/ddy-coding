@@ -101,35 +101,37 @@
 </script>
 
 <Tabs.Root value="map" class="relative">
-  <Tabs.List class="absolute items-center left-1/2 top-4 z-50">
+  <Tabs.List class="absolute items-center left-[calc(50vw-2.5rem)] top-4 z-40">
     <Tabs.Trigger value="map"><MapPin class="w-4 h-4" /></Tabs.Trigger>
     <Tabs.Trigger value="pictures"><ImageIcon class="w-4 h-4" /></Tabs.Trigger>
   </Tabs.List>
-  <!-- <Tabs.Content value="pictures">
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4">
-      {#each pictures as picture}
-        <AlertDialog.Root>
-          <AlertDialog.Trigger>
-            <div class="overflow-hidden rounded-md">
-              <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-square" src={picture.large_url} alt={picture.description} />
-            </div>
-          </AlertDialog.Trigger>
-          <AlertDialog.Content>
-            <div class="flex flex-col space-y-4">
-              <img class="h-auto w-auto" src={picture.large_url} alt={picture.description} />
-              <div>{picture.description}</div>
-            </div>
-            <AlertDialog.Footer>
-              <AlertDialog.Cancel class=""><ChevronDown /></AlertDialog.Cancel>
-            </AlertDialog.Footer>
-          </AlertDialog.Content>
-        </AlertDialog.Root>
-      {/each}
+  <Tabs.Content value="pictures">
+    <div class="container max-w-4xl py-16">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4">
+        {#each pictures as picture}
+          <AlertDialog.Root>
+            <AlertDialog.Trigger>
+              <div class="overflow-hidden rounded-md">
+                <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-square" src={picture.large_url} alt={picture.description} />
+              </div>
+            </AlertDialog.Trigger>
+            <AlertDialog.Content>
+              <div class="flex flex-col space-y-4">
+                <img class="h-auto w-auto" src={picture.large_url} alt={picture.description} />
+                <div>{picture.description}</div>
+              </div>
+              <AlertDialog.Footer>
+                <AlertDialog.Cancel class=""><ChevronDown /></AlertDialog.Cancel>
+              </AlertDialog.Footer>
+            </AlertDialog.Content>
+          </AlertDialog.Root>
+        {/each}
+      </div>
     </div>
-  </Tabs.Content> -->
-  <Tabs.Content value="map" class="relative z-20 ">
+  </Tabs.Content>
+  <Tabs.Content value="map" class="relative z-20">
     <div id="mapContainer" class="w-screen h-[calc(100vh-3.5rem)]"></div>
-    <div class="absolute right-[40px] top-[180px] z-60 flex space-x-2 bg-card shadow-lg rounded-lg p-2 ">
+    <div class="absolute right-[40px] top-[180px] z-40 flex space-x-2 bg-card shadow-lg rounded-lg p-2">
       <button on:click={hadleMapDarkStyle}>
         {#if mapStyle == "dark"}
           <Moon class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
