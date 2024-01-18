@@ -1,11 +1,12 @@
 <script lang="ts">
   import type { PageData } from "./$types";
   import * as Tabs from "$lib/components/ui/tabs";
-  import { MapPin, ImageIcon, ChevronDown, Expand, Minimize, Maximize, Sun, Moon } from "lucide-svelte";
+  import { MapPin, ImageIcon, ChevronDown, Expand, Minimize, Maximize, Sun, Moon,Map} from "lucide-svelte";
   import * as AlertDialog from "$lib/components/ui/alert-dialog";
   import AMapLoader from "@amap/amap-jsapi-loader";
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
+  import { setMode, mode } from 'mode-watcher';
 
   export let data: PageData;
   let pictures: any = data.pictures;
@@ -30,10 +31,10 @@
             viewMode: "3D", //地图模式
             rotateEnable: true, //是否开启地图旋转交互 鼠标右键 + 鼠标画圈移动 或 键盘Ctrl + 鼠标左键画圈移动
             pitchEnable: true, //是否开启地图倾斜交互 鼠标右键 + 鼠标上下移动或键盘Ctrl + 鼠标左键上下移动
-            zoom: 6, //初始化地图层级
+            zoom: 4.5, //初始化地图层级
             rotation: 0, //初始地图顺时针旋转的角度
             zooms: [2, 20], //地图显示的缩放级别范围
-            center: [113.280637, 23.125178], //初始地图中心经纬度
+            center: [116.405285, 29.904989], //初始地图中心经纬度
             mapStyle: "amap://styles/normal", //设置地图的显示样式
           });
           //控制地图旋转插件
@@ -67,7 +68,7 @@
           var _renderMarker = function (context: any) {
             var imgUrl = context["data"][0]["url"];
             var content = `
-               <img class="w-16 h-16 rounded-lg object-cover transition-all hover:scale-105 aspect-square" src=${imgUrl}>
+               <img class="w-24 h-24 rounded-lg object-cover transition-all hover:scale-105 aspect-square" src=${imgUrl}>
              `;
             var offset = new AMap.Pixel(-9, -9);
             context.marker.setContent(content);
@@ -77,18 +78,19 @@
           // 自定义聚合点样式
           var _renderClusterMarker = function (context: any) {
             var clusterCount = context.count;
+            var totalCount = points.length;
+            var size = Math.round(30 + Math.pow(context.count / totalCount, 1 / 5) * 20);
             var imgUrl = context["clusterData"]["0"]["url"];
             var content = `
-<div class="relative">
-  <img class="w-16 h-16 rounded-lg object-cover transition-all aspect-square" src="${imgUrl}" />
+<div class="relative flex flex-col space-x-1 items-center justify-center">
+  <img class="w-20 h-20 rounded-lg object-cover transition-all aspect-square" src="${imgUrl}" />
   <div class="absolute -right-2 -top-2 z-40 w-6 h-6 rounded-full bg-ddy-400 items-center shadow flex items-center justify-center">
-    <p class="text-xs font-bold">${clusterCount}</p>
+    <p class="text-xs font-bold text-foreground/80">${clusterCount}</p>
   </div>
 </div>
              `;
-            var offset = new AMap.Pixel(-9, -9);
             context.marker.setContent(content);
-            context.marker.setOffset(offset);
+            context.marker.setOffset(new AMap.Pixel(-size / 2, -size / 2));
             console.log(context);
           };
 
@@ -115,9 +117,11 @@
     if (mapStyle === "normal") {
       map.setMapStyle("amap://styles/dark");
       mapStyle = "dark";
+      setMode('dark');
     } else {
       map.setMapStyle("amap://styles/normal");
       mapStyle = "normal";
+      setMode('light');
     }
   }
 </script>
