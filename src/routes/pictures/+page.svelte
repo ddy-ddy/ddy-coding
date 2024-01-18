@@ -58,7 +58,7 @@
             },
           });
           for (var i = 0; i < pictures.length; i += 1) {
-            var center = [113.280637 + i, 23.125178 + i];
+            var center = [pictures[i]["longitude"], pictures[i]["latitude"]];
             var icon = new AMap.Icon({
               image: pictures[i]["small_url"], // 替换为您想要显示的图片路径
               size: new AMap.Size(40, 40), // 设置图片的宽度和高度
@@ -101,7 +101,7 @@
 </script>
 
 <Tabs.Root value="map" class="relative">
-  <Tabs.List class="absolute items-center left-[calc(50vw-2.5rem)] top-4 z-40">
+  <Tabs.List class="absolute items-center left-[calc(50vw-2.5rem)] top-4 z-40 shadow-lg">
     <Tabs.Trigger value="map"><MapPin class="w-4 h-4" /></Tabs.Trigger>
     <Tabs.Trigger value="pictures"><ImageIcon class="w-4 h-4" /></Tabs.Trigger>
   </Tabs.List>
