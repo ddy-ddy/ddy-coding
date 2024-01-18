@@ -10,9 +10,9 @@
   export let data: PageData;
   let pictures: any = data.pictures;
   let mapToken: any = data.mapToken;
+  let points: any = data.points;
   let map: any;
 
-  let geolocation: any;
   let mapStyle = "normal";
 
   // 确保当前是在浏览器环境
@@ -21,7 +21,7 @@
       AMapLoader.load({
         key: mapToken,
         version: "2.0",
-        plugins: ["AMap.ControlBar", "AMap.ToolBar", "AMap.Scale", "AMap.Geolocation"],
+        plugins: ["AMap.ControlBar", "AMap.ToolBar", "AMap.Scale", "AMap.Geolocation", "AMap.MarkerClusterer"],
       })
         .then((AMap) => {
           // 地图实例
@@ -57,26 +57,48 @@
               bottom: "14px",
             },
           });
-          for (var i = 0; i < pictures.length; i += 1) {
-            var center = [pictures[i]["longitude"], pictures[i]["latitude"]];
-            var icon = new AMap.Icon({
-              image: pictures[i]["small_url"], // 替换为您想要显示的图片路径
-              size: new AMap.Size(40, 40), // 设置图片的宽度和高度
-              imageSize: new AMap.Size(40, 40), // 设置图片显示时的实际大小
-            });
-            var marker = new AMap.Marker({
-              position: center,
-              icon: icon,
-              zIndex: 10,
-              bubble: true,
-              cursor: "pointer",
-              clickable: true,
-            });
-            marker.setMap(map);
-          }
+
+          // 添加控制
           map.addControl(toolBar);
           map.addControl(controlBar);
           map.addControl(scale);
+
+          // 自定义非聚合点样式
+          var _renderMarker = function (context: any) {
+            var imgUrl = context["data"][0]["url"];
+            var content = `
+               <img class="w-16 h-16 rounded-lg object-cover transition-all hover:scale-105 aspect-square" src=${imgUrl}>
+             `;
+            var offset = new AMap.Pixel(-9, -9);
+            context.marker.setContent(content);
+            context.marker.setOffset(offset);
+          };
+
+          // 自定义聚合点样式
+          var _renderClusterMarker = function (context: any) {
+            var clusterCount = context.count;
+            var imgUrl = context["clusterData"]["0"]["url"];
+            var content = `
+<div class="relative">
+  <img class="w-16 h-16 rounded-lg object-cover transition-all aspect-square" src="${imgUrl}" />
+  <div class="absolute -right-2 -top-2 z-40 w-6 h-6 rounded-full bg-ddy-400 items-center shadow flex items-center justify-center">
+    <p class="text-xs font-bold">${clusterCount}</p>
+  </div>
+</div>
+             `;
+            var offset = new AMap.Pixel(-9, -9);
+            context.marker.setContent(content);
+            context.marker.setOffset(offset);
+            console.log(context);
+          };
+
+          // 添加标记点聚类
+          var cluster;
+          cluster = new AMap.MarkerCluster(map, points, {
+            gridSize: 60, // 聚合网格像素大小
+            renderClusterMarker: _renderClusterMarker,
+            renderMarker: _renderMarker,
+          });
         })
         .catch((e) => {
           console.error(e);
@@ -142,3 +164,9 @@
     </div>
   </Tabs.Content>
 </Tabs.Root>
+<style>
+  #custom-marker {
+    width: 10px;
+    height: 10px;
+  }
+</style>

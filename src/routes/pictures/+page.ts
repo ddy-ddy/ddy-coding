@@ -9,9 +9,7 @@ export const load: PageLoad = async (data: any) => {
         const response = await fetchData(urlBase + "/api/pictures?filters[flag][$eq]=true&populate=*");
         const picturesInfo = response.data;
 
-
         const pictures = picturesInfo.map((picture: any) => {
-
             return {
                 description: picture.attributes.description,
                 img_url: urlBase + picture["attributes"]["img"]["data"][0]["attributes"]["url"],
@@ -30,8 +28,18 @@ export const load: PageLoad = async (data: any) => {
             }
         });
 
+
+        // 处理聚类数据
+        var points: any = [];
+        for (var i = 0; i < pictures.length; i += 1) {
+            var center = [pictures[i]["longitude"], pictures[i]["latitude"]];
+            var picUrl = pictures[i]["large_url"];
+            points.push({ lnglat: center, url: picUrl });
+        }
+
         return {
             pictures: pictures,
+            points: points,
             mapToken: mapToken
         }
 
