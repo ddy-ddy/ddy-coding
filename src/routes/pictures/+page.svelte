@@ -68,7 +68,7 @@
           var _renderMarker = function (context: any) {
             var imgUrl = context["data"][0]["url"];
             var content = `
-               <img class="w-24 h-24 rounded-lg object-cover transition-all hover:scale-105 aspect-square" src=${imgUrl}>
+               <img class="w-16 h-16 rounded-lg object-cover transition-all hover:scale-105 aspect-square" src=${imgUrl}>
              `;
             var offset = new AMap.Pixel(-9, -9);
             context.marker.setContent(content);
@@ -83,7 +83,7 @@
             var imgUrl = context["clusterData"]["0"]["url"];
             var content = `
 <div class="relative flex flex-col space-x-1 items-center justify-center">
-  <img class="w-20 h-20 rounded-lg object-cover transition-all aspect-square" src="${imgUrl}" />
+  <img class="w-16 h-16 rounded-lg object-cover transition-all aspect-square" src="${imgUrl}" />
   <div class="absolute -right-2 -top-2 z-40 w-6 h-6 rounded-full bg-ddy-400 items-center shadow flex items-center justify-center">
     <p class="text-xs font-bold text-foreground/80">${clusterCount}</p>
   </div>

@@ -11,7 +11,7 @@
   import { toggleMode } from "mode-watcher";
   import { Search } from "$lib/components/page/";
   let open = false;
-  let pathName = $page.url.pathname;
+  $: pathName = $page.url.pathname;
   function handleNavClick() {
     open = false; //点击导航链接后关闭侧边栏
   }
