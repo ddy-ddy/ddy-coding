@@ -177,7 +177,7 @@
         {#each pictures as picture}
           <AlertDialog.Root>
             <AlertDialog.Trigger>
-              <div class="overflow-hidden shadow-2xl hover:shadow-ddy-100 dark:hover:shadow-ddy-900">
+              <div class="p-[1px] overflow-hidden shadow-2xl hover:shadow-ddy-100 dark:hover:shadow-ddy-900">
                 <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-video brightness-95 dark:brightness-75" src={picture.large_url} alt={picture.description} />
               </div>
             </AlertDialog.Trigger>
