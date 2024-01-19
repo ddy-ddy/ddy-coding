@@ -241,7 +241,7 @@
           </button>
         </Tooltip.Trigger>
         <Tooltip.Content side="left" class="mr-2">
-          <p class="text-xs font-medium text-foreground/70">点击地图中心</p>
+          <p class="text-xs font-medium text-foreground/70">点击返回中心</p>
         </Tooltip.Content>
       </Tooltip.Root>
     </div>
