@@ -27,11 +27,10 @@
   let defaultCenter = [106.405285, 29.904989]; // 地图中心
   let defaultPitch = 50; // 俯视角度
 
-  console.log(browser);
   // 确保当前是在浏览器环境
   if (browser) {
-    onMount(() => {
-      import AMapLoader from "@amap/amap-jsapi-loader";
+    onMount(async () => {
+      const AMapLoader = await import("@amap/amap-jsapi-loader");
       AMapLoader.load({
         key: mapToken,
         version: "2.0",
