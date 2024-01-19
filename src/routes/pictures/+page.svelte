@@ -8,16 +8,20 @@
   import * as Tabs from "$lib/components/ui/tabs";
   import * as AlertDialog from "$lib/components/ui/alert-dialog";
   import { Separator } from "$lib/components/ui/separator";
+  import * as Tooltip from "$lib/components/ui/tooltip";
 
+  // 服务端数据
   export let data: PageData;
   let pictures: any = data.pictures;
   let mapToken: any = data.mapToken;
   let points: any = data.points;
 
+  // 地图实例变量
   let map: any;
   let geolocation: any;
   let satelliteLayer: any;
 
+  // 地图样式
   let mapStyle = "normal";
   let isSatelliteLayer = false;
   let defaultZoom = 5.5; // 地图缩放级别
@@ -96,12 +100,12 @@
           var size = Math.round(30 + Math.pow(context.count / totalCount, 1 / 5) * 20);
           var imgUrl = context["clusterData"]["0"]["url"];
           var content = `
-<div class="relative flex flex-col space-x-1 items-center justify-center">
-  <img class="w-16 h-16 rounded-lg object-cover transition-all aspect-square" src="${imgUrl}" />
-  <div class="absolute -right-2 -top-2 z-40 w-6 h-6 rounded-full bg-ddy-400 items-center shadow flex items-center justify-center">
-    <p class="text-xs font-bold text-foreground/80">${clusterCount}</p>
-  </div>
-</div>
+                  <div class="relative flex flex-col space-x-1 items-center justify-center">
+                    <img class="w-16 h-16 rounded-lg object-cover transition-all aspect-square" src="${imgUrl}" />
+                    <div class="absolute -right-2 -top-2 z-40 w-6 h-6 rounded-full bg-ddy-400 items-center shadow flex items-center justify-center">
+                      <p class="text-xs font-bold text-foreground/80">${clusterCount}</p>
+                    </div>
+                  </div>
              `;
           context.marker.setContent(content);
           context.marker.setOffset(new AMap.Pixel(-size / 2, -size / 2));
@@ -116,7 +120,6 @@
         });
       });
     });
-
     onDestroy(() => {
       map.destroy();
       map = null;
@@ -215,18 +218,32 @@
       </button>
       <Separator />
       <!-- 选择图层 -->
-      <button on:click={handleSatelliteLayer}>
-        {#if isSatelliteLayer}
-          <MapPinned class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
-        {:else}
-          <SatelliteDish class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
-        {/if}
-      </button>
+      <Tooltip.Root openDelay={0}>
+        <Tooltip.Trigger>
+          <button on:click={handleSatelliteLayer}>
+            {#if isSatelliteLayer}
+              <MapPinned class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
+            {:else}
+              <SatelliteDish class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
+            {/if}
+          </button>
+        </Tooltip.Trigger>
+        <Tooltip.Content side="left" class="mr-2">
+          <p class="text-xs font-medium text-foreground/70">点击切换图层</p>
+        </Tooltip.Content>
+      </Tooltip.Root>
       <Separator />
       <!-- 返回地图中心 -->
-      <button on:click={goBackCenter}>
-        <Compass class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
-      </button>
+      <Tooltip.Root openDelay={0}>
+        <Tooltip.Trigger>
+          <button on:click={goBackCenter}>
+            <Compass class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
+          </button>
+        </Tooltip.Trigger>
+        <Tooltip.Content side="left" class="mr-2">
+          <p class="text-xs font-medium text-foreground/70">点击地图中心</p>
+        </Tooltip.Content>
+      </Tooltip.Root>
     </div>
   </Tabs.Content>
 </Tabs.Root>
