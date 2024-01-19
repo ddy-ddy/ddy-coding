@@ -209,7 +209,7 @@
       </button>
       <Separator />
       <!-- 控制深色模式 -->
-      <button on:click={handleMapDarkStyle}>
+      <button on:click={handleMapDarkStyle} class="cursor-pointer">
         {#if mapStyle == "dark"}
           <Moon class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
         {:else}
@@ -220,7 +220,7 @@
       <!-- 选择图层 -->
       <Tooltip.Root openDelay={0}>
         <Tooltip.Trigger>
-          <button on:click={handleSatelliteLayer}>
+          <button on:click={handleSatelliteLayer} class="cursor-pointer">
             {#if isSatelliteLayer}
               <MapPinned class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
             {:else}
@@ -236,7 +236,7 @@
       <!-- 返回地图中心 -->
       <Tooltip.Root openDelay={0}>
         <Tooltip.Trigger>
-          <button on:click={goBackCenter}>
+          <button on:click={goBackCenter} class="cursor-pointer">
             <Compass class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
           </button>
         </Tooltip.Trigger>
