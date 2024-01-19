@@ -219,7 +219,7 @@
       <Separator />
       <!-- 选择图层 -->
       <Tooltip.Root openDelay={0}>
-        <Tooltip.Trigger>
+        <Tooltip.Trigger class="w-4 h-4">
           <button on:click={handleSatelliteLayer} class="cursor-pointer">
             {#if isSatelliteLayer}
               <MapPinned class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
@@ -235,7 +235,7 @@
       <Separator />
       <!-- 返回地图中心 -->
       <Tooltip.Root openDelay={0}>
-        <Tooltip.Trigger>
+        <Tooltip.Trigger class="w-4 h-4">
           <button on:click={goBackCenter} class="cursor-pointer">
             <Compass class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
           </button>
