@@ -1,20 +1,28 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import * as Tabs from "$lib/components/ui/tabs";
-  import { MapPin, ImageIcon, ChevronDown, Expand, Minimize, Maximize, Sun, Moon,Map} from "lucide-svelte";
-  import * as AlertDialog from "$lib/components/ui/alert-dialog";
-  import AMapLoader from "@amap/amap-jsapi-loader";
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
-  import { setMode, mode } from 'mode-watcher';
+  import { MapPinned, ImageIcon, ChevronDown, Sun, Moon, Navigation, Map, Columns, Plus, Minus, SatelliteDish, Compass } from "lucide-svelte";
+  import AMapLoader from "@amap/amap-jsapi-loader";
+  import { setMode } from "mode-watcher";
+  import * as Tabs from "$lib/components/ui/tabs";
+  import * as AlertDialog from "$lib/components/ui/alert-dialog";
+  import { Separator } from "$lib/components/ui/separator";
 
   export let data: PageData;
   let pictures: any = data.pictures;
   let mapToken: any = data.mapToken;
   let points: any = data.points;
+
   let map: any;
+  let geolocation: any;
+  let satelliteLayer: any;
 
   let mapStyle = "normal";
+  let isSatelliteLayer = false;
+  let defaultZoom = 5.5; // 地图缩放级别
+  let defaultCenter = [106.405285, 29.904989]; // 地图中心
+  let defaultPitch = 50; // 俯视角度
 
   // 确保当前是在浏览器环境
   if (browser) {
@@ -22,66 +30,72 @@
       AMapLoader.load({
         key: mapToken,
         version: "2.0",
-        plugins: ["AMap.ControlBar", "AMap.ToolBar", "AMap.Scale", "AMap.Geolocation", "AMap.MarkerClusterer"],
-      })
-        .then((AMap) => {
-          // 地图实例
-          map = new AMap.Map("mapContainer", {
-            pitch: 0, //地图俯仰角度，有效范围 0 度- 83 度
-            viewMode: "3D", //地图模式
-            rotateEnable: true, //是否开启地图旋转交互 鼠标右键 + 鼠标画圈移动 或 键盘Ctrl + 鼠标左键画圈移动
-            pitchEnable: true, //是否开启地图倾斜交互 鼠标右键 + 鼠标上下移动或键盘Ctrl + 鼠标左键上下移动
-            zoom: 4.5, //初始化地图层级
-            rotation: 0, //初始地图顺时针旋转的角度
-            zooms: [2, 20], //地图显示的缩放级别范围
-            center: [116.405285, 29.904989], //初始地图中心经纬度
-            mapStyle: "amap://styles/normal", //设置地图的显示样式
-          });
-          //控制地图旋转插件
-          var controlBar = new AMap.ControlBar({
-            position: {
-              right: "10px",
-              top: "10px",
-            },
-          });
-          //地图缩放插件
-          var toolBar = new AMap.ToolBar({
-            position: {
-              right: "40px",
-              top: "110px",
-            },
-          });
-          // 比例尺
-          var scale = new AMap.Scale({
-            position: {
-              right: "40px",
-              bottom: "14px",
-            },
-          });
+        plugins: ["AMap.ControlBar", "AMap.ToolBar", "AMap.Scale", "AMap.Geolocation", "AMap.MarkerClusterer", "AMap.MapType"],
+      }).then((AMap) => {
+        // 地图实例
+        map = new AMap.Map("mapContainer", {
+          pitch: defaultPitch,
+          viewMode: "3D",
+          rotateEnable: true,
+          pitchEnable: true,
+          zoom: defaultZoom,
+          rotation: 0,
+          zooms: [2, 20],
+          center: defaultCenter,
+          mapStyle: "amap://styles/normal",
+        });
 
-          // 添加控制
-          map.addControl(toolBar);
-          map.addControl(controlBar);
-          map.addControl(scale);
+        // 卫星图层
+        satelliteLayer = new AMap.TileLayer.Satellite();
 
-          // 自定义非聚合点样式
-          var _renderMarker = function (context: any) {
-            var imgUrl = context["data"][0]["url"];
-            var content = `
+        //控制地图旋转插件
+        var controlBar = new AMap.ControlBar({
+          position: {
+            right: "10px",
+            top: "10px",
+          },
+        });
+        // 比例尺
+        var scale = new AMap.Scale({
+          position: {
+            right: "40px",
+            bottom: "14px",
+          },
+        });
+        // 定位
+        geolocation = new AMap.Geolocation({
+          enableHighAccuracy: true,
+          timeout: 10000,
+          zoomToAccuracy: true,
+          position: {
+            right: "40px",
+            top: "110px",
+          },
+        });
+
+        // 添加控制
+        map.addControl(controlBar);
+        map.addControl(scale);
+        map.addControl(geolocation);
+
+        // 自定义非聚合点样式
+        var _renderMarker = function (context: any) {
+          var imgUrl = context["data"][0]["url"];
+          var content = `
                <img class="w-16 h-16 rounded-lg object-cover transition-all hover:scale-105 aspect-square" src=${imgUrl}>
              `;
-            var offset = new AMap.Pixel(-9, -9);
-            context.marker.setContent(content);
-            context.marker.setOffset(offset);
-          };
+          var offset = new AMap.Pixel(-9, -9);
+          context.marker.setContent(content);
+          context.marker.setOffset(offset);
+        };
 
-          // 自定义聚合点样式
-          var _renderClusterMarker = function (context: any) {
-            var clusterCount = context.count;
-            var totalCount = points.length;
-            var size = Math.round(30 + Math.pow(context.count / totalCount, 1 / 5) * 20);
-            var imgUrl = context["clusterData"]["0"]["url"];
-            var content = `
+        // 自定义聚合点样式
+        var _renderClusterMarker = function (context: any) {
+          var clusterCount = context.count;
+          var totalCount = points.length;
+          var size = Math.round(30 + Math.pow(context.count / totalCount, 1 / 5) * 20);
+          var imgUrl = context["clusterData"]["0"]["url"];
+          var content = `
 <div class="relative flex flex-col space-x-1 items-center justify-center">
   <img class="w-16 h-16 rounded-lg object-cover transition-all aspect-square" src="${imgUrl}" />
   <div class="absolute -right-2 -top-2 z-40 w-6 h-6 rounded-full bg-ddy-400 items-center shadow flex items-center justify-center">
@@ -89,22 +103,18 @@
   </div>
 </div>
              `;
-            context.marker.setContent(content);
-            context.marker.setOffset(new AMap.Pixel(-size / 2, -size / 2));
-            console.log(context);
-          };
+          context.marker.setContent(content);
+          context.marker.setOffset(new AMap.Pixel(-size / 2, -size / 2));
+        };
 
-          // 添加标记点聚类
-          var cluster;
-          cluster = new AMap.MarkerCluster(map, points, {
-            gridSize: 60, // 聚合网格像素大小
-            renderClusterMarker: _renderClusterMarker,
-            renderMarker: _renderMarker,
-          });
-        })
-        .catch((e) => {
-          console.error(e);
+        // 添加标记点聚类
+        var cluster;
+        cluster = new AMap.MarkerCluster(map, points, {
+          gridSize: 60, // 聚合网格像素大小
+          renderClusterMarker: _renderClusterMarker,
+          renderMarker: _renderMarker,
         });
+      });
     });
 
     onDestroy(() => {
@@ -113,23 +123,50 @@
     });
   }
 
-  function hadleMapDarkStyle() {
+  function handleMapDarkStyle() {
+    // 切换地图样式
     if (mapStyle === "normal") {
       map.setMapStyle("amap://styles/dark");
       mapStyle = "dark";
-      setMode('dark');
+      setMode("dark");
     } else {
       map.setMapStyle("amap://styles/normal");
       mapStyle = "normal";
-      setMode('light');
+      setMode("light");
+    }
+  }
+
+  function goBackCenter() {
+    // 返回地图中心
+    map.setZoomAndCenter(defaultZoom, defaultCenter);
+  }
+
+  function handleZoomIn() {
+    // 放大地图
+    map.zoomIn();
+  }
+
+  function handleZoomOut() {
+    // 缩小地图
+    map.zoomOut();
+  }
+
+  function handleSatelliteLayer() {
+    // 切换图层
+    if (isSatelliteLayer) {
+      map.remove(satelliteLayer);
+      isSatelliteLayer = false;
+    } else {
+      map.add(satelliteLayer);
+      isSatelliteLayer = true;
     }
   }
 </script>
 
 <Tabs.Root value="map" class="relative">
   <Tabs.List class="absolute items-center left-[calc(50vw-2.5rem)] top-4 z-40 shadow-lg">
-    <Tabs.Trigger value="map"><MapPin class="w-4 h-4" /></Tabs.Trigger>
-    <Tabs.Trigger value="pictures"><ImageIcon class="w-4 h-4" /></Tabs.Trigger>
+    <Tabs.Trigger value="map"><Map class="w-4 h-4" /></Tabs.Trigger>
+    <Tabs.Trigger value="pictures"><Columns class="w-4 h-4" /></Tabs.Trigger>
   </Tabs.List>
   <Tabs.Content value="pictures">
     <div class="container max-w-4xl py-16">
@@ -157,20 +194,39 @@
   </Tabs.Content>
   <Tabs.Content value="map" class="relative z-20">
     <div id="mapContainer" class="w-screen h-[calc(100vh-3.5rem)]"></div>
-    <div class="absolute right-[40px] top-[180px] z-40 flex space-x-2 bg-card shadow-lg rounded-lg p-2">
-      <button on:click={hadleMapDarkStyle}>
+    <div class="absolute right-[40px] top-[160px] z-40 flex flex-col space-y-2 bg-card shadow-lg rounded-lg p-2">
+      <!-- zoom in -->
+      <button on:click={handleZoomIn}>
+        <Plus class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-3" />
+      </button>
+      <Separator />
+      <!-- zoom out -->
+      <button on:click={handleZoomOut}>
+        <Minus class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-3" />
+      </button>
+      <Separator />
+      <!-- 控制深色模式 -->
+      <button on:click={handleMapDarkStyle}>
         {#if mapStyle == "dark"}
           <Moon class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
         {:else}
           <Sun class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
         {/if}
       </button>
+      <Separator />
+      <!-- 选择图层 -->
+      <button on:click={handleSatelliteLayer}>
+        {#if isSatelliteLayer}
+          <MapPinned class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
+        {:else}
+          <SatelliteDish class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
+        {/if}
+      </button>
+      <Separator />
+      <!-- 返回地图中心 -->
+      <button on:click={goBackCenter}>
+        <Compass class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
+      </button>
     </div>
   </Tabs.Content>
 </Tabs.Root>
-<style>
-  #custom-marker {
-    width: 10px;
-    height: 10px;
-  }
-</style>
