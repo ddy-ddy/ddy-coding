@@ -101,7 +101,7 @@
           var imgUrl = context["clusterData"]["0"]["url"];
           var content = `
                   <div class="relative flex flex-col space-x-1 items-center justify-center">
-                    <img class="w-16 h-16 rounded-lg object-cover transition-all aspect-square" src="${imgUrl}" />
+                    <img class="w-16 h-16 rounded-lg object-cover transition-all aspect-square brightness-95 dark:brightness-75" src="${imgUrl}" />
                     <div class="absolute -right-2 -top-2 z-40 w-6 h-6 rounded-full bg-ddy-400 items-center shadow flex items-center justify-center">
                       <p class="text-xs font-bold text-foreground/80">${clusterCount}</p>
                     </div>
@@ -172,13 +172,13 @@
     <Tabs.Trigger value="pictures"><Columns class="w-4 h-4" /></Tabs.Trigger>
   </Tabs.List>
   <Tabs.Content value="pictures">
-    <div class="container max-w-4xl py-16">
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4">
+    <div class="container max-w-6xl py-16">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 my-4 gap-x-8 gap-y-8">
         {#each pictures as picture}
           <AlertDialog.Root>
             <AlertDialog.Trigger>
-              <div class="overflow-hidden rounded-md">
-                <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-square" src={picture.large_url} alt={picture.description} />
+              <div class="overflow-hidden shadow-2xl hover:shadow-ddy-100 dark:hover:shadow-ddy-900">
+                <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-video brightness-95 dark:brightness-75" src={picture.large_url} alt={picture.description} />
               </div>
             </AlertDialog.Trigger>
             <AlertDialog.Content>
