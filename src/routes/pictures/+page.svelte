@@ -199,15 +199,15 @@
     <div id="mapContainer" class="w-screen h-[calc(100vh-3.5rem)]"></div>
     <div class="absolute right-[40px] top-[160px] z-40 flex flex-col space-y-2 bg-card shadow-lg rounded-lg p-2">
       <!-- zoom in -->
-      <button on:click={handleZoomIn}>
+      <button on:click={handleZoomIn} class="hidden lg:block">
         <Plus class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-3" />
       </button>
-      <Separator />
+      <Separator class="hidden lg:block" />
       <!-- zoom out -->
-      <button on:click={handleZoomOut}>
+      <button on:click={handleZoomOut} class="hidden lg:block">
         <Minus class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-3" />
       </button>
-      <Separator />
+      <Separator class="hidden lg:block" />
       <!-- 控制深色模式 -->
       <button on:click={handleMapDarkStyle} class="cursor-pointer">
         {#if mapStyle == "dark"}
