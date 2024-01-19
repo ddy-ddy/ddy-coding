@@ -3,7 +3,6 @@
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
   import { MapPinned, ImageIcon, ChevronDown, Sun, Moon, Navigation, Map, Columns, Plus, Minus, SatelliteDish, Compass } from "lucide-svelte";
-  import AMapLoader from "@amap/amap-jsapi-loader";
   import { setMode } from "mode-watcher";
   import * as Tabs from "$lib/components/ui/tabs";
   import * as AlertDialog from "$lib/components/ui/alert-dialog";
@@ -28,9 +27,11 @@
   let defaultCenter = [106.405285, 29.904989]; // 地图中心
   let defaultPitch = 50; // 俯视角度
 
+  console.log(browser);
   // 确保当前是在浏览器环境
   if (browser) {
     onMount(() => {
+      import AMapLoader from "@amap/amap-jsapi-loader";
       AMapLoader.load({
         key: mapToken,
         version: "2.0",
