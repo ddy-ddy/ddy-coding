@@ -3,6 +3,9 @@
   import { ModeWatcher } from "mode-watcher";
   import { SiteHeader, SiteFooter } from "$lib/components/page";
   import { Toaster } from "$lib/components/ui/sonner";
+  import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+ 
+  injectSpeedInsights();
 </script>
 
 <ModeWatcher />
