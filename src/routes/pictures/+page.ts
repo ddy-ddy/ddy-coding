@@ -26,7 +26,8 @@ export const load: PageLoad = async (data: any) => {
                     f_number: picture.attributes.exif_info.f_number,
                     exposure_time: picture.attributes.exif_info.exposure_time,
                     latitude: picture.attributes.exif_info.latitude,
-                    longitude: picture.attributes.exif_info.longitude
+                    longitude: picture.attributes.exif_info.longitude,
+                    widthLargeHeight: parseInt(picture["attributes"]["img"]["data"]["attributes"]["width"]) >= parseInt(picture["attributes"]["img"]["data"]["attributes"]["height"]),
                 })
             }
         });
@@ -35,7 +36,7 @@ export const load: PageLoad = async (data: any) => {
         var points: any = [];
         for (var i = 0; i < pictures.length; i += 1) {
             var center = [pictures[i]["longitude"], pictures[i]["latitude"]];
-            var picUrl = pictures[i]["small_url"];
+            var picUrl = pictures[i]["thumbnail_url"];
             points.push({ lnglat: center, url: picUrl });
         }
 

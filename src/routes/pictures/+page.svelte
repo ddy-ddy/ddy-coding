@@ -86,7 +86,7 @@
         var _renderMarker = function (context: any) {
           var imgUrl = context["data"][0]["url"];
           var content = `
-               <img class="w-16 h-16 rounded-lg object-cover transition-all hover:scale-105 aspect-square" src=${imgUrl}>
+               <img class="w-16 h-16 lg:w-20 lg:h-20 rounded-lg object-cover transition-all hover:scale-105 aspect-square" src=${imgUrl}>
              `;
           var offset = new AMap.Pixel(-9, -9);
           context.marker.setContent(content);
@@ -101,7 +101,7 @@
           var imgUrl = context["clusterData"]["0"]["url"];
           var content = `
                   <div class="relative flex flex-col space-x-1 items-center justify-center">
-                    <img class="w-16 h-16 rounded-lg object-cover transition-all aspect-square brightness-95 dark:brightness-75" src="${imgUrl}" />
+                    <img class="w-16 h-16 lg:w-20 lg:h-20 rounded-lg object-cover transition-all aspect-square brightness-95 dark:brightness-75" src="${imgUrl}" />
                     <div class="absolute -right-2 -top-2 z-40 w-6 h-6 rounded-full bg-ddy-400 items-center shadow flex items-center justify-center">
                       <p class="text-xs font-bold text-foreground/80">${clusterCount}</p>
                     </div>
@@ -178,13 +178,19 @@
           <AlertDialog.Root>
             <AlertDialog.Trigger>
               <div class="p-[1px] overflow-hidden shadow-2xl hover:shadow-ddy-100 dark:hover:shadow-ddy-900">
-                <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-video brightness-95 dark:brightness-75" src={picture.large_url} alt={picture.description} />
+                {#if picture.widthLargeHeight}
+                  <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-video brightness-95 dark:brightness-75" src={picture.large_url} alt={picture.description} />
+                {:else}
+                  <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-[4/3] brightness-95 dark:brightness-75" src={picture.large_url} alt={picture.description} />
+                {/if}
               </div>
             </AlertDialog.Trigger>
             <AlertDialog.Content>
               <div class="flex flex-col space-y-4">
                 <img class="h-auto w-auto" src={picture.img_url} alt={picture.description} />
                 <div>{picture.description}</div>
+                <div>{picture.create_time}</div>
+                <div>{picture.widthLargeHeight}</div>
               </div>
               <AlertDialog.Footer>
                 <AlertDialog.Cancel class=""><ChevronDown /></AlertDialog.Cancel>
