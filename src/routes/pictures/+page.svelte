@@ -183,7 +183,7 @@
             </AlertDialog.Trigger>
             <AlertDialog.Content>
               <div class="flex flex-col space-y-4">
-                <img class="h-auto w-auto" src={picture.large_url} alt={picture.description} />
+                <img class="h-auto w-auto" src={picture.img_url} alt={picture.description} />
                 <div>{picture.description}</div>
               </div>
               <AlertDialog.Footer>

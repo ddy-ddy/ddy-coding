@@ -6,7 +6,7 @@ export const load: PageLoad = async (data: any) => {
     try {
         const mapToken = data["data"]["body"]["map_token"]
 
-        const response = await fetchData(urlBase + "/api/pictures?filters[flag][$eq]=true&populate=*");
+        const response = await fetchData(urlBase + "/api/pictures?pagination[pageSize]=100&filters[flag][$eq]=true&populate=*");
         const picturesInfo = response.data;
 
         const pictures: any = [];
@@ -35,7 +35,7 @@ export const load: PageLoad = async (data: any) => {
         var points: any = [];
         for (var i = 0; i < pictures.length; i += 1) {
             var center = [pictures[i]["longitude"], pictures[i]["latitude"]];
-            var picUrl = pictures[i]["large_url"];
+            var picUrl = pictures[i]["small_url"];
             points.push({ lnglat: center, url: picUrl });
         }
 
