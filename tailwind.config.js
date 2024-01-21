@@ -3,7 +3,7 @@ import { fontFamily, typography } from "tailwindcss/defaultTheme";
 /** @type {import('tailwindcss').Config} */
 const config = {
 	darkMode: ["class"],
-	content: ["./src/**/*.{html,js,svelte,md,ts}"],
+	content: ["./src/**/*.{html,js,svelte,md,ts}", "./node_modules/tw-elements/dist/js/**/*.js"],
 	safelist: ["dark"],
 	theme: {
 		container: {
@@ -131,7 +131,7 @@ const config = {
 			}),
 		}
 	},
-	plugins: [require('@tailwindcss/typography')]
+	plugins: [require('@tailwindcss/typography'), require("tw-elements/dist/plugin.cjs")]
 };
 
 export default config;

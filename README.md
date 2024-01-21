@@ -2,3 +2,4 @@
 
 ## 参考链接
 - [create a masonry layout using tailwind-css](https://stackoverflow.com/questions/66914169/can-i-create-a-masonry-layout-using-tailwind-css-utility-classes/66915792#66915792)
+- [how to use tw-element in sveltekit](https://tw-elements.com/docs/standard/integrations/svelte-integration/)

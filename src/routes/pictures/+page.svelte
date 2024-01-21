@@ -8,6 +8,13 @@
   import * as AlertDialog from "$lib/components/ui/alert-dialog";
   import { Separator } from "$lib/components/ui/separator";
   import * as Tooltip from "$lib/components/ui/tooltip";
+  import { Lightbox, initTE } from "tw-elements";
+
+  if (browser) {
+    onMount(() => {
+      initTE({ Lightbox });
+    });
+  }
 
   // 服务端数据
   export let data: PageData;
@@ -69,7 +76,7 @@
         // 定位
         geolocation = new AMap.Geolocation({
           enableHighAccuracy: true,
-          timeout: 10000,
+          timeout: 100000,
           zoomToAccuracy: true,
           position: {
             right: "40px",
@@ -173,10 +180,10 @@
   </Tabs.List>
   <Tabs.Content value="pictures">
     <div class="container max-w-6xl py-16">
-      <div class="columns-2 lg:columns-3 gap-10 [column-fill:_balance] mx-auto mt-4">
+      <div data-te-lightbox-init class="columns-2 lg:columns-3 gap-10 [column-fill:_balance] mx-auto mt-4">
         {#each pictures as picture}
           <div class="group relative break-inside mb-8 overflow-hidden hover:animate-move-right-left shadow-2xl hover:shadow-ddy-100 dark:hover:shadow-ddy-900">
-            <img class="h-auto w-auto object-cover transition-all brightness-100 group-hover:brightness-75 dark:brightness-75 dark:group-hover:brightness-100" src={picture.large_url} alt={picture.description} />
+            <img class="cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto h-auto w-auto object-cover transition-all brightness-100 group-hover:brightness-75 dark:brightness-75 dark:group-hover:brightness-100" src={picture.large_url} data-te-img={picture.large_url} alt={picture.description} />
             <button class="invisible group-hover:visible absolute bottom-2 right-2 bg-card/60 p-1 rounded-md">
               <Maximize class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-3"></Maximize>
             </button>
