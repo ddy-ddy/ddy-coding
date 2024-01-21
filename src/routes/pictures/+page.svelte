@@ -1,13 +1,13 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
   import { browser } from "$app/environment";
   import { MapPinned, ImageIcon, ChevronDown, Sun, Moon, Navigation, Map, Columns, Plus, Minus, SatelliteDish, Compass, Maximize } from "lucide-svelte";
   import { setMode } from "mode-watcher";
   import * as Tabs from "$lib/components/ui/tabs";
-  import * as AlertDialog from "$lib/components/ui/alert-dialog";
   import { Separator } from "$lib/components/ui/separator";
   import * as Tooltip from "$lib/components/ui/tooltip";
+  import { afterNavigate, beforeNavigate } from "$app/navigation";
 
   // 服务端数据
   export let data: PageData;
@@ -122,7 +122,8 @@
         });
       });
     });
-    onDestroy(() => {
+    beforeNavigate(() => {
+      // 再定位到其他页面时，销毁地图实例
       map.destroy();
       map = null;
     });
