@@ -166,23 +166,19 @@
   }
 </script>
 
-<Tabs.Root value="map" class="relative">
+<Tabs.Root value="pictures" class="relative">
   <Tabs.List class="absolute items-center left-[calc(50vw-2.5rem)] top-4 z-40 shadow-lg">
     <Tabs.Trigger value="map"><Map class="w-4 h-4" /></Tabs.Trigger>
     <Tabs.Trigger value="pictures"><Columns class="w-4 h-4" /></Tabs.Trigger>
   </Tabs.List>
   <Tabs.Content value="pictures">
     <div class="container max-w-6xl py-16">
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 my-4 gap-x-8 gap-y-8">
+      <div class="masonry-2-col lg:masonry-3-col box-border mx-auto before:box-inherit after:box-inherit">
         {#each pictures as picture}
           <AlertDialog.Root>
             <AlertDialog.Trigger>
-              <div class="p-[1px] overflow-hidden shadow-2xl hover:shadow-ddy-100 dark:hover:shadow-ddy-900">
-                {#if picture.widthLargeHeight}
-                  <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-video brightness-95 dark:brightness-75" src={picture.large_url} alt={picture.description} />
-                {:else}
-                  <img class="h-auto w-auto object-cover transition-all hover:scale-105 aspect-[4/3] brightness-95 dark:brightness-75" src={picture.large_url} alt={picture.description} />
-                {/if}
+              <div class="break-inside mb-4 rounded-sm overflow-hidden shadow-2xl hover:shadow-ddy-100 dark:hover:shadow-ddy-900">
+                <img class="rounded-sm h-auto w-auto object-cover transition-all hover:scale-105 brightness-95 dark:brightness-75" src={picture.large_url} alt={picture.description} />
               </div>
             </AlertDialog.Trigger>
             <AlertDialog.Content>
@@ -193,7 +189,7 @@
                 <div>{picture.widthLargeHeight}</div>
               </div>
               <AlertDialog.Footer>
-                <AlertDialog.Cancel class=""><ChevronDown /></AlertDialog.Cancel>
+                <AlertDialog.Cancel><ChevronDown /></AlertDialog.Cancel>
               </AlertDialog.Footer>
             </AlertDialog.Content>
           </AlertDialog.Root>
