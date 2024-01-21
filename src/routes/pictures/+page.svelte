@@ -180,6 +180,9 @@
             <button class="invisible group-hover:visible absolute bottom-2 right-2 bg-card/60 p-1 rounded-md">
               <Maximize class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-3"></Maximize>
             </button>
+            <div class="invisible group-hover:visible absolute bottom-2 left-2 bg-card/60 p-1 rounded-md">
+              <p class="text-xs font-medium text-foreground/70">{picture.create_time}</p>
+            </div>
           </div>
         {/each}
       </div>
