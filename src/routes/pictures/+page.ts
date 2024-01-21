@@ -37,7 +37,9 @@ export const load: PageLoad = async (data: any) => {
         for (var i = 0; i < pictures.length; i += 1) {
             var center = [pictures[i]["longitude"], pictures[i]["latitude"]];
             var picUrl = pictures[i]["thumbnail_url"];
-            points.push({ lnglat: center, url: picUrl });
+            var picTrueUrl = pictures[i]["img_url"];
+            var picDescription = pictures[i]["description"];
+            points.push({ lnglat: center, url: picUrl, trueUrl: picTrueUrl, description: picDescription });
         }
 
 
