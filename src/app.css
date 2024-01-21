@@ -125,22 +125,6 @@
   }
 }
 
-/* masonry layout */
-@layer utilities {
-    @variants responsive {
-        .masonry-3-col {
-            column-count: 3;
-            column-gap: 2em;
-        }
-        .masonry-2-col {
-            column-count: 2;
-            column-gap: 2em;
-        }
-        .break-inside {
-            break-inside: avoid;
-        }
-    }
-}
 
 [data-theme="default"] {
   display: flex;

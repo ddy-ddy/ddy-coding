@@ -166,14 +166,14 @@
   }
 </script>
 
-<Tabs.Root value="map" class="relative">
+<Tabs.Root value="pictures" class="relative">
   <Tabs.List class="absolute items-center left-[calc(50vw-2.5rem)] top-4 z-40 shadow-lg">
     <Tabs.Trigger value="map"><Map class="w-4 h-4" /></Tabs.Trigger>
     <Tabs.Trigger value="pictures"><Columns class="w-4 h-4" /></Tabs.Trigger>
   </Tabs.List>
   <Tabs.Content value="pictures">
     <div class="container max-w-6xl py-16">
-      <div class="masonry-2-col lg:masonry-3-col box-border mx-auto before:box-inherit after:box-inherit mt-4">
+      <div class="columns-2 lg:columns-3 gap-10 [column-fill:_balance] mx-auto mt-4">
         {#each pictures as picture}
           <div class="group relative break-inside mb-8 overflow-hidden hover:animate-move-right-left shadow-2xl hover:shadow-ddy-100 dark:hover:shadow-ddy-900">
             <img class="h-auto w-auto object-cover transition-all brightness-100 group-hover:brightness-75 dark:brightness-75 dark:group-hover:brightness-100" src={picture.large_url} alt={picture.description} />
