@@ -8,13 +8,6 @@
   import * as AlertDialog from "$lib/components/ui/alert-dialog";
   import { Separator } from "$lib/components/ui/separator";
   import * as Tooltip from "$lib/components/ui/tooltip";
-  import { Lightbox, initTE } from "tw-elements";
-
-  if (browser) {
-    onMount(() => {
-      initTE({ Lightbox });
-    });
-  }
 
   // 服务端数据
   export let data: PageData;
@@ -95,7 +88,7 @@
           var trueUrl = context["data"][0]["true_url"];
           var description = context["data"][0]["description"];
           var content = `
-               <img class="cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto w-16 h-16 lg:w-20 lg:h-20 rounded-lg object-cover transition-all hover:scale-105 aspect-square" src=${imgUrl} data-te-img=${trueUrl} alt=${description}>
+               <img class="w-16 h-16 lg:w-20 lg:h-20 rounded-lg object-cover transition-all hover:scale-105 aspect-square" src=${imgUrl} alt=${description}>
              `;
           var offset = new AMap.Pixel(-9, -9);
           context.marker.setContent(content);
@@ -185,7 +178,7 @@
       <div data-te-lightbox-init class="columns-2 lg:columns-3 gap-10 [column-fill:_balance] mx-auto mt-4">
         {#each pictures as picture}
           <div class="group relative break-inside mb-8 overflow-hidden hover:animate-move-right-left shadow-2xl hover:shadow-ddy-100 dark:hover:shadow-ddy-900">
-            <img class="cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto h-auto w-auto object-cover transition-all brightness-100 group-hover:brightness-75 dark:brightness-75 dark:group-hover:brightness-100" src={picture.large_url} data-te-img={picture.img_url} alt={picture.description} />
+            <img class="h-auto w-auto object-cover transition-all brightness-100 group-hover:brightness-75 dark:brightness-75 dark:group-hover:brightness-100" src={picture.large_url} alt={picture.description} />
             <div class="invisible group-hover:visible absolute bottom-2 left-2 bg-card/60 p-1 rounded-md">
               <p class="text-xs font-medium text-foreground/70">{picture.create_time}</p>
             </div>
