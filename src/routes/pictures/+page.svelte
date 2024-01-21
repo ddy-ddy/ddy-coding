@@ -2,7 +2,7 @@
   import type { PageData } from "./$types";
   import { onMount, onDestroy } from "svelte";
   import { browser } from "$app/environment";
-  import { MapPinned, ImageIcon, ChevronDown, Sun, Moon, Navigation, Map, Columns, Plus, Minus, SatelliteDish, Compass } from "lucide-svelte";
+  import { MapPinned, ImageIcon, ChevronDown, Sun, Moon, Navigation, Map, Columns, Plus, Minus, SatelliteDish, Compass, Maximize } from "lucide-svelte";
   import { setMode } from "mode-watcher";
   import * as Tabs from "$lib/components/ui/tabs";
   import * as AlertDialog from "$lib/components/ui/alert-dialog";
@@ -175,24 +175,12 @@
     <div class="container max-w-6xl py-16">
       <div class="masonry-2-col lg:masonry-3-col box-border mx-auto before:box-inherit after:box-inherit mt-4">
         {#each pictures as picture}
-          <AlertDialog.Root>
-            <AlertDialog.Trigger>
-              <div class="break-inside mb-6 overflow-hidden hover:animate-move-right-left shadow-2xl hover:shadow-ddy-100 dark:hover:shadow-ddy-900">
-                <img class="h-auto w-auto object-cover transition-all brightness-95 dark:brightness-75" src={picture.large_url} alt={picture.description} />
-              </div>
-            </AlertDialog.Trigger>
-            <AlertDialog.Content>
-              <div class="flex flex-col space-y-4">
-                <img class="h-auto w-auto" src={picture.img_url} alt={picture.description} />
-                <div>{picture.description}</div>
-                <div>{picture.create_time}</div>
-                <div>{picture.widthLargeHeight}</div>
-              </div>
-              <AlertDialog.Footer>
-                <AlertDialog.Cancel><ChevronDown /></AlertDialog.Cancel>
-              </AlertDialog.Footer>
-            </AlertDialog.Content>
-          </AlertDialog.Root>
+          <div class="group relative break-inside mb-8 overflow-hidden hover:animate-move-right-left shadow-2xl hover:shadow-ddy-100 dark:hover:shadow-ddy-900">
+            <img class="h-auto w-auto object-cover transition-all brightness-100 group-hover:brightness-75 dark:brightness-75 dark:group-hover:brightness-100" src={picture.large_url} alt={picture.description} />
+            <button class="invisible group-hover:visible absolute bottom-2 right-2 bg-card/60 p-1 rounded-md">
+              <Maximize class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-3"></Maximize>
+            </button>
+          </div>
         {/each}
       </div>
     </div>
