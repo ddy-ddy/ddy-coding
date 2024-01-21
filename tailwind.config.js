@@ -16,7 +16,6 @@ const config = {
 		extend: {
 			animation: {
 				'move-right-left': 'move-right-left 1s ease-in-out infinite',
-				'slow-ping': 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
 			},
 			colors: {
 				// 边框
