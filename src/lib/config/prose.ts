@@ -9,5 +9,5 @@ const proseStyleUl = "prose-ul:pl-3";
 const proseStyleLi = "prose-li:text-foreground/70";
 const proseStyleA = "prose-a:after:content-['_↗'] prose-a:text-ddy-400 hover:prose-a:text-ddy-600 dark:prose-a:text-ddy-600 dark:hover:prose-a:text-ddy-400 prose-a:underline prose-a:underline-offset-4";
 const proseStylePre = "prose-pre:my-[1px] prose-pre:rounded-md";
-const proseStyleImg = "prose-img:my-[1px] prose-img:rounded-md";
+const proseStyleImg = "prose-img:my-[1px] prose-img:rounded-md dark:prose-img:brightness-90";
 export const proseStyle = combineStyles(proseStyleStrong, proseStyleBase, proseStyleheadings, proseStyleP, proseStyleA, proseStylePre, proseStyleImg, proseStyleLi, proseStyleUl);

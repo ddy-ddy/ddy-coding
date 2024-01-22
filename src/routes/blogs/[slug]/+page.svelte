@@ -7,6 +7,7 @@
   import { logoRingStyle } from "$lib/config/site";
   import { ArrowLeft } from "lucide-svelte";
   import { Icons } from "$lib/components/icons";
+  import Separator from "$lib/components/ui/separator/separator.svelte";
 
   export let data: PageData;
   let blog: any = data.blog;
@@ -65,10 +66,6 @@
                 <Avatar.Root class={logoRingStyle}>
                   <Icons.logo class="ml-[1px] hover:animate-move-right-left" />
                 </Avatar.Root>
-                <!-- <Avatar.Root class={logoRingStyle}>
-                  <Avatar.Image src={blog.authorIconLink} alt={blog.author} class="ml-[1px]" />
-                  <Avatar.Fallback>{blog.author}</Avatar.Fallback>
-                </Avatar.Root> -->
               </a>
               <div class="flex flex-col space-y-[2px] text-left">
                 <div class="font-medium text-foreground/80">{blog.author}</div>
@@ -77,6 +74,7 @@
             </div>
           </div>
         </div>
+        <Separator class="mt-4"></Separator>
         <article>
           {@html htmlContent}
         </article>
