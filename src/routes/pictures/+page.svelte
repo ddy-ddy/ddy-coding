@@ -9,6 +9,8 @@
   import * as Tooltip from "$lib/components/ui/tooltip";
   import { afterNavigate, beforeNavigate } from "$app/navigation";
   import * as Dialog from "$lib/components/ui/dialog";
+  import * as Card from "$lib/components/ui/card";
+  import * as Carousel from "$lib/components/ui/carousel";
 
   // 服务端数据
   export let data: PageData;
@@ -189,11 +191,12 @@
                   </div>
                 </div>
               </Dialog.Trigger>
-              <Dialog.DialogPicture>
-                <img class="h-auto w-full object-cover brightness-100 dark:brightness-75" src={picture.large_url} alt={picture.description} />
-                <div class="flex">
-                  <div>{picture.description}</div>
-                  <div>{picture.create_time}</div>
+              <Dialog.DialogPicture class="flex flex-col items-center justify-center p-4">
+                <div class="h-[calc(90vh)] shadow-lg shadow-ddy-100">
+                  <img class="h-full max-w-[calc(80vw)] object-cover rounded shadow-lg" src={picture.img_url} alt={picture.description} />
+                </div>
+                <div class="h-[calc(10vh)] shadow-lg items-center justify-center flex">
+                  <p class="text-primary-foreground">{picture.description}</p>
                 </div>
               </Dialog.DialogPicture>
             </Dialog.Root>
