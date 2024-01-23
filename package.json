@@ -43,6 +43,7 @@
     "marked": "^11.1.1",
     "mode-watcher": "^0.1.2",
     "path": "^0.12.7",
+    "photoswipe": "^5.4.3",
     "prettier": "^3.1.1",
     "prismjs": "^1.29.0",
     "radix-icons-svelte": "^1.2.1",
