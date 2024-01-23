@@ -8,6 +8,7 @@
   import { Separator } from "$lib/components/ui/separator";
   import * as Tooltip from "$lib/components/ui/tooltip";
   import { afterNavigate, beforeNavigate } from "$app/navigation";
+  import * as Dialog from "$lib/components/ui/dialog";
 
   // 服务端数据
   export let data: PageData;
@@ -176,10 +177,17 @@
   </Tabs.List>
   <Tabs.Content value="pictures">
     <div class="container max-w-6xl py-16">
-      <div data-te-lightbox-init class="columns-2 lg:columns-3 gap-10 [column-fill:_balance] mx-auto mt-4">
+      <div class="columns-2 lg:columns-3 gap-10 [column-fill:_balance] mx-auto mt-4">
         {#each pictures as picture}
           <div class="group relative mb-8 overflow-hidden hover:animate-move-right-left shadow-2xl hover:shadow-ddy-100 dark:hover:shadow-ddy-900">
-            <img class="h-auto w-auto object-cover transition-all brightness-100 group-hover:brightness-75 dark:brightness-75 dark:group-hover:brightness-100" src={picture.large_url} alt={picture.description} />
+            <Dialog.Root>
+              <Dialog.Trigger>
+                <img class="h-auto w-auto object-cover transition-all brightness-100 group-hover:brightness-75 dark:brightness-75 dark:group-hover:brightness-100" src={picture.large_url} alt={picture.description} />
+              </Dialog.Trigger>
+              <Dialog.Content>
+                <img class="h-auto w-auto object-cover transition-all brightness-100 group-hover:brightness-75 dark:brightness-75 dark:group-hover:brightness-100" src={picture.large_url} alt={picture.description} />
+              </Dialog.Content>
+            </Dialog.Root>
             <div class="invisible group-hover:visible absolute bottom-2 left-2 bg-card/60 p-1 rounded-md">
               <p class="text-xs font-medium text-foreground/70">{picture.create_time}</p>
             </div>
