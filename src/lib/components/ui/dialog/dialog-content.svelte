@@ -15,11 +15,11 @@
 </script>
 
 <Dialog.Portal>
-  <Dialog.Overlay />
+  <Dialog.Overlay class="bg-background/80 backdrop-blur-sm" />
   <DialogPrimitive.Content {transition} {transitionConfig} class={cn("fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg sm:rounded-lg md:w-full", className)} {...$$restProps}>
     <slot />
-    <DialogPrimitive.Close class="absolute right-4 top-4 bg-card shadow-lg rounded-lg p-2">
-      <X class="h-4 w-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
+    <DialogPrimitive.Close class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+      <X class="h-4 w-4" />
       <span class="sr-only">Close</span>
     </DialogPrimitive.Close>
   </DialogPrimitive.Content>
