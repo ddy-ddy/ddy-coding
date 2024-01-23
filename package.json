@@ -32,6 +32,7 @@
     "clsx": "^2.1.0",
     "cmdk-sv": "^0.0.12",
     "dotenv": "^16.3.1",
+    "embla-carousel-svelte": "^8.0.0-rc19",
     "formsnap": "^0.4.1",
     "fs": "^0.0.1-security",
     "hast-util-to-html": "^9.0.0",

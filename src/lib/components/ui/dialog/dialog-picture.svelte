@@ -16,7 +16,7 @@
 
 <Dialog.Portal>
   <Dialog.Overlay />
-  <DialogPrimitive.Content {transition} {transitionConfig} class={cn("fixed flex items-center justify-center z-50 w-full h-full left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] borderbg-background/80 backdrop-blur-sm", className)} {...$$restProps}>
+  <DialogPrimitive.Content {transition} {transitionConfig} class={cn("fixed z-50 w-full h-full left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] borderbg-background/80 backdrop-blur-sm", className)} {...$$restProps}>
     <slot />
     <DialogPrimitive.Close class="absolute right-4 top-4 bg-card shadow-lg rounded-lg p-2">
       <X class="h-4 w-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
