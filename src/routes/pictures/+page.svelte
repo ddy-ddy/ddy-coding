@@ -172,7 +172,7 @@
   }
 </script>
 
-<Tabs.Root value="pictures" class="relative">
+<Tabs.Root value="map" class="relative">
   <Tabs.List class="absolute items-center left-[calc(50vw-2.5rem)] top-4 z-40 shadow-lg">
     <Tabs.Trigger value="map"><Map class="w-4 h-4" /></Tabs.Trigger>
     <Tabs.Trigger value="pictures"><Columns class="w-4 h-4" /></Tabs.Trigger>
