@@ -188,9 +188,9 @@
                 </div>
               </div>
             </Dialog.Trigger>
-            <Dialog.Content>
+            <Dialog.DialogPicture>
               <img class="h-auto w-auto object-cover transition-all brightness-100 group-hover:brightness-75 dark:brightness-75 dark:group-hover:brightness-100" src={picture.large_url} alt={picture.description} />
-            </Dialog.Content>
+            </Dialog.DialogPicture>
           </Dialog.Root>
         {/each}
       </div>

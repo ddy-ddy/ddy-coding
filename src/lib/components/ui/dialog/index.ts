@@ -10,6 +10,7 @@ import Header from "./dialog-header.svelte";
 import Overlay from "./dialog-overlay.svelte";
 import Content from "./dialog-content.svelte";
 import Description from "./dialog-description.svelte";
+import Picture from "./dialog-picture.svelte";
 
 export {
 	Root,
@@ -30,5 +31,6 @@ export {
 	Trigger as DialogTrigger,
 	Overlay as DialogOverlay,
 	Content as DialogContent,
-	Description as DialogDescription
+	Description as DialogDescription,
+	Picture as DialogPicture,
 };
