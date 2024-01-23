@@ -20,7 +20,7 @@ export const load: PageLoad = async (data: any) => {
                     large_url: urlBase + picture["attributes"]["img"]["data"]["attributes"]["formats"]["large"]["url"],
                     description: picture.attributes.exif_info.description,
                     create_time: picture.attributes.exif_info.datetime.split(" ")[0].replace(/:/g, "-"),
-                    camera_make: picture.attributes.exif_info.camera_make,
+                    camera_model: picture.attributes.exif_info.camera_model,
                     len_make: picture.attributes.exif_info.len_make,
                     len_model: picture.attributes.exif_info.len_model,
                     f_number: picture.attributes.exif_info.f_number,

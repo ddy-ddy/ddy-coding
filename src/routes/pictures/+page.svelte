@@ -2,7 +2,7 @@
   import type { PageData } from "./$types";
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
-  import { MapPinned, ImageIcon, ChevronDown, Sun, Moon, Navigation, Map, Columns, Plus, Minus, SatelliteDish, Compass, Maximize } from "lucide-svelte";
+  import { Camera, Focus, Calendar, Languages, Aperture, MapPinned, ImageIcon, ChevronDown, Sun, Moon, Navigation, Map, Columns, Plus, Minus, SatelliteDish, Compass, Maximize, History } from "lucide-svelte";
   import { setMode } from "mode-watcher";
   import * as Tabs from "$lib/components/ui/tabs";
   import { Separator } from "$lib/components/ui/separator";
@@ -192,11 +192,42 @@
                 </div>
               </Dialog.Trigger>
               <Dialog.DialogPicture class="flex flex-col items-center justify-center p-4">
-                <div class="h-[calc(90vh)] shadow-lg shadow-ddy-100">
-                  <img class="h-full max-w-[calc(80vw)] object-cover rounded shadow-lg" src={picture.img_url} alt={picture.description} />
+                <div class="h-[calc(50vh)] lg:h-[calc(90vh)] shadow-lg shadow-ddy-100">
+                  <img class="h-full max-w-[calc(90vw)] object-cover rounded shadow-lg" src={picture.img_url} alt={picture.description} />
                 </div>
-                <div class="h-[calc(10vh)] shadow-lg items-center justify-center flex">
-                  <p class="text-primary-foreground">{picture.description}</p>
+                <div class="h-[calc(20vh)] lg:h-[calc(10vh)] shadow-lg items-center justify-center flex flex-col lg:flex-row space-y-2 space-x-0 lg:space-y-0 lg:space-x-8 flex-nowrap">
+                  <div class="flex space-x-1 items-center justify-center">
+                    <Languages class="h-4 w-4 stroke-primary-foreground/60 stroke-2"></Languages>
+                    <p class="text-xs font-medium text-primary-foreground/60">{picture.description}</p>
+                  </div>
+                  <div class="flex space-x-1 items-center justify-center">
+                    <Calendar class="h-4 w-4 stroke-primary-foreground/60 stroke-2"></Calendar>
+                    <p class="text-xs font-medium text-primary-foreground/60">{picture.create_time}</p>
+                  </div>
+                  {#if picture.f_number != "None"}
+                    <div class="flex space-x-1 items-center justify-center">
+                      <Aperture class="h-4 w-4 stroke-primary-foreground/60 stroke-2"></Aperture>
+                      <p class="text-xs font-medium text-primary-foreground/60">f/{picture.f_number}</p>
+                    </div>
+                  {/if}
+                  {#if picture.exposure_time != "None"}
+                    <div class="flex space-x-1 items-center justify-center">
+                      <History class="h-4 w-4 stroke-primary-foreground/60 stroke-2"></History>
+                      <p class="text-xs font-medium text-primary-foreground/60">{picture.exposure_time}s</p>
+                    </div>
+                  {/if}
+                  {#if picture.camera_model != "None"}
+                    <div class="flex space-x-1 items-center justify-center">
+                      <Camera class="h-4 w-4 stroke-primary-foreground/60 stroke-2"></Camera>
+                      <p class="text-xs font-medium text-primary-foreground/60">{picture.camera_model}</p>
+                    </div>
+                  {/if}
+                  {#if picture.len_model != "None"}
+                    <div class="flex space-x-1 items-center justify-center">
+                      <Focus class="h-4 w-4 stroke-primary-foreground/60 stroke-2"></Focus>
+                      <p class="text-xs font-medium text-primary-foreground/60">{picture.len_model}</p>
+                    </div>
+                  {/if}
                 </div>
               </Dialog.DialogPicture>
             </Dialog.Root>
