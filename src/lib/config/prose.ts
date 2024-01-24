@@ -2,7 +2,7 @@ function combineStyles(...styles: any) {
     return styles.join(" ");
 }
 const proseStyleBase = "prose prose-sm md:prose-base dark:prose-dark max-w-full";
-const proseStyleheadings = "prose-headings:text-foreground prose-headings:tracking-[-0.025em] prose-h4:my-[10px] prose-h3:my-[20px] prose-h2:mb-[20px]";
+const proseStyleheadings = "prose-headings:text-foreground prose-headings:tracking-[-0.025em] prose-h4:my-[10px] prose-h3:my-[20px] prose-h2:mb-[20px] prose-h2:underline prose-h2:underline-offset-8 prose-h2:decoration-2 prose-h2:decoration-ddy-400 prose-h2:dark:decoration-ddy-600";
 const proseStyleP = "prose-p:text-foreground/80 prose-p:my-[10px]";
 const proseStyleStrong = "prose-strong:text-foreground";
 const proseStyleUl = "prose-ul:pl-3";
