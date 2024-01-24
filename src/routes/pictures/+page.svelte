@@ -192,43 +192,50 @@
                 </div>
               </Dialog.Trigger>
               <Dialog.DialogPicture class="flex flex-col items-center justify-center p-4">
-                <div class="h-[calc(50vh)] lg:h-[calc(90vh)] shadow-lg shadow-ddy-100">
+                <div class="h-[calc(50vh)] lg:h-[calc(90vh)] rounded shadow-lg shadow-ddy-100">
                   <img class="h-full max-w-[calc(90vw)] object-cover rounded shadow-lg" src={picture.img_url} alt={picture.description} />
                 </div>
-                <div class="h-[calc(20vh)] lg:h-[calc(10vh)] shadow-lg items-center justify-center flex flex-col lg:flex-row space-y-2 space-x-0 lg:space-y-0 lg:space-x-8 flex-nowrap">
+                <div class="h-[calc(20vh)] lg:h-[calc(10vh)] items-center justify-center flex flex-col lg:flex-row space-y-2 space-x-0 lg:space-y-0 lg:space-x-8 flex-nowrap">
                   <div class="flex space-x-1 items-center justify-center">
-                    <Languages class="h-4 w-4 stroke-primary-foreground/60 stroke-2"></Languages>
-                    <p class="text-xs font-medium text-primary-foreground/60">{picture.description}</p>
+                    <Languages class="h-4 w-4 stroke-foreground/60 stroke-2"></Languages>
+                    <p class="text-xs font-medium text-foreground/60">{picture.description}</p>
                   </div>
                   <div class="flex space-x-1 items-center justify-center">
-                    <Calendar class="h-4 w-4 stroke-primary-foreground/60 stroke-2"></Calendar>
-                    <p class="text-xs font-medium text-primary-foreground/60">{picture.create_time}</p>
+                    <Calendar class="h-4 w-4 stroke-foreground/60 stroke-2"></Calendar>
+                    <p class="text-xs font-medium text-foreground/60">{picture.create_time}</p>
                   </div>
                   {#if picture.f_number != "None"}
                     <div class="flex space-x-1 items-center justify-center">
-                      <Aperture class="h-4 w-4 stroke-primary-foreground/60 stroke-2"></Aperture>
-                      <p class="text-xs font-medium text-primary-foreground/60">f/{picture.f_number}</p>
+                      <Aperture class="h-4 w-4 stroke-foreground/60 stroke-2"></Aperture>
+                      <p class="text-xs font-medium text-foreground/60">f/{picture.f_number}</p>
                     </div>
                   {/if}
                   {#if picture.exposure_time != "None"}
                     <div class="flex space-x-1 items-center justify-center">
-                      <History class="h-4 w-4 stroke-primary-foreground/60 stroke-2"></History>
-                      <p class="text-xs font-medium text-primary-foreground/60">{picture.exposure_time}s</p>
+                      <History class="h-4 w-4 stroke-foreground/60 stroke-2"></History>
+                      <p class="text-xs font-medium text-foreground/60">{picture.exposure_time}s</p>
                     </div>
                   {/if}
                   {#if picture.camera_model != "None"}
                     <div class="flex space-x-1 items-center justify-center">
-                      <Camera class="h-4 w-4 stroke-primary-foreground/60 stroke-2"></Camera>
-                      <p class="text-xs font-medium text-primary-foreground/60">{picture.camera_model}</p>
+                      <Camera class="h-4 w-4 stroke-foreground/60 stroke-2"></Camera>
+                      <p class="text-xs font-medium text-foreground/60">{picture.camera_model}</p>
                     </div>
                   {/if}
                   {#if picture.len_model != "None"}
                     <div class="flex space-x-1 items-center justify-center">
-                      <Focus class="h-4 w-4 stroke-primary-foreground/60 stroke-2"></Focus>
-                      <p class="text-xs font-medium text-primary-foreground/60">{picture.len_model}</p>
+                      <Focus class="h-4 w-4 stroke-foreground/60 stroke-2"></Focus>
+                      <p class="text-xs font-medium text-foreground/60">{picture.len_model}</p>
                     </div>
                   {/if}
                 </div>
+                <button on:click={handleMapDarkStyle} class="absolute right-4 top-14 bg-card shadow-lg rounded-lg p-2">
+                  {#if mapStyle == "dark"}
+                    <Moon class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
+                  {:else}
+                    <Sun class="w-4 h-4 stroke-foreground/60 hover:stroke-ddy-400 dark:hover:stroke-ddy-600 stroke-2" />
+                  {/if}
+                </button>
               </Dialog.DialogPicture>
             </Dialog.Root>
           {/if}
