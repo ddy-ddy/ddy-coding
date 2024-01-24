@@ -89,14 +89,14 @@
       {/each}
     </Tabs.List>
     {#each showBlogs as blog}
-      <Tabs.Content bind:value={selectedCategory} class="py-2">
+      <Tabs.Content bind:value={selectedCategory} class="py-4">
         <section class="flex flex-col space-y-4">
           <div class="flex space-x-4">
-            <img alt="img" class="hidden md:block w-20 h-20 rounded-md border bg-muted object-cover" src={blog.coverUrl} />
+            <!-- <img alt="img" class="hidden md:block w-20 h-20 rounded-md border bg-muted object-cover" src={blog.coverUrl} /> -->
             <div class="flex flex-col space-y-1">
               <div class="flex-1 space-y-1">
                 <a href={`/blogs/${blog.id}?category=${selectedCategoryId}&page=${currentPage}`} class="font-bold text-lg text-foreground/80 hover:text-ddy-400 dark:hover:text-ddy-600">{blog.title}</a>
-                <p class="text-sm text-foreground/60 line-clamp-1">{blog.summary}</p>
+                <p class="text-sm text-foreground/60 line-clamp-2">{blog.summary}</p>
               </div>
               <div class="flex space-x-2">
                 <p class="tracking-tighter text-sm text-foreground/60">{blog.publishTime}</p>
