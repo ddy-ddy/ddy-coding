@@ -72,6 +72,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
 
     const blog = {
         title: blogData.data.attributes.title,
+        viewCount: blogData.data.attributes.viewCount,
         summary: blogData.data.attributes.summary,
         publishTime: blogData.data.attributes.publishedAt.split('T')[0],
         author: blogData.data.attributes.author.data.attributes.name,
