@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<title>ddy的个人网站</title>
+	<title>ddy的个人展示页面</title>
 	<meta name="description" content="这是ddy的个人网站，在这里可以查看我的简介，博客，摄影以及骑行信息" />
 </svelte:head>
 
